@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A2F42898B43C6103BAFEC38 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7AB2C179E346E382D3E093 /* libPods.a */; };
 		89EFA20A1A261434008AAF2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA2091A261434008AAF2C /* Foundation.framework */; };
 		89EFA20C1A261434008AAF2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20B1A261434008AAF2C /* CoreGraphics.framework */; };
 		89EFA20E1A261434008AAF2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20D1A261434008AAF2C /* UIKit.framework */; };
@@ -21,6 +22,21 @@
 		89EFA22B1A261434008AAF2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20D1A261434008AAF2C /* UIKit.framework */; };
 		89EFA2331A261434008AAF2C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 89EFA2311A261434008AAF2C /* InfoPlist.strings */; };
 		89EFA2351A261434008AAF2C /* FindMeAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EFA2341A261434008AAF2C /* FindMeAppTests.m */; };
+		A03081BE1A275FAD00CC30AE /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */; };
+		A03081C01A275FBB00CC30AE /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */; };
+		A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A03081C21A27604700CC30AE /* ViewControllerSocket.m */; };
+		A07370481A274B7F001B3D6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370471A274B7F001B3D6B /* AVFoundation.framework */; };
+		A073704A1A274BA1001B3D6B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370491A274BA1001B3D6B /* CoreData.framework */; };
+		A073704C1A274BAE001B3D6B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073704B1A274BAE001B3D6B /* CoreLocation.framework */; };
+		A073704E1A274BBA001B3D6B /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073704D1A274BBA001B3D6B /* CoreText.framework */; };
+		A07370501A274BC8001B3D6B /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073704F1A274BC8001B3D6B /* GLKit.framework */; };
+		A07370521A274BD7001B3D6B /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370511A274BD7001B3D6B /* ImageIO.framework */; };
+		A07370541A274BED001B3D6B /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370531A274BED001B3D6B /* libc++.dylib */; };
+		A07370561A274C04001B3D6B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370551A274C04001B3D6B /* libicucore.dylib */; };
+		A07370581A274C14001B3D6B /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370571A274C14001B3D6B /* libz.dylib */; };
+		A073705A1A274C21001B3D6B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370591A274C21001B3D6B /* OpenGLES.framework */; };
+		A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705B1A274C2F001B3D6B /* QuartzCore.framework */; };
+		A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +69,25 @@
 		89EFA2301A261434008AAF2C /* FindMeAppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FindMeAppTests-Info.plist"; sourceTree = "<group>"; };
 		89EFA2321A261434008AAF2C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		89EFA2341A261434008AAF2C /* FindMeAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindMeAppTests.m; sourceTree = "<group>"; };
+		A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		A03081C11A27604700CC30AE /* ViewControllerSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerSocket.h; sourceTree = "<group>"; };
+		A03081C21A27604700CC30AE /* ViewControllerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSocket.m; sourceTree = "<group>"; };
+		A07370471A274B7F001B3D6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A07370491A274BA1001B3D6B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A073704B1A274BAE001B3D6B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A073704D1A274BBA001B3D6B /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		A073704F1A274BC8001B3D6B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		A07370511A274BD7001B3D6B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		A07370531A274BED001B3D6B /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		A07370551A274C04001B3D6B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		A07370571A274C14001B3D6B /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A07370591A274C21001B3D6B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A073705B1A274C2F001B3D6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		AB7AB2C179E346E382D3E093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C31642967B924B74C2066B8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +95,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */,
+				A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */,
+				A073705A1A274C21001B3D6B /* OpenGLES.framework in Frameworks */,
+				A07370581A274C14001B3D6B /* libz.dylib in Frameworks */,
+				A07370561A274C04001B3D6B /* libicucore.dylib in Frameworks */,
+				A07370541A274BED001B3D6B /* libc++.dylib in Frameworks */,
+				A07370521A274BD7001B3D6B /* ImageIO.framework in Frameworks */,
+				A07370501A274BC8001B3D6B /* GLKit.framework in Frameworks */,
+				A073704E1A274BBA001B3D6B /* CoreText.framework in Frameworks */,
+				A073704C1A274BAE001B3D6B /* CoreLocation.framework in Frameworks */,
+				A073704A1A274BA1001B3D6B /* CoreData.framework in Frameworks */,
+				A07370481A274B7F001B3D6B /* AVFoundation.framework in Frameworks */,
 				89EFA20C1A261434008AAF2C /* CoreGraphics.framework in Frameworks */,
 				89EFA20E1A261434008AAF2C /* UIKit.framework in Frameworks */,
+				A03081BE1A275FAD00CC30AE /* GoogleMaps.framework in Frameworks */,
 				89EFA20A1A261434008AAF2C /* Foundation.framework in Frameworks */,
+				5A2F42898B43C6103BAFEC38 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +128,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		866371976790CB359B1DD7A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C31642967B924B74C2066B8A /* Pods.debug.xcconfig */,
+				C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		89EFA1FD1A261434008AAF2C = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +144,7 @@
 				89EFA22E1A261434008AAF2C /* FindMeAppTests */,
 				89EFA2081A261434008AAF2C /* Frameworks */,
 				89EFA2071A261434008AAF2C /* Products */,
+				866371976790CB359B1DD7A3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,10 +160,25 @@
 		89EFA2081A261434008AAF2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */,
+				A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */,
+				A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */,
+				A073705B1A274C2F001B3D6B /* QuartzCore.framework */,
+				A07370591A274C21001B3D6B /* OpenGLES.framework */,
+				A07370571A274C14001B3D6B /* libz.dylib */,
+				A07370551A274C04001B3D6B /* libicucore.dylib */,
+				A07370531A274BED001B3D6B /* libc++.dylib */,
+				A07370511A274BD7001B3D6B /* ImageIO.framework */,
+				A073704F1A274BC8001B3D6B /* GLKit.framework */,
+				A073704D1A274BBA001B3D6B /* CoreText.framework */,
+				A073704B1A274BAE001B3D6B /* CoreLocation.framework */,
+				A07370491A274BA1001B3D6B /* CoreData.framework */,
+				A07370471A274B7F001B3D6B /* AVFoundation.framework */,
 				89EFA2091A261434008AAF2C /* Foundation.framework */,
 				89EFA20B1A261434008AAF2C /* CoreGraphics.framework */,
 				89EFA20D1A261434008AAF2C /* UIKit.framework */,
 				89EFA2281A261434008AAF2C /* XCTest.framework */,
+				AB7AB2C179E346E382D3E093 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -112,6 +186,8 @@
 		89EFA20F1A261434008AAF2C /* FindMeApp */ = {
 			isa = PBXGroup;
 			children = (
+				A03081C11A27604700CC30AE /* ViewControllerSocket.h */,
+				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
 				89EFA2181A261434008AAF2C /* AppDelegate.h */,
 				89EFA2191A261434008AAF2C /* AppDelegate.m */,
 				89EFA21B1A261434008AAF2C /* Main.storyboard */,
@@ -159,9 +235,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89EFA2381A261434008AAF2C /* Build configuration list for PBXNativeTarget "FindMeApp" */;
 			buildPhases = (
+				263ECBAA3ABCF995150AD136 /* Check Pods Manifest.lock */,
 				89EFA2021A261434008AAF2C /* Sources */,
 				89EFA2031A261434008AAF2C /* Frameworks */,
 				89EFA2041A261434008AAF2C /* Resources */,
+				31BD1DC4CDE037BCEC826B15 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,6 +309,7 @@
 				89EFA2221A261434008AAF2C /* Images.xcassets in Resources */,
 				89EFA2141A261434008AAF2C /* InfoPlist.strings in Resources */,
 				89EFA21D1A261434008AAF2C /* Main.storyboard in Resources */,
+				A03081C01A275FBB00CC30AE /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,12 +323,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		263ECBAA3ABCF995150AD136 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		31BD1DC4CDE037BCEC826B15 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		89EFA2021A261434008AAF2C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				89EFA2201A261434008AAF2C /* ViewController.m in Sources */,
+				A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 			);
@@ -335,6 +448,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -373,9 +487,20 @@
 		};
 		89EFA2391A261434008AAF2C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C31642967B924B74C2066B8A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FindMeApp/FindMeApp-Prefix.pch";
 				INFOPLIST_FILE = "FindMeApp/FindMeApp-Info.plist";
@@ -386,9 +511,20 @@
 		};
 		89EFA23A1A261434008AAF2C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					/Users/diegovidal/Documents/Meus,
+					"Projetos/GoogleMaps-iOS-1.9.0",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FindMeApp/FindMeApp-Prefix.pch";
 				INFOPLIST_FILE = "FindMeApp/FindMeApp-Info.plist";
@@ -456,6 +592,7 @@
 				89EFA23A1A261434008AAF2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		89EFA23B1A261434008AAF2C /* Build configuration list for PBXNativeTarget "FindMeAppTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +601,7 @@
 				89EFA23D1A261434008AAF2C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
