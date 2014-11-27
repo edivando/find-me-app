@@ -12,4 +12,5 @@
 @interface ViewControllerSocket : UIViewController <SRWebSocketDelegate>
 
 - (IBAction)sendMessage:(UIButton *)sender;
+
 @end
