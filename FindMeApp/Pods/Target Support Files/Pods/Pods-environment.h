@@ -6,6 +6,12 @@
 // project.
 
 
+// JSONModel
+#define COCOAPODS_POD_AVAILABLE_JSONModel
+#define COCOAPODS_VERSION_MAJOR_JSONModel 1
+#define COCOAPODS_VERSION_MINOR_JSONModel 0
+#define COCOAPODS_VERSION_PATCH_JSONModel 1
+
 // SocketRocket
 #define COCOAPODS_POD_AVAILABLE_SocketRocket
 #define COCOAPODS_VERSION_MAJOR_SocketRocket 0

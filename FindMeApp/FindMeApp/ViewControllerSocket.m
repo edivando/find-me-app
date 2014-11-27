@@ -68,7 +68,7 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
     webSocket = newWebSocket;
-    [webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
+    //[webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
@@ -82,38 +82,20 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSLog(@"Msg recebida: %@", message);
-    //self.messagesTextView.text = [NSString stringWithFormat:@"%@\n%@", self.messagesTextView.text, message];
+    NSError* error;
+    
+    PositionJson* recebida = [[PositionJson alloc] initWithString:message error:&error];
+
+    NSLog(@"User recebido: %@", recebida.user);
+    NSLog(@"Lat recebida: %f", recebida.latitude);
+    NSLog(@"Long recebida: %f", recebida.longitude);
 }
 
 - (IBAction)sendMessage:(UIButton *)sender {
-//    NSError *writeError = nil;
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:notifications options:NSJSONWritingPrettyPrinted error:&writeError];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"JSON Output: %@", jsonString);
-    
-    
-    
-    
-    
-    
     PositionJson *position = [[PositionJson alloc]initWithUser:@"Yuri" latitude:23.876 longitude:87.9765];
-
-    NSError *error = nil;
-    NSData *json;
     
+    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
     
-    if ([NSJSONSerialization isValidJSONObject:[position dictionary]]){
-        json = [NSJSONSerialization dataWithJSONObject:[position dictionary] options:NSJSONWritingPrettyPrinted error:&error];
-
-        
-        NSLog(@"é Valido");
-    }
-
-    NSString *msg = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"Mensagem:%@",msg);
-    
-    [webSocket send: json];
+    [webSocket send:[position toJSONString]];
 }
 @end

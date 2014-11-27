@@ -7,17 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <JSONModel.h>
 
-@interface PositionJson : NSObject
+@interface PositionJson : JSONModel
 
-@property (strong, nonatomic) NSString *user;
-@property float latitude;
-@property float longitude;
+@property (nonatomic) NSString <Optional> *user;
+@property (nonatomic) float latitude;
+@property (nonatomic) float longitude;
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
                    longitude:(float)longitude;
-
--(NSDictionary*) dictionary;
 
 @end
