@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerSocket.h"
+#import "PositionJson.h"
 
 @interface ViewControllerSocket ()
 
@@ -86,7 +87,33 @@
 }
 
 - (IBAction)sendMessage:(UIButton *)sender {
-    [webSocket send:@"assdsdsd"];
-    //    self.messageTextField.text = nil;
+//    NSError *writeError = nil;
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:notifications options:NSJSONWritingPrettyPrinted error:&writeError];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"JSON Output: %@", jsonString);
+    
+    
+    
+    
+    
+    
+    PositionJson *position = [[PositionJson alloc]initWithUser:@"Yuri" latitude:23.876 longitude:87.9765];
+
+    NSError *error = nil;
+    NSData *json;
+    
+    
+    if ([NSJSONSerialization isValidJSONObject:[position dictionary]]){
+        json = [NSJSONSerialization dataWithJSONObject:[position dictionary] options:NSJSONWritingPrettyPrinted error:&error];
+
+        
+        NSLog(@"é Valido");
+    }
+
+    NSString *msg = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Mensagem:%@",msg);
+    
+    [webSocket send: json];
 }
 @end
