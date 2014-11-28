@@ -8,6 +8,26 @@
 
 #import "UserInfoDAO.h"
 
-@implementation UserInfoDAO
+
+@implementation UserInfoDAO{
+    GenericDAO *dao;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        dao = [[GenericDAO alloc] initEntity:@"Usuario"];
+    }
+    return self;
+}
+
+-(NSError*)save:(UserInfo*)user{
+    NSDictionary *dict = @{@"nome": user.user,
+                           @"telefone" : user.telefone,
+                           @"email" : user.email};
+    
+    return [dao save:dict];
+}
 
 @end

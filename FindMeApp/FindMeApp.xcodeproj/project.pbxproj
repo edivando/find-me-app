@@ -13,6 +13,7 @@
 		89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0281A28A1F100861042 /* WebSocketSingleton.m */; };
 		89B2A02C1A28A21400861042 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A02B1A28A21400861042 /* WebSocket.m */; };
 		89B2A0311A28AA9200861042 /* UserInfoDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0301A28AA9200861042 /* UserInfoDAO.m */; };
+		89B2A0341A28B0FC00861042 /* GenericDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0331A28B0FC00861042 /* GenericDAO.m */; };
 		89EFA20A1A261434008AAF2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA2091A261434008AAF2C /* Foundation.framework */; };
 		89EFA20C1A261434008AAF2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20B1A261434008AAF2C /* CoreGraphics.framework */; };
 		89EFA20E1A261434008AAF2C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20D1A261434008AAF2C /* UIKit.framework */; };
@@ -64,6 +65,8 @@
 		89B2A02B1A28A21400861042 /* WebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebSocket.m; sourceTree = "<group>"; };
 		89B2A02F1A28AA9200861042 /* UserInfoDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoDAO.h; sourceTree = "<group>"; };
 		89B2A0301A28AA9200861042 /* UserInfoDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoDAO.m; sourceTree = "<group>"; };
+		89B2A0321A28B0FC00861042 /* GenericDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericDAO.h; sourceTree = "<group>"; };
+		89B2A0331A28B0FC00861042 /* GenericDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericDAO.m; sourceTree = "<group>"; };
 		89EFA2061A261434008AAF2C /* FindMeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EFA2091A261434008AAF2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		89EFA20B1A261434008AAF2C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,13 +181,15 @@
 			name = controller;
 			sourceTree = "<group>";
 		};
-		89B2A02E1A28A84E00861042 /* BD */ = {
+		89B2A02E1A28A84E00861042 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
 				89B2A02F1A28AA9200861042 /* UserInfoDAO.h */,
 				89B2A0301A28AA9200861042 /* UserInfoDAO.m */,
+				89B2A0321A28B0FC00861042 /* GenericDAO.h */,
+				89B2A0331A28B0FC00861042 /* GenericDAO.m */,
 			);
-			name = BD;
+			name = DAO;
 			sourceTree = "<group>";
 		};
 		89EFA1FD1A261434008AAF2C = {
@@ -236,7 +241,7 @@
 		89EFA20F1A261434008AAF2C /* FindMeApp */ = {
 			isa = PBXGroup;
 			children = (
-				89B2A02E1A28A84E00861042 /* BD */,
+				89B2A02E1A28A84E00861042 /* DAO */,
 				89B2A02D1A28A44000861042 /* controller */,
 				89B2A0261A28A1B100861042 /* websocket */,
 				89ACFE901A27662C0000B7A7 /* model */,
@@ -422,6 +427,7 @@
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
 				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89B2A02C1A28A21400861042 /* WebSocket.m in Sources */,
+				89B2A0341A28B0FC00861042 /* GenericDAO.m in Sources */,
 				89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 				89B2A0311A28AA9200861042 /* UserInfoDAO.m in Sources */,

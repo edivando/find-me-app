@@ -62,30 +62,19 @@
 
 
 - (IBAction)sendMessage:(UIButton *)sender {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context =[appDelegate managedObjectContext];
-    NSManagedObject *newContact;
-    newContact = [NSEntityDescription
-                  insertNewObjectForEntityForName:@"Usuario"
-                  inManagedObjectContext:context];
-    [newContact setValue: _nome.text forKey:@"nome"];
-    [newContact setValue: _email.text forKey:@"email"];
-    [newContact setValue: _telefone.text forKey:@"telefone"];
-    //[newContact setValue: latitude forKey:@"latitude"];
-    //[newContact setValue: longitude forKey:@"longitude"];
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    UserInfo *novo = [[UserInfo alloc] initWithUser:self.nome.text latitude:0.0 longitude:0.0 email:self.email.text telefone:self.telefone.text];
+    [dao save:novo];
     _nome.text = @"";
     _telefone.text = @"";
-    _email.text = @"";
-    NSError *error;
-    [context save:&error];
+    _email.text = @"";    
     
     
-    
-    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
-    
-    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
-    
-    [socket sendMessage:[position toJSONString]];
+//    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
+//    
+//    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
+//    
+//    [socket sendMessage:[position toJSONString]];
 }
 
 - (IBAction)loadData:(UIButton *)sender {

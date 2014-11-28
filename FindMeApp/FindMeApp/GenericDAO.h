@@ -1,5 +1,5 @@
 //
-//  UserInfoDAO.h
+//  GenericDAO.h
 //  FindMeApp
 //
 //  Created by bepid on 28/11/14.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GenericDAO.h"
-#import "UserInfo.h"
 
-@interface UserInfoDAO : NSObject
+@interface GenericDAO : NSObject
 
--(NSError*)save:(UserInfo*)user;
+- (instancetype)initEntity:(NSString*)e;
+
+-(NSError*) save:(NSDictionary*)dictionary;
 
 @end
