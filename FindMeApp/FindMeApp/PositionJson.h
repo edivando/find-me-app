@@ -11,7 +11,7 @@
 
 @interface PositionJson : JSONModel
 
-@property (nonatomic) NSString <Optional> *user;
+@property (nonatomic) NSString *user;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 
