@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <SRWebSocket.h>
 
-@interface ViewControllerSocket : UIViewController <SRWebSocketDelegate>
+@interface ViewControllerSocket : UIViewController <SRWebSocketDelegate,UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UITextField *textNome;
+@property (weak, nonatomic) IBOutlet UITextField *textEmail;
+@property (weak, nonatomic) IBOutlet UITextField *textTelefone;
 - (IBAction)sendMessage:(UIButton *)sender;
 
 @end

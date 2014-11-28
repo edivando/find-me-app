@@ -50,6 +50,11 @@
 }
 */
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    return YES;
+}
+
+
 #pragma mark - Connection
 
 - (void)connectWebSocket {
