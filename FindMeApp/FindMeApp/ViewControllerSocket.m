@@ -8,13 +8,14 @@
 
 #import "ViewControllerSocket.h"
 #import "UserInfo.h"
+#import "WebSocketSingleton.h"
 
 @interface ViewControllerSocket ()
 
 @end
 
 @implementation ViewControllerSocket{
-    SRWebSocket *webSocket;
+    WebSocket *socket;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,7 +30,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self connectWebSocket];
+    self.nome.delegate = self;
+    self.telefone.delegate = self;
+    self.email.delegate = self;
+    
+    socket = [WebSocketSingleton getConnection];
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,56 +56,62 @@
 */
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
     return YES;
 }
 
 
-#pragma mark - Connection
-
-- (void)connectWebSocket {
-    webSocket.delegate = nil;
-    webSocket = nil;
-    
-    NSString *urlString = @"wss://findme-edivando.rhcloud.com:8443/server?userName=Yuri";
-    SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
-    newWebSocket.delegate = self;
-    
-    [newWebSocket open];
-}
-
-
-#pragma mark - SRWebSocket delegate
-
-- (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
-    webSocket = newWebSocket;
-    //[webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
-    [self connectWebSocket];
-    NSLog(@"Error: %@",error);
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean {
-    NSLog(@"Reason: %@",reason);
-    [self connectWebSocket];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSError* error;
-    
-    UserInfo* recebida = [[UserInfo alloc] initWithString:message error:&error];
-
-    NSLog(@"User recebido: %@", recebida.user);
-    NSLog(@"Lat recebida: %f", recebida.latitude);
-    NSLog(@"Long recebida: %f", recebida.longitude);
-}
-
 - (IBAction)sendMessage:(UIButton *)sender {
-    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context =[appDelegate managedObjectContext];
+    NSManagedObject *newContact;
+    newContact = [NSEntityDescription
+                  insertNewObjectForEntityForName:@"Usuario"
+                  inManagedObjectContext:context];
+    [newContact setValue: _nome.text forKey:@"nome"];
+    [newContact setValue: _email.text forKey:@"email"];
+    [newContact setValue: _telefone.text forKey:@"telefone"];
+    //[newContact setValue: latitude forKey:@"latitude"];
+    //[newContact setValue: longitude forKey:@"longitude"];
+    _nome.text = @"";
+    _telefone.text = @"";
+    _email.text = @"";
+    NSError *error;
+    [context save:&error];
+    
+    
+    
+    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
     
     NSLog(@"JSON STRING:\n%@",[position toJSONString]);
     
-    [webSocket send:[position toJSONString]];
+    [socket sendMessage:[position toJSONString]];
+}
+
+- (IBAction)loadData:(UIButton *)sender {
+    AppDelegate *appDelegate =[[UIApplication sharedApplication] delegate];
+    
+    NSManagedObjectContext *context =[appDelegate managedObjectContext];
+    
+    NSEntityDescription *entityDesc =[NSEntityDescription entityForName:@"Usuario" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(nome = %@)", _nome.text];
+    [request setPredicate:pred];
+    NSManagedObject *matches = nil;
+    
+    NSError *error;
+    NSArray *objects = [context executeFetchRequest:request error:&error];
+    
+    if ([objects count] == 0) {
+        _telefone.text = @"No matches";
+    } else {
+        matches = objects[0];
+        _telefone.text = [matches valueForKey:@"telefone"];
+        _email.text = [matches valueForKey:@"email"];
+    }
+    
 }
 @end
