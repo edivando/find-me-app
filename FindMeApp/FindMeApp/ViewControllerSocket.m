@@ -77,22 +77,23 @@
 }
 
 - (IBAction)loadData:(UIButton *)sender {
-    AppDelegate *appDelegate =((AppDelegate*)[[UIApplication sharedApplication] delegate]);
-    
-    NSManagedObjectContext *context =[appDelegate managedObjectContext];
-    
-    NSEntityDescription *entityDesc =[NSEntityDescription entityForName:@"Usuario" inManagedObjectContext:context];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(nome = %@)", _nome.text];
-    [request setPredicate:pred];
+//    AppDelegate *appDelegate =((AppDelegate*)[[UIApplication sharedApplication] delegate]);
+//    
+//    NSManagedObjectContext *context =[appDelegate managedObjectContext];
+//    
+//    NSEntityDescription *entityDesc =[NSEntityDescription entityForName:@"Usuario" inManagedObjectContext:context];
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    [request setEntity:entityDesc];
+//    
+//    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(nome = %@)", _nome.text];
+//    [request setPredicate:pred];
     NSManagedObject *matches = nil;
-    
-    NSError *error;
-    NSArray *objects = [context executeFetchRequest:request error:&error];
-    
+//    
+//    NSError *error;
+//    NSArray *objects = [context executeFetchRequest:request error:&error];
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    NSArray *objects = [dao fetch:@"nome" : _nome.text];
     if ([objects count] == 0) {
         _telefone.text = @"No matches";
     } else {

@@ -337,6 +337,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = BEPiD;
 				TargetAttributes = {
+					89EFA2051A261434008AAF2C = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
+					};
 					89EFA2261A261434008AAF2C = {
 						TestTargetID = 89EFA2051A261434008AAF2C;
 					};
