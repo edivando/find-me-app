@@ -92,7 +92,7 @@
 }
 
 - (IBAction)sendMessage:(UIButton *)sender {
-    PositionJson *position = [[PositionJson alloc]initWithUser:@"Yuri" latitude:23.876 longitude:87.9765];
+    PositionJson *position = [[PositionJson alloc]initWithUser:@"Yuri" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
     
     NSLog(@"JSON STRING:\n%@",[position toJSONString]);
     
