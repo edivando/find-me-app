@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController<CLLocationManagerDelegate>
+
+- (IBAction)getLocation:(UIButton *)sender;
+@property(nonatomic) float latitude;
+@property(nonatomic) float longitude;
 
 @end
