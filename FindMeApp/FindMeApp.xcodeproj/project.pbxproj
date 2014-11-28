@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A2F42898B43C6103BAFEC38 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7AB2C179E346E382D3E093 /* libPods.a */; };
-		89ACFE8F1A2766280000B7A7 /* PositionJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ACFE8E1A2766280000B7A7 /* PositionJson.m */; };
+		89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ACFE8E1A2766280000B7A7 /* UserInfo.m */; };
 		89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0231A28914900861042 /* CoreDataModel.xcdatamodeld */; };
 		89EFA20A1A261434008AAF2C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA2091A261434008AAF2C /* Foundation.framework */; };
 		89EFA20C1A261434008AAF2C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EFA20B1A261434008AAF2C /* CoreGraphics.framework */; };
@@ -52,8 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		89ACFE8D1A2766280000B7A7 /* PositionJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionJson.h; sourceTree = "<group>"; };
-		89ACFE8E1A2766280000B7A7 /* PositionJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionJson.m; sourceTree = "<group>"; };
+		89ACFE8D1A2766280000B7A7 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		89ACFE8E1A2766280000B7A7 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		89B2A0241A28914900861042 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		89EFA2061A261434008AAF2C /* FindMeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89EFA2091A261434008AAF2C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,8 +145,8 @@
 		89ACFE901A27662C0000B7A7 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				89ACFE8D1A2766280000B7A7 /* PositionJson.h */,
-				89ACFE8E1A2766280000B7A7 /* PositionJson.m */,
+				89ACFE8D1A2766280000B7A7 /* UserInfo.h */,
+				89ACFE8E1A2766280000B7A7 /* UserInfo.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -381,7 +381,7 @@
 				A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */,
 				89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
-				89ACFE8F1A2766280000B7A7 /* PositionJson.m in Sources */,
+				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

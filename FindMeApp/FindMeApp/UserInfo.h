@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <JSONModel.h>
 
-@interface PositionJson : JSONModel
+@interface UserInfo : JSONModel
 
 @property (nonatomic) NSString *user;
 @property (nonatomic) NSString <Optional> *email;

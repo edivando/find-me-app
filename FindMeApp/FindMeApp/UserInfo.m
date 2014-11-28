@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 BEPiD. All rights reserved.
 //
 
-#import "PositionJson.h"
+#import "UserInfo.h"
 
-@implementation PositionJson
+@implementation UserInfo
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
