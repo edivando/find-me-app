@@ -232,7 +232,7 @@
         
     } ];
     
-    [self HelloMap];
+    [self StreetView];
     
 }
 
