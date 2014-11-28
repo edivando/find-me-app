@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ViewControllerSocket.h"
 
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate>
@@ -15,5 +16,7 @@
 - (IBAction)getLocation:(UIButton *)sender;
 @property(nonatomic) float latitude;
 @property(nonatomic) float longitude;
+
+-(void) mandaLocalização;
 
 @end

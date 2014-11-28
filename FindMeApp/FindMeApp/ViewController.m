@@ -22,11 +22,13 @@
     CLLocationManager *manager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+    WebSocket *socket;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    socket = [WebSocketSingleton getConnection];
     
     _latitude = 0.0;
     _longitude = 0.0;
@@ -205,32 +207,34 @@
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
-        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
-        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
-        NSLog(@"Pega Latitude e Longitude");
+//        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
+//        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
+//        NSLog(@"Pega Latitude e Longitude");
+        
+        [self mandaLocalização];
         
     }
     
-    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-        
-        if (error == nil && [placemarks count] > 0) {
-            
-            placemark = [placemarks lastObject];
-            
-           NSLog(@"%@",[NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-                                 placemark.subThoroughfare, placemark.thoroughfare,
-                                 placemark.postalCode, placemark.locality,
-                                 placemark.administrativeArea,
-                                 placemark.country]);
-           NSLog(@"Pega Adress");
-            
-        } else {
-            
-            NSLog(@"%@", error.debugDescription);
-            
-        }
-        
-    } ];
+//    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+//        
+//        if (error == nil && [placemarks count] > 0) {
+//            
+//            placemark = [placemarks lastObject];
+//            
+//           NSLog(@"%@",[NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+//                                 placemark.subThoroughfare, placemark.thoroughfare,
+//                                 placemark.postalCode, placemark.locality,
+//                                 placemark.administrativeArea,
+//                                 placemark.country]);
+//           NSLog(@"Pega Adress");
+//            
+//        } else {
+//            
+//            NSLog(@"%@", error.debugDescription);
+//            
+//        }
+//        
+//    } ];
     
     [self StreetView];
     
@@ -242,8 +246,20 @@
     
     manager.delegate = self;
    // manager.desiredAccuracy = kCLLocationAccuracyBest;
-    manager.distanceFilter = 10000.0;
+    manager.distanceFilter = 5.0;
     
     [manager startUpdatingLocation];
+    
+}
+
+-(void) mandaLocalização{
+    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:_latitude longitude:_longitude email:@"bla@bla.com" telefone:@"35699856"];
+    
+    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
+    
+    [socket sendMessage:[position toJSONString]];
+    
+    
+    //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
 }
 @end

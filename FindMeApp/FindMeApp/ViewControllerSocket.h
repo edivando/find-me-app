@@ -10,6 +10,8 @@
 #import <SRWebSocket.h>
 #import "AppDelegate.h"
 #import "UserInfoDAO.h"
+#import "UserInfo.h"
+#import "WebSocketSingleton.h"
 
 @interface ViewControllerSocket : UIViewController <UITextFieldDelegate>
 
