@@ -9,36 +9,34 @@
 #import "ViewController.h"
 #import "GoogleMaps/GoogleMaps.h"
 
+
+
 @interface ViewController ()
 {
-    GMSMapView *mapView_;
+    //GMSMapView *mapView_;
+    
 }
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    CLLocationManager *manager;
+    CLGeocoder *geocoder;
+    CLPlacemark *placemark;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
-    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    //mapView_.mapType = kGMSTypeSatellite;
-    mapView_.myLocationEnabled = YES;
-    self.view = mapView_;
+    _latitude = 0.0;
+    _longitude = 0.0;
     
-    // Creates a marker in the center of the map.
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
-    marker.map = mapView_;
+    manager = [[CLLocationManager alloc] init];
+    geocoder = [[CLGeocoder alloc] init];
     
-    NSLog(@"User's location: %@", mapView_.myLocation);
+    //[self CustomMaker];
+    
+    
 
 }
 
@@ -48,4 +46,204 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) HelloMap{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
+                                                            longitude:_longitude
+                                                                 zoom:6];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = camera.target;
+    marker.snippet = @"Hello World";
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.map = mapView;
+    
+    self.view = mapView;
+}
+
+-(void) ChangeTheMapType{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.80948
+                                                            longitude:5.965699
+                                                                 zoom:2];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    // Available map types: kGMSTypeNormal, kGMSTypeSatellite, kGMSTypeHybrid,
+    // kGMSTypeTerrain, kGMSTypeNone
+    
+    // Set the mapType to Satellite
+    mapView.mapType = kGMSTypeSatellite;
+    self.view = mapView;
+    
+}
+
+-(void) CustomMaker{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:41.887
+                                                            longitude:-87.622
+                                                                 zoom:15];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(41.887, -87.622);
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.icon = [UIImage imageNamed:@"flag_icon"];
+    marker.map = mapView;
+    
+    self.view = mapView;
+
+}
+
+-(void) StreetView{
+    CLLocationCoordinate2D panoramaNear = {_latitude,_longitude};
+    
+    GMSPanoramaView *panoView =
+    [GMSPanoramaView panoramaWithFrame:CGRectZero
+                        nearCoordinate:panoramaNear];
+    
+    self.view = panoView;
+}
+
+-(void) PolyLines{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:0
+                                                            longitude:-165
+                                                                 zoom:2];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    GMSMutablePath *path = [GMSMutablePath path];
+    [path addLatitude:-33.866 longitude:151.195]; // Sydney
+    [path addLatitude:-18.142 longitude:178.431]; // Fiji
+    [path addLatitude:21.291 longitude:-157.821]; // Hawaii
+    [path addLatitude:37.423 longitude:-122.091]; // Mountain View
+    
+    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+    polyline.strokeColor = [UIColor blueColor];
+    polyline.strokeWidth = 5.f;
+    polyline.map = mapView;
+
+}
+
+-(void) Camera{
+    GMSCameraPosition *camera =
+    [GMSCameraPosition cameraWithLatitude:-37.809487
+                                longitude:144.965699
+                                     zoom:17.5
+                                  bearing:30
+                             viewingAngle:40];
+    
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    self.view = mapView;
+}
+
+-(void) Indoor{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.78318
+                                                            longitude:-122.40374
+                                                                 zoom:18];
+    
+    GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    self.view = mapView;
+    
+}
+
+-(void) MyLocation{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.868
+                                                            longitude:151.2086
+                                                                 zoom:12];
+    GMSMapView *mapView_;
+    
+    
+    mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView_.settings.compassButton = YES;
+    mapView_.settings.myLocationButton = YES;
+    
+    // Listen to the myLocation property of GMSMapView.
+    [mapView_ addObserver:self
+               forKeyPath:@"myLocation"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+    
+    self.view = mapView_;
+
+    
+}
+
+-(void) exampleMap{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
+                                                            longitude:151.20
+                                                                 zoom:6];
+    GMSMapView *mapView;
+
+    mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    mapView.myLocationEnabled = YES;
+    self.view = mapView;
+    
+    // Creates a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
+    marker.title = @"Sydney";
+    marker.snippet = @"Australia";
+    marker.map = mapView;
+
+}
+
+#pragma mark - CLLocationManagerDelegate Methods
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Error: %@", error);
+    NSLog(@"Failed to get location! :(");
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    
+    NSLog(@"Location: %@", newLocation);
+    CLLocation *currentLocation = newLocation;
+    
+    if (currentLocation != nil) {
+        
+        _latitude = currentLocation.coordinate.latitude;
+        _longitude = currentLocation.coordinate.longitude;
+        
+        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
+        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
+        NSLog(@"Pega Latitude e Longitude");
+        
+    }
+    
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+        
+        if (error == nil && [placemarks count] > 0) {
+            
+            placemark = [placemarks lastObject];
+            
+           NSLog(@"%@",[NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+                                 placemark.subThoroughfare, placemark.thoroughfare,
+                                 placemark.postalCode, placemark.locality,
+                                 placemark.administrativeArea,
+                                 placemark.country]);
+           NSLog(@"Pega Adress");
+            
+        } else {
+            
+            NSLog(@"%@", error.debugDescription);
+            
+        }
+        
+    } ];
+    
+    [self HelloMap];
+    
+}
+
+#pragma mark - ButtonAction
+
+- (IBAction)getLocation:(UIButton *)sender {
+    
+    manager.delegate = self;
+   // manager.desiredAccuracy = kCLLocationAccuracyBest;
+    manager.distanceFilter = 10000.0;
+    
+    [manager startUpdatingLocation];
+}
 @end
