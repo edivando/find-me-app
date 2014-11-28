@@ -23,9 +23,9 @@
     return self;
 }
 
--(NSDictionary*) dictionary{
-    return [NSDictionary dictionaryWithObjectsAndKeys:self.user,@"user",@(self.latitude),@"latitude",@(self.longitude), @"longitude", nil];
-    
+//-(NSDictionary*) dictionary{
+//    return [NSDictionary dictionaryWithObjectsAndKeys:self.user,@"user",@(self.latitude),@"latitude",@(self.longitude), @"longitude", nil];
+
 //    
 //    NSDictionary * itens = @{@"longitude" : @(self.longitude),
 //                             @"latitude" : @(self.latitude),
@@ -33,6 +33,6 @@
 //    
 //    NSDictionary *dict = @{@"positionInfo":itens};
 //    return dict;
-}
+//}
 
 @end
