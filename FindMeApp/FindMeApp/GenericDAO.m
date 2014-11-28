@@ -9,15 +9,13 @@
 #import "GenericDAO.h"
 #import "AppDelegate.h"
 
-@implementation GenericDAO{
-    NSString *entity;
-}
+@implementation GenericDAO
 
 - (instancetype)initEntity:(NSString*)e
 {
     self = [super init];
     if (self) {
-        entity = e;
+        _entity = e;
     }
     return self;
 }
@@ -29,10 +27,23 @@
 
 -(NSError*) save:(NSDictionary*)dictionary{
     NSError *error;
-    NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:entity inManagedObjectContext:[self context]];
+    NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
     [managed setValuesForKeysWithDictionary:dictionary];
     [[self context] save:&error];
     return error;
+}
+
+-(NSArray*) fetch:(NSPredicate*)predicate{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entityDesc =[NSEntityDescription entityForName:_entity inManagedObjectContext: [self context]];
+    [request setEntity:entityDesc];
+    
+    if(predicate != NULL){
+        [request setPredicate:predicate];
+    }
+    NSError *error;
+    return [[self context] executeFetchRequest:request error:&error];
+ 
 }
 
 

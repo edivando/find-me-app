@@ -10,8 +10,12 @@
 
 @interface GenericDAO : NSObject
 
+@property (readonly,nonatomic) NSString *entity;
+
 - (instancetype)initEntity:(NSString*)e;
 
 -(NSError*) save:(NSDictionary*)dictionary;
+
+-(NSArray*) fetch:(NSPredicate*)predicate;
 
 @end

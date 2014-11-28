@@ -30,4 +30,10 @@
     return [dao save:dict];
 }
 
+-(NSArray*) fetch:(NSString*)chave :(NSString*)valor{
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(%@ = %@)",chave ,valor];
+    return [dao fetch:pred];
+}
+
 @end
