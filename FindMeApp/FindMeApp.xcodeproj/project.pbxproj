@@ -177,6 +177,10 @@
 		89B2A02D1A28A44000861042 /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				89EFA21E1A261434008AAF2C /* ViewController.h */,
+				89EFA21F1A261434008AAF2C /* ViewController.m */,
+				A03081C11A27604700CC30AE /* ViewControllerSocket.h */,
+				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -245,13 +249,9 @@
 				89B2A02D1A28A44000861042 /* controller */,
 				89B2A0261A28A1B100861042 /* websocket */,
 				89ACFE901A27662C0000B7A7 /* model */,
-				A03081C11A27604700CC30AE /* ViewControllerSocket.h */,
-				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
 				89EFA2181A261434008AAF2C /* AppDelegate.h */,
 				89EFA2191A261434008AAF2C /* AppDelegate.m */,
 				89EFA21B1A261434008AAF2C /* Main.storyboard */,
-				89EFA21E1A261434008AAF2C /* ViewController.h */,
-				89EFA21F1A261434008AAF2C /* ViewController.m */,
 				89B2A0231A28914900861042 /* CoreDataModel.xcdatamodeld */,
 				89EFA2211A261434008AAF2C /* Images.xcassets */,
 				89EFA2101A261434008AAF2C /* Supporting Files */,

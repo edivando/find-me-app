@@ -78,7 +78,7 @@
 }
 
 - (IBAction)loadData:(UIButton *)sender {
-    AppDelegate *appDelegate =(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate =((AppDelegate*)[[UIApplication sharedApplication] delegate]);
     
     NSManagedObjectContext *context =[appDelegate managedObjectContext];
     
