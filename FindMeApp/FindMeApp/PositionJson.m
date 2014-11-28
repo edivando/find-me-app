@@ -13,26 +13,18 @@
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
                    longitude:(float)longitude
+                       email:(NSString*)email
+                    telefone:(NSString*)telefone
 {
     self = [super init];
     if (self) {
         _user = user;
         _latitude = latitude;
         _longitude = longitude;
+        _telefone = telefone;
+        _email = email;
     }
     return self;
 }
-
-//-(NSDictionary*) dictionary{
-//    return [NSDictionary dictionaryWithObjectsAndKeys:self.user,@"user",@(self.latitude),@"latitude",@(self.longitude), @"longitude", nil];
-
-//    
-//    NSDictionary * itens = @{@"longitude" : @(self.longitude),
-//                             @"latitude" : @(self.latitude),
-//                             @"user" : self.user};
-//    
-//    NSDictionary *dict = @{@"positionInfo":itens};
-//    return dict;
-//}
 
 @end

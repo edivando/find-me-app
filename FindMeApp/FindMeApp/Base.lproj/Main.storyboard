@@ -20,7 +20,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="24" y="-42"/>
+            <point key="canvasLocation" x="85" y="-42"/>
         </scene>
         <!--View Controller Socket-->
         <scene sceneID="Pim-W0-TX6">

@@ -12,11 +12,15 @@
 @interface PositionJson : JSONModel
 
 @property (nonatomic) NSString *user;
+@property (nonatomic) NSString <Optional> *email;
+@property (nonatomic) NSString *telefone;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
-                   longitude:(float)longitude;
+                   longitude:(float)longitude
+                       email:(NSString*)email
+                    telefone:(NSString*)telefone;
 
 @end
