@@ -93,7 +93,7 @@
 //    NSError *error;
 //    NSArray *objects = [context executeFetchRequest:request error:&error];
     UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    NSArray *objects = [dao fetch:@"nome" : _nome.text];
+    NSArray *objects = [dao fetchWithKey:@"nome" andValue: _nome.text];
     if ([objects count] == 0) {
         _telefone.text = @"No matches";
     } else {

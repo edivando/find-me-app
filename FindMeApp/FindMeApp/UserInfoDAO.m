@@ -23,16 +23,32 @@
 }
 
 -(NSError*)save:(UserInfo*)user{
-    NSDictionary *dict = @{@"nome": user.user,
-                           @"telefone" : user.telefone,
-                           @"email" : user.email};
-    
+    NSDictionary *dict;
+    NSArray *objects = [self fetchWithKey:@"defaultuser" andValue:@"YES"];
+    if ([objects count] == 0) {
+        dict = @{@"nome": user.user,
+                 @"telefone" : user.telefone,
+                 @"email" : user.email,
+                 @"defaultuser" : @"YES"};
+    } else {
+        dict = @{@"nome": user.user,
+                 @"telefone" : user.telefone,
+                 @"email" : user.email,
+                 @"defaultuser" : @"NO"};
+    }
     return [dao save:dict];
 }
 
--(NSArray*) fetch:(NSString*)chave :(NSString*)valor{
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(%@ = %@)",chave ,valor];
+-(NSArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
+    NSPredicate *pred = [[NSPredicate alloc] init];
+    if ([chave isEqual:@"nome"])
+        pred = [NSPredicate predicateWithFormat:@"(nome = %@)",valor];
+    else if ([chave isEqual:@"defaultuser"])
+        pred = [NSPredicate predicateWithFormat:@"(defaultuser = %@)",valor];
+    else if ([chave isEqual:@"telefone"])
+        pred = [NSPredicate predicateWithFormat:@"(telefone = %@)",valor];
+    else if ([chave isEqual:@"email"])
+        pred = [NSPredicate predicateWithFormat:@"(email = %@)",valor];
     return [dao fetch:pred];
 }
 

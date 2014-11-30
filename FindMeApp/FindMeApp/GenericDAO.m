@@ -38,7 +38,7 @@
     NSEntityDescription *entityDesc =[NSEntityDescription entityForName:_entity inManagedObjectContext: [self context]];
     [request setEntity:entityDesc];
     
-    if(predicate != NULL){
+    if(predicate != nil){
         [request setPredicate:predicate];
     }
     NSError *error;

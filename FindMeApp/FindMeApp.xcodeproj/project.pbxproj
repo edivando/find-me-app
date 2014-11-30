@@ -43,6 +43,7 @@
 		A073705A1A274C21001B3D6B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370591A274C21001B3D6B /* OpenGLES.framework */; };
 		A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705B1A274C2F001B3D6B /* QuartzCore.framework */; };
 		A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */; };
+		DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		AB7AB2C179E346E382D3E093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31642967B924B74C2066B8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRegistration.h; sourceTree = "<group>"; };
+		DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRegistration.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 				89EFA21F1A261434008AAF2C /* ViewController.m */,
 				A03081C11A27604700CC30AE /* ViewControllerSocket.h */,
 				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
+				DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */,
+				DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -435,6 +440,7 @@
 				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89B2A02C1A28A21400861042 /* WebSocket.m in Sources */,
 				89B2A0341A28B0FC00861042 /* GenericDAO.m in Sources */,
+				DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */,
 				89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 				89B2A0311A28AA9200861042 /* UserInfoDAO.m in Sources */,
