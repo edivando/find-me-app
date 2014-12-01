@@ -46,24 +46,11 @@
     [numberToolbar sizeToFit];
     self.textTelefone.inputAccessoryView = numberToolbar;
     
-    //[self.navigationController setNavigationBarHidden:NO];
-    
-    //[self.navigationController setModalPresentationStyle:UIModalPresentationFullScreen];
-    
-    //[self presentViewController:nav animated:YES completion:nil];
-    
-    //[self.navigationController setNavigationBarHidden:NO];
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

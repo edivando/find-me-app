@@ -32,11 +32,11 @@
     manager = [[CLLocationManager alloc] init];
     _UsuariosAtivos = [NSMutableArray new];
     
-    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
-    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
-    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
     [_UsuariosAtivos addObjectsFromArray:(@[user1,user2,user3])];
     

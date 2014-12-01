@@ -45,7 +45,13 @@
     NSError* error;
     
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound) {
-        NSLog(@"connectionInfo");
+        NSLog(@"CONNECTION INFO: %@",message);
+    }
+    if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
+        NSLog(@"USER INFO: %@",message);
+    }
+    if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
+        NSLog(@"STATUS INFO: %@",message);
     }
     //UserInfoMessage* recebida = [[UserInfoMessage alloc] initWithString:message error:&error];
     

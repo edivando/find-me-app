@@ -25,7 +25,8 @@
         _longitude = longitude;
         _telefone = telefone;
         _email = email;
-        
+        _idServer = idServer;
+        _connectionId = connectionId;
         _marker = [[GMSMarker alloc] init];
         CLLocationCoordinate2D position = CLLocationCoordinate2DMake(_latitude, _longitude);
         GMSMarker *marker = [GMSMarker markerWithPosition:position];
