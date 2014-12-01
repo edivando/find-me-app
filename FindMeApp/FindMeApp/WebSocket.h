@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <SRWebSocket.h>
 #import "UserInfo.h"
+#import "UserInfoMessage.h"
 
 @interface WebSocket : NSObject <SRWebSocketDelegate>
 

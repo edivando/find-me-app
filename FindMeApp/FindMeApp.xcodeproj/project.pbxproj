@@ -13,6 +13,7 @@
 		892483C81A2C95590087C4E9 /* ConnectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483C71A2C95590087C4E9 /* ConnectionInfo.m */; };
 		892483CB1A2C969B0087C4E9 /* StatusInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */; };
 		892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */; };
+		892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */; };
 		89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ACFE8E1A2766280000B7A7 /* UserInfo.m */; };
 		89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0231A28914900861042 /* CoreDataModel.xcdatamodeld */; };
 		89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0281A28A1F100861042 /* WebSocketSingleton.m */; };
@@ -72,6 +73,8 @@
 		892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusInfoMessage.m; sourceTree = "<group>"; };
 		892483CC1A2C96AA0087C4E9 /* ConnectionInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionInfoMessage.h; sourceTree = "<group>"; };
 		892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionInfoMessage.m; sourceTree = "<group>"; };
+		892483CF1A2C9A120087C4E9 /* ViewControllerContactsPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerContactsPicker.h; sourceTree = "<group>"; };
+		892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerContactsPicker.m; sourceTree = "<group>"; };
 		89ACFE8D1A2766280000B7A7 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		89ACFE8E1A2766280000B7A7 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		89B2A0241A28914900861042 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -219,6 +222,8 @@
 				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
 				DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */,
 				DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */,
+				892483CF1A2C9A120087C4E9 /* ViewControllerContactsPicker.h */,
+				892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				89EFA2201A261434008AAF2C /* ViewController.m in Sources */,
 				A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */,
 				89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */,
+				892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */,
 				892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
 				892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */,

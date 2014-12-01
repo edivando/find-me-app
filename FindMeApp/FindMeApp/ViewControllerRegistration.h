@@ -10,6 +10,9 @@
 #import "UserInfo.h"
 #import "UserInfoDAO.h"
 #import "ViewController.h"
+#import "UserInfoMessage.h"
+#import "WebSocket.h"
+#import "WebSocketSingleton.h"
 
 @interface ViewControllerRegistration : UITableViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textNome;

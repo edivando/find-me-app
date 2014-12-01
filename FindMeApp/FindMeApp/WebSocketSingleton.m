@@ -8,10 +8,8 @@
 
 #import "WebSocketSingleton.h"
 
-
-@implementation WebSocketSingleton{
+@implementation WebSocketSingleton
     
-}
 static WebSocket *webSocket;
 
 +(WebSocket*) getConnection{

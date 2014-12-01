@@ -39,7 +39,7 @@
     return [dao save:dict];
 }
 
--(NSArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
+-(NSMutableArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
     NSPredicate *pred = [[NSPredicate alloc] init];
     if ([chave isEqual:@"nome"])
         pred = [NSPredicate predicateWithFormat:@"(nome = %@)",valor];
@@ -49,7 +49,23 @@
         pred = [NSPredicate predicateWithFormat:@"(telefone = %@)",valor];
     else if ([chave isEqual:@"email"])
         pred = [NSPredicate predicateWithFormat:@"(email = %@)",valor];
-    return [dao fetch:pred];
+    return [self convertToUsersInfo:[dao fetch:pred]];
+}
+
+
+-(NSMutableArray*) convertToUsersInfo:(NSArray*) managers{
+    NSMutableArray *users = [NSMutableArray new];
+    for (NSManagedObject *m in managers) {
+        UserInfo *user = [[UserInfo alloc] initWithUser:[m valueForKey:@"nome"]
+                                                      latitude:[[m valueForKey:@"latitude"] floatValue]
+                                                     longitude:[[m valueForKey:@"longitude"] floatValue]
+                                                         email:[m valueForKey:@"email"]
+                                                      telefone:[m valueForKey:@"telefone"]
+                                                      idServer:[[m valueForKey:@"idServer"] integerValue]
+                                                  connectionId:[m valueForKey:@"connectionId"]];
+        [users addObject:user];
+    }
+    return users;
 }
 
 @end

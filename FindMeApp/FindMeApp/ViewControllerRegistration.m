@@ -46,9 +46,9 @@
     [numberToolbar sizeToFit];
     self.textTelefone.inputAccessoryView = numberToolbar;
     
-    [self.navigationController setNavigationBarHidden:NO];
+    //[self.navigationController setNavigationBarHidden:NO];
     
-    [self.navigationController setModalPresentationStyle:UIModalPresentationFullScreen];
+    //[self.navigationController setModalPresentationStyle:UIModalPresentationFullScreen];
     
     //[self presentViewController:nav animated:YES completion:nil];
     
@@ -129,10 +129,12 @@
         [alert show];
     }
     else{
-        UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text
-                         ];
+        UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text idServer:0 connectionId:@"0"];
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         [dao save:newUser];
+        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:newUser];
+        WebSocket *socket = [WebSocketSingleton getConnection];
+        [socket sendMessage:[message toJSONString]];
         [self dismissViewControllerAnimated:YES completion:nil];
         
         //segue

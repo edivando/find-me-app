@@ -11,6 +11,6 @@
 
 @interface WebSocketSingleton : NSObject
 
-+(WebSocket*) getConnection;
++(WebSocket*)getConnection;
 
 @end

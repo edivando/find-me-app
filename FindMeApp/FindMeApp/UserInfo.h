@@ -11,6 +11,8 @@
 
 @interface UserInfo : JSONModel
 
+@property (nonatomic) NSInteger idServer;
+@property (nonatomic) NSString *connectionId;
 @property (nonatomic) NSString *user;
 @property (nonatomic) NSString <Optional> *email;
 @property (nonatomic) NSString *telefone;
@@ -21,6 +23,8 @@
                     latitude:(float)latitude
                    longitude:(float)longitude
                        email:(NSString*)email
-                    telefone:(NSString*)telefone;
+                    telefone:(NSString*)telefone
+                          idServer:(NSInteger)idServer
+                connectionId:(NSString*)connectionId;
 
 @end
