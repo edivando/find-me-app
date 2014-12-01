@@ -46,6 +46,12 @@
  
 }
 
+-(void) delete:(NSDictionary*)dictionary{
+    NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
+    [managed setValuesForKeysWithDictionary:dictionary];
+    [[self context] deleteObject:managed];
+}
+
 
 
 

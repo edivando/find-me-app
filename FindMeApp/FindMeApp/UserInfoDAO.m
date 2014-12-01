@@ -68,6 +68,24 @@
     return [self convertToUsersInfo:[dao fetch:pred]];
 }
 
+-(void) clearAllExceptDefault{
+    NSPredicate *pred = [[NSPredicate alloc] init];
+    NSDictionary *dict;
+    NSMutableArray *nonDefault = [[NSMutableArray alloc] init];
+    pred = [NSPredicate predicateWithFormat:@"(defaultuser = NO)"];
+    nonDefault = [self convertToUsersInfo:[dao fetch:pred]];
+    for (UserInfo *u in nonDefault) {
+        dict = @{@"nome": u.user,
+                 @"telefone" : u.telefone,
+                 @"email" : u.email,
+                 @"connectionId" : u.connectionId,
+                 @"latitude" : @(u.latitude),
+                 @"longitude" : @(u.longitude),
+                 @"defaultuser" : @"NO"};
+        [dao delete:dict];
+    }
+}
+
 
 -(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds{
     NSMutableArray *users = [NSMutableArray new];
