@@ -33,17 +33,8 @@
     self.textNome.delegate = self;
     self.textEmail.delegate = self;
     self.tableView.backgroundColor = [[UIColor alloc] initWithRed:255.0f/255.0f green:256.0f/255.0f blue:255.0f/255.0f alpha:1.0];
+    
     //Setando botão Done (background e tamanho)
-    UIImage *buttonImage = [[UIImage imageNamed:@"blueButton"]
-                            resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-    UIImage *buttonImageHighlight = [[UIImage imageNamed:@"blueButtonHighlight"]
-                                     resizableImageWithCapInsets:UIEdgeInsetsMake(18, 18, 18, 18)];
-    CGRect buttonFrame = self.btDoneOut.frame;
-    buttonFrame.size = CGSizeMake(100, 35);
-    self.btDoneOut.frame = buttonFrame;
-    [self.btDoneOut setBackgroundImage:buttonImage forState:UIControlStateNormal]
-    ;
-    [self.btDoneOut setBackgroundImage:buttonImageHighlight forState:UIControlStateHighlighted];
     
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
@@ -55,11 +46,24 @@
     [numberToolbar sizeToFit];
     self.textTelefone.inputAccessoryView = numberToolbar;
     
+    [self.navigationController setNavigationBarHidden:NO];
+    
+    [self.navigationController setModalPresentationStyle:UIModalPresentationFullScreen];
+    
+    //[self presentViewController:nav animated:YES completion:nil];
+    
+    //[self.navigationController setNavigationBarHidden:NO];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     //self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[self navigationController] setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -129,8 +133,7 @@
                          ];
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         [dao save:newUser];
-        [self performSegueWithIdentifier:@"SegueViewPrincipal" sender:sender];
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         //segue
     }

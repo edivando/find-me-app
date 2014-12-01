@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ViewControllerSocket.h"
+#import "ViewControllerRegistration.h"
 
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate>

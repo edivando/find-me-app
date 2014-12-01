@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A2F42898B43C6103BAFEC38 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7AB2C179E346E382D3E093 /* libPods.a */; };
+		892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483C01A2C91710087C4E9 /* UserInfoMessage.m */; };
 		89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ACFE8E1A2766280000B7A7 /* UserInfo.m */; };
 		89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0231A28914900861042 /* CoreDataModel.xcdatamodeld */; };
 		89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0281A28A1F100861042 /* WebSocketSingleton.m */; };
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		892483BF1A2C91710087C4E9 /* UserInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoMessage.h; sourceTree = "<group>"; };
+		892483C01A2C91710087C4E9 /* UserInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoMessage.m; sourceTree = "<group>"; };
 		89ACFE8D1A2766280000B7A7 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		89ACFE8E1A2766280000B7A7 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		89B2A0241A28914900861042 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -157,6 +160,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		892483C21A2C91810087C4E9 /* Mensagem */ = {
+			isa = PBXGroup;
+			children = (
+				892483BF1A2C91710087C4E9 /* UserInfoMessage.h */,
+				892483C01A2C91710087C4E9 /* UserInfoMessage.m */,
+			);
+			name = Mensagem;
+			sourceTree = "<group>";
+		};
 		89ACFE901A27662C0000B7A7 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,7 @@
 		89B2A0261A28A1B100861042 /* websocket */ = {
 			isa = PBXGroup;
 			children = (
+				892483C21A2C91810087C4E9 /* Mensagem */,
 				89B2A0271A28A1F100861042 /* WebSocketSingleton.h */,
 				89B2A0281A28A1F100861042 /* WebSocketSingleton.m */,
 				89B2A02A1A28A21400861042 /* WebSocket.h */,
@@ -437,6 +450,7 @@
 				A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */,
 				89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
+				892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */,
 				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89B2A02C1A28A21400861042 /* WebSocket.m in Sources */,
 				89B2A0341A28B0FC00861042 /* GenericDAO.m in Sources */,

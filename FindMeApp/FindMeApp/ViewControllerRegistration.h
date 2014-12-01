@@ -16,6 +16,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *textEmail;
 @property (weak, nonatomic) IBOutlet UITextField *textTelefone;
 - (IBAction)btDone:(UIButton *)sender;
-@property (weak, nonatomic) IBOutlet UIButton *btDoneOut;
 
 @end

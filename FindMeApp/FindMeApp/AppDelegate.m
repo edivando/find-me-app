@@ -17,22 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    NSArray *objects = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
-    //Testa se existe usuário registrado no BD
-    if ([objects count] == 0) {
-        //Se não existir, carrega view registro
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"registroView"];
-        self.navigationController = [[UINavigationController alloc]initWithRootViewController:viewController];
-    } else {
-        //Caso exista, carrega view principal
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"principalView"];
-        self.navigationController = [[UINavigationController alloc]initWithRootViewController:viewController];
-    }
-    self.window.rootViewController = self.navigationController;
-    [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyD6fAxPgNUim_lM1MqACWZFlVHuwq8Li4k"];
     return YES;

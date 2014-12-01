@@ -36,9 +36,22 @@
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     
+    //Caso exista, carrega normalmente
+    
     //[self CustomMaker];
     
     
+
+}
+
+-(void) viewDidAppear:(BOOL)animated{
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    NSArray *objects = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    //Testa se existe usuário registrado no BD
+    if ([objects count] == 0) {
+        //Se não existir, carrega view registro
+        [self performSegueWithIdentifier:@"SegueViewRegistro" sender:nil];
+    }
 
 }
 
