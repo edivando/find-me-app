@@ -123,9 +123,9 @@
 //    marker2.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
 //    marker2.map = mapView;
     
-    for (UserInfo* user in _UsuariosAtivos) {
-        user.marker.map = mapView;
-    }
+//    for (UserInfo* user in _UsuariosAtivos) {
+//        user.marker.map = mapView;
+//    }
     
     //mapView.mapType = kGMSTypeSatellite;
 
