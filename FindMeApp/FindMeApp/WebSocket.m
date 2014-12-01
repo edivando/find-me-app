@@ -16,7 +16,7 @@
     webSocket.delegate = nil;
     webSocket = nil;
     
-    NSString *urlString = @"wss://findme-edivando.rhcloud.com:8443/server?userName=Yuri";
+    NSString *urlString = @"wss://findme-edivando.rhcloud.com:8443/server";
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
     
@@ -44,11 +44,14 @@
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSError* error;
     
-    UserInfo* recebida = [[UserInfo alloc] initWithString:message error:&error];
+    if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound) {
+        NSLog(@"connectionInfo");
+    }
+    //UserInfoMessage* recebida = [[UserInfoMessage alloc] initWithString:message error:&error];
     
-    NSLog(@"User recebido: %@", recebida.user);
-    NSLog(@"Lat recebida: %f", recebida.latitude);
-    NSLog(@"Long recebida: %f", recebida.longitude);
+    //NSLog(@"User recebido: %@", recebida.user);
+    //NSLog(@"Lat recebida: %f", recebida.latitude);
+    //NSLog(@"Long recebida: %f", recebida.longitude);
 }
 
 -(void) sendMessage:(NSString*)message{

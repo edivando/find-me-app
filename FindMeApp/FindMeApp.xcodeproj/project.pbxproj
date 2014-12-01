@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		5A2F42898B43C6103BAFEC38 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB7AB2C179E346E382D3E093 /* libPods.a */; };
+		892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483C01A2C91710087C4E9 /* UserInfoMessage.m */; };
+		892483C51A2C949F0087C4E9 /* StatusInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483C41A2C949F0087C4E9 /* StatusInfo.m */; };
+		892483C81A2C95590087C4E9 /* ConnectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483C71A2C95590087C4E9 /* ConnectionInfo.m */; };
+		892483CB1A2C969B0087C4E9 /* StatusInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */; };
+		892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */; };
+		892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */; };
 		89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ACFE8E1A2766280000B7A7 /* UserInfo.m */; };
 		89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0231A28914900861042 /* CoreDataModel.xcdatamodeld */; };
 		89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 89B2A0281A28A1F100861042 /* WebSocketSingleton.m */; };
@@ -43,6 +49,7 @@
 		A073705A1A274C21001B3D6B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370591A274C21001B3D6B /* OpenGLES.framework */; };
 		A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705B1A274C2F001B3D6B /* QuartzCore.framework */; };
 		A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */; };
+		DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		892483BF1A2C91710087C4E9 /* UserInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoMessage.h; sourceTree = "<group>"; };
+		892483C01A2C91710087C4E9 /* UserInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoMessage.m; sourceTree = "<group>"; };
+		892483C31A2C949F0087C4E9 /* StatusInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusInfo.h; sourceTree = "<group>"; };
+		892483C41A2C949F0087C4E9 /* StatusInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusInfo.m; sourceTree = "<group>"; };
+		892483C61A2C95590087C4E9 /* ConnectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionInfo.h; sourceTree = "<group>"; };
+		892483C71A2C95590087C4E9 /* ConnectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionInfo.m; sourceTree = "<group>"; };
+		892483C91A2C969B0087C4E9 /* StatusInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusInfoMessage.h; sourceTree = "<group>"; };
+		892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusInfoMessage.m; sourceTree = "<group>"; };
+		892483CC1A2C96AA0087C4E9 /* ConnectionInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionInfoMessage.h; sourceTree = "<group>"; };
+		892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionInfoMessage.m; sourceTree = "<group>"; };
+		892483CF1A2C9A120087C4E9 /* ViewControllerContactsPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerContactsPicker.h; sourceTree = "<group>"; };
+		892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerContactsPicker.m; sourceTree = "<group>"; };
 		89ACFE8D1A2766280000B7A7 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		89ACFE8E1A2766280000B7A7 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
 		89B2A0241A28914900861042 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -105,6 +124,8 @@
 		AB7AB2C179E346E382D3E093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31642967B924B74C2066B8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRegistration.h; sourceTree = "<group>"; };
+		DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRegistration.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,9 +175,26 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		892483C21A2C91810087C4E9 /* Mensagem */ = {
+			isa = PBXGroup;
+			children = (
+				892483BF1A2C91710087C4E9 /* UserInfoMessage.h */,
+				892483C01A2C91710087C4E9 /* UserInfoMessage.m */,
+				892483C91A2C969B0087C4E9 /* StatusInfoMessage.h */,
+				892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */,
+				892483CC1A2C96AA0087C4E9 /* ConnectionInfoMessage.h */,
+				892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */,
+			);
+			name = Mensagem;
+			sourceTree = "<group>";
+		};
 		89ACFE901A27662C0000B7A7 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				892483C31A2C949F0087C4E9 /* StatusInfo.h */,
+				892483C41A2C949F0087C4E9 /* StatusInfo.m */,
+				892483C61A2C95590087C4E9 /* ConnectionInfo.h */,
+				892483C71A2C95590087C4E9 /* ConnectionInfo.m */,
 				89ACFE8D1A2766280000B7A7 /* UserInfo.h */,
 				89ACFE8E1A2766280000B7A7 /* UserInfo.m */,
 			);
@@ -166,6 +204,7 @@
 		89B2A0261A28A1B100861042 /* websocket */ = {
 			isa = PBXGroup;
 			children = (
+				892483C21A2C91810087C4E9 /* Mensagem */,
 				89B2A0271A28A1F100861042 /* WebSocketSingleton.h */,
 				89B2A0281A28A1F100861042 /* WebSocketSingleton.m */,
 				89B2A02A1A28A21400861042 /* WebSocket.h */,
@@ -181,6 +220,10 @@
 				89EFA21F1A261434008AAF2C /* ViewController.m */,
 				A03081C11A27604700CC30AE /* ViewControllerSocket.h */,
 				A03081C21A27604700CC30AE /* ViewControllerSocket.m */,
+				DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */,
+				DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */,
+				892483CF1A2C9A120087C4E9 /* ViewControllerContactsPicker.h */,
+				892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -431,13 +474,20 @@
 				89EFA2201A261434008AAF2C /* ViewController.m in Sources */,
 				A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */,
 				89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */,
+				892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */,
+				892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
+				892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */,
 				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89B2A02C1A28A21400861042 /* WebSocket.m in Sources */,
+				892483C81A2C95590087C4E9 /* ConnectionInfo.m in Sources */,
 				89B2A0341A28B0FC00861042 /* GenericDAO.m in Sources */,
+				DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */,
 				89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */,
+				892483C51A2C949F0087C4E9 /* StatusInfo.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 				89B2A0311A28AA9200861042 /* UserInfoDAO.m in Sources */,
+				892483CB1A2C969B0087C4E9 /* StatusInfoMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

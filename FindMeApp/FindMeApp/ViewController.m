@@ -52,6 +52,21 @@
 
 }
 
+-(void) viewDidAppear:(BOOL)animated{
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    NSArray *users = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    //Testa se existe usuário registrado no BD
+    if ([users count] == 0) {
+        //Se não existir, carrega view registro
+        [self performSegueWithIdentifier:@"SegueViewRegistro" sender:nil];
+    }
+    else{
+        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[users objectAtIndex:0]];
+        [socket sendMessage:[message toJSONString]];
+    }
+
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -314,13 +329,13 @@
 }
 
 -(void) mandaLocalização{
-    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:_latitude longitude:_longitude email:@"bla@bla.com" telefone:@"35699856"];
-    
-    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
-    
-    [socket sendMessage:[position toJSONString]];
-    
-    
+//    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:_latitude longitude:_longitude email:@"bla@bla.com" telefone:@"35699856"];
+//    
+//    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
+//    
+//    [socket sendMessage:[position toJSONString]];
+//    
+//    
     //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
 }
 

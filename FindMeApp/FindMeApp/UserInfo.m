@@ -15,6 +15,8 @@
                    longitude:(float)longitude
                        email:(NSString*)email
                     telefone:(NSString*)telefone
+                    idServer:(NSInteger)idServer
+                connectionId:(NSString*)connectionId
 {
     self = [super init];
     if (self) {

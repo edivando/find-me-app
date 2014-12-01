@@ -23,17 +23,49 @@
 }
 
 -(NSError*)save:(UserInfo*)user{
-    NSDictionary *dict = @{@"nome": user.user,
-                           @"telefone" : user.telefone,
-                           @"email" : user.email};
-    
+    NSDictionary *dict;
+    NSArray *objects = [self fetchWithKey:@"defaultuser" andValue:@"YES"];
+    if ([objects count] == 0) {
+        dict = @{@"nome": user.user,
+                 @"telefone" : user.telefone,
+                 @"email" : user.email,
+                 @"defaultuser" : @"YES"};
+    } else {
+        dict = @{@"nome": user.user,
+                 @"telefone" : user.telefone,
+                 @"email" : user.email,
+                 @"defaultuser" : @"NO"};
+    }
     return [dao save:dict];
 }
 
--(NSArray*) fetch:(NSString*)chave :(NSString*)valor{
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(%@ = %@)",chave ,valor];
-    return [dao fetch:pred];
+-(NSMutableArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
+    NSPredicate *pred = [[NSPredicate alloc] init];
+    if ([chave isEqual:@"nome"])
+        pred = [NSPredicate predicateWithFormat:@"(nome = %@)",valor];
+    else if ([chave isEqual:@"defaultuser"])
+        pred = [NSPredicate predicateWithFormat:@"(defaultuser = %@)",valor];
+    else if ([chave isEqual:@"telefone"])
+        pred = [NSPredicate predicateWithFormat:@"(telefone = %@)",valor];
+    else if ([chave isEqual:@"email"])
+        pred = [NSPredicate predicateWithFormat:@"(email = %@)",valor];
+    return [self convertToUsersInfo:[dao fetch:pred]];
+}
+
+
+-(NSMutableArray*) convertToUsersInfo:(NSArray*) managers{
+    NSMutableArray *users = [NSMutableArray new];
+    for (NSManagedObject *m in managers) {
+        UserInfo *user = [[UserInfo alloc] initWithUser:[m valueForKey:@"nome"]
+                                                      latitude:[[m valueForKey:@"latitude"] floatValue]
+                                                     longitude:[[m valueForKey:@"longitude"] floatValue]
+                                                         email:[m valueForKey:@"email"]
+                                                      telefone:[m valueForKey:@"telefone"]
+                                                      idServer:[[m valueForKey:@"idServer"] integerValue]
+                                                  connectionId:[m valueForKey:@"connectionId"]];
+        [users addObject:user];
+    }
+    return users;
 }
 
 @end

@@ -14,6 +14,6 @@
 
 -(NSError*)save:(UserInfo*)user;
 
--(NSArray*) fetch:(NSString*)chave :(NSString*)valor;
+-(NSMutableArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor;
 
 @end

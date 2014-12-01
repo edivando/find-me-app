@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ViewControllerSocket.h"
-
+#import "ViewControllerRegistration.h"
+#import "UserInfoMessage.h"
+#import "WebSocket.h"
+#import "WebSocketSingleton.h"
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate>
 

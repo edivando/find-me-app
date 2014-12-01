@@ -61,19 +61,19 @@
 
 
 - (IBAction)sendMessage:(UIButton *)sender {
-    // Salva no Banco de Dados Local
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    UserInfo *novo = [[UserInfo alloc] initWithUser:self.nome.text latitude:0.0 longitude:0.0 email:self.email.text telefone:self.telefone.text];
-    [dao save:novo];
-    _nome.text = @"";
-    _telefone.text = @"";
-    _email.text = @"";    
-    
-    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
-    
-    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
-    
-    [socket sendMessage:[position toJSONString]];
+//    // Salva no Banco de Dados Local
+//    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+////   UserInfo *novo = [[UserInfo alloc] initWithUser:self.nome.text latitude:0.0 longitude:0.0 email:self.email.text telefone:self.telefone.text];
+//    [dao save:novo];
+//    _nome.text = @"";
+//    _telefone.text = @"";
+//    _email.text = @"";    
+//    
+//   // UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:23.876 longitude:87.9765 email:@"bla@bla.com" telefone:@"35699856"];
+//    
+//    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
+//    
+//    [socket sendMessage:[position toJSONString]];
 }
 
 - (IBAction)loadData:(UIButton *)sender {
@@ -93,7 +93,7 @@
 //    NSError *error;
 //    NSArray *objects = [context executeFetchRequest:request error:&error];
     UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    NSArray *objects = [dao fetch:@"nome" : _nome.text];
+    NSArray *objects = [dao fetchWithKey:@"nome" andValue: _nome.text];
     if ([objects count] == 0) {
         _telefone.text = @"No matches";
     } else {
