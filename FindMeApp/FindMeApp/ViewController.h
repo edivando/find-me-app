@@ -19,6 +19,7 @@
 - (IBAction)getLocation:(UIButton *)sender;
 @property(nonatomic) float latitude;
 @property(nonatomic) float longitude;
+@property(nonatomic) NSMutableArray* UsuariosAtivos;
 
 -(void) mandaLocalização;
 

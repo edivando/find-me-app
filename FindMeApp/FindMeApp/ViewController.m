@@ -29,6 +29,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     socket = [WebSocketSingleton getConnection];
+    manager = [[CLLocationManager alloc] init];
+    _UsuariosAtivos = [NSMutableArray new];
+    
+    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
+    
+    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
+    
+    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
+    
+    [_UsuariosAtivos addObjectsFromArray:(@[user1,user2,user3])];
     
     _latitude = 0.0;
     _longitude = 0.0;
@@ -36,9 +46,7 @@
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     
-    //Caso exista, carrega normalmente
-    
-    //[self CustomMaker];
+    //[self Indoor];
     
     
 
@@ -77,6 +85,7 @@
     marker.snippet = @"Hello World";
     marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.map = mapView;
+
     
     self.view = mapView;
 }
@@ -99,14 +108,28 @@
 -(void) CustomMaker{
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:41.887
                                                             longitude:-87.622
-                                                                 zoom:15];
+                                                                 zoom:18];
     GMSMapView *mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(41.887, -87.622);
-    marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.icon = [UIImage imageNamed:@"flag_icon"];
-    marker.map = mapView;
+//    GMSMarker *marker = [[GMSMarker alloc] init];
+//    marker.position = CLLocationCoordinate2DMake(41.887, -87.622);
+//    marker.appearAnimation = kGMSMarkerAnimationPop;
+//    marker.icon = [UIImage imageNamed:@"flag_icon"];
+//    marker.map = mapView;
+//    
+//    GMSMarker *marker2 = [[GMSMarker alloc] init];
+//    marker2.position = CLLocationCoordinate2DMake(41.880, -87.622);
+//    marker2.appearAnimation = kGMSMarkerAnimationPop;
+//    //marker2.icon = [UIImage imageNamed:@"flag_icon"];
+//    marker2.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
+//    marker2.map = mapView;
+    
+//    for (UserInfo* user in _UsuariosAtivos) {
+//        user.marker.map = mapView;
+//    }
+    
+    //mapView.mapType = kGMSTypeSatellite;
+
     
     self.view = mapView;
 
@@ -118,6 +141,19 @@
     GMSPanoramaView *panoView =
     [GMSPanoramaView panoramaWithFrame:CGRectZero
                         nearCoordinate:panoramaNear];
+    
+//    GMSMarker *marker = [[GMSMarker alloc] init];
+//    marker.position = CLLocationCoordinate2DMake(41.887, -87.622);
+//    marker.appearAnimation = kGMSMarkerAnimationPop;
+//    marker.icon = [UIImage imageNamed:@"flag_icon"];
+//    marker.panoramaView = panoView;
+//    
+//    GMSMarker *marker2 = [[GMSMarker alloc] init];
+//    marker2.position = CLLocationCoordinate2DMake(41.880, -87.622);
+//    marker2.appearAnimation = kGMSMarkerAnimationPop;
+//    //marker2.icon = [UIImage imageNamed:@"flag_icon"];
+//    marker2.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
+//    marker2.panoramaView = panoView;
     
     self.view = panoView;
 }
@@ -201,6 +237,9 @@
     marker.title = @"Sydney";
     marker.snippet = @"Australia";
     marker.map = mapView;
+    
+    self.view = mapView;
+
 
 }
 
@@ -216,20 +255,24 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    
-    NSLog(@"Location: %@", newLocation);
+    //NSLog(@"Distance Location: %f", [newLocation distanceFromLocation:oldLocation]);
     CLLocation *currentLocation = newLocation;
-    
+
     if (currentLocation != nil) {
         
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
+        
+        [self StreetView];
+        
+        //NSLog(@"%f", currentLocation.coordinate.latitude);
         
 //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
 //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
 //        NSLog(@"Pega Latitude e Longitude");
         
         [self mandaLocalização];
+        
         
     }
     
@@ -254,7 +297,6 @@
 //        
 //    } ];
     
-    [self StreetView];
     
 }
 
@@ -264,10 +306,27 @@
     
     manager.delegate = self;
    // manager.desiredAccuracy = kCLLocationAccuracyBest;
-    manager.distanceFilter = 5.0;
+    //manager.distanceFilter = 10.0;
+    //manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     
-    [manager startUpdatingLocation];
+    //[manager setDesiredAccuracy:kCLLocationAccuracyBest];
     
+    //[manager setDistanceFilter:kCLDistanceFilterNone];
+    //manager.distanceFilter = 50.0f;
+    //manager.headingFilter = 5;
+    //[manager startUpdatingLocation];
+    
+    
+    
+    manager.distanceFilter = 10.0;
+    manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+
+    
+
+    // update location
+    if ([CLLocationManager locationServicesEnabled]){
+        [manager startUpdatingLocation];
+    }
 }
 
 -(void) mandaLocalização{
@@ -280,4 +339,23 @@
 //    
     //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
 }
+
+-(void) markerTest{
+    
+    GMSMapView *mapView;
+    
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(51.5, -0.127);
+    GMSMarker *london = [GMSMarker markerWithPosition:position];
+    london.title = @"London";
+    london.snippet = @"Population: 8,174,100";
+    london.infoWindowAnchor = CGPointMake(0.5, 0.5);
+    london.icon = [UIImage imageNamed:@"house"];
+    london.map = mapView;
+    
+    self.view = mapView;
+
+
+}
+
+
 @end

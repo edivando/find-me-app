@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel.h>
+#import "GoogleMaps/GoogleMaps.h"
+
 
 @interface UserInfo : JSONModel
 
@@ -18,6 +20,7 @@
 @property (nonatomic) NSString *telefone;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
+//@property (nonatomic) GMSMarker<Optional> *marker;
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
@@ -26,5 +29,9 @@
                     telefone:(NSString*)telefone
                           idServer:(NSInteger)idServer
                 connectionId:(NSString*)connectionId;
+
+
+
+
 
 @end

@@ -42,10 +42,31 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSError* error;
+    //NSError* error;
     
-    if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound) {
-        NSLog(@"connectionInfo");
+    if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
+        //Extraindo o connectionId da mensagem
+        NSString *prefix = @"{\"connectionInfo\":{\"userInfo\":{\"id\":0,\"connectionId\":\""; // string prefix,
+        NSRange needleRange = NSMakeRange(prefix.length, prefix.length-22);
+        NSString *connectionId = [message substringWithRange:needleRange];
+        NSLog(@"CONNECTION INFO: %@", connectionId);
+        
+        //Atualizar o usuario default com o connectionId atual
+        UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+        if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]==0) {
+            //usuario default não cadastrado (a view de cadastro provavelmente está aberta nesse ponto)
+        }
+        else{
+            UserInfo *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+            fetchResult.connectionId = connectionId;
+            NSLog(@"%@",[dao updateDefaultUser:fetchResult]);
+        }
+    }
+    if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
+        NSLog(@"USER INFO: %@",message);
+    }
+    if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
+        NSLog(@"STATUS INFO: %@",message);
     }
     //UserInfoMessage* recebida = [[UserInfoMessage alloc] initWithString:message error:&error];
     

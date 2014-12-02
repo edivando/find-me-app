@@ -24,18 +24,34 @@
 
 -(NSError*)save:(UserInfo*)user{
     NSDictionary *dict;
-    NSArray *objects = [self fetchWithKey:@"defaultuser" andValue:@"YES"];
-    if ([objects count] == 0) {
+    if ([[self fetchWithKey:@"defaultuser" andValue:@"YES"] count] == 0) {
         dict = @{@"nome": user.user,
                  @"telefone" : user.telefone,
                  @"email" : user.email,
+                 @"connectionId" : user.connectionId,
+                 @"latitude" : @(user.latitude),
+                 @"longitude" : @(user.longitude),
                  @"defaultuser" : @"YES"};
     } else {
         dict = @{@"nome": user.user,
                  @"telefone" : user.telefone,
                  @"email" : user.email,
+                 @"connectionId" : user.connectionId,
+                 @"latitude" : @(user.latitude),
+                 @"longitude" : @(user.longitude),
                  @"defaultuser" : @"NO"};
     }
+    return [dao save:dict];
+}
+
+-(NSError*)updateDefaultUser:(UserInfo*)user{
+    NSDictionary *dict = @{@"nome": user.user,
+                           @"telefone" : user.telefone,
+                           @"email" : user.email,
+                           @"connectionId" : user.connectionId,
+                           @"latitude" : @(user.latitude),
+                           @"longitude" : @(user.longitude),
+                           @"defaultuser" : @"YES"};
     return [dao save:dict];
 }
 
@@ -52,10 +68,28 @@
     return [self convertToUsersInfo:[dao fetch:pred]];
 }
 
+-(void) clearAllExceptDefault{
+    NSPredicate *pred = [[NSPredicate alloc] init];
+    NSDictionary *dict;
+    NSMutableArray *nonDefault = [[NSMutableArray alloc] init];
+    pred = [NSPredicate predicateWithFormat:@"(defaultuser = NO)"];
+    nonDefault = [self convertToUsersInfo:[dao fetch:pred]];
+    for (UserInfo *u in nonDefault) {
+        dict = @{@"nome": u.user,
+                 @"telefone" : u.telefone,
+                 @"email" : u.email,
+                 @"connectionId" : u.connectionId,
+                 @"latitude" : @(u.latitude),
+                 @"longitude" : @(u.longitude),
+                 @"defaultuser" : @"NO"};
+        [dao delete:dict];
+    }
+}
 
--(NSMutableArray*) convertToUsersInfo:(NSArray*) managers{
+
+-(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds{
     NSMutableArray *users = [NSMutableArray new];
-    for (NSManagedObject *m in managers) {
+    for (NSManagedObject *m in manageds) {
         UserInfo *user = [[UserInfo alloc] initWithUser:[m valueForKey:@"nome"]
                                                       latitude:[[m valueForKey:@"latitude"] floatValue]
                                                      longitude:[[m valueForKey:@"longitude"] floatValue]
