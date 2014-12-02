@@ -60,9 +60,9 @@
  
 }
 
--(void) delete:(NSDictionary*)dictionary{
-    NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
-    [managed setValuesForKeysWithDictionary:dictionary];
+-(void) delete:(NSManagedObject*)managed{
+    //NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
+    //[managed setValuesForKeysWithDictionary:dictionary];
     [[self context] deleteObject:managed];
     //**Talvez precise salvar o context depois, não sei
 }

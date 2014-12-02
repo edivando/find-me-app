@@ -24,4 +24,6 @@
 
 -(UserInfo*)convertToUserInfo:(NSManagedObject*)m;
 
+-(void) clearAllExceptDefault;
+
 @end
