@@ -33,6 +33,12 @@
     return error;
 }
 
+-(NSError*) update:(NSManagedObject*)managed{
+    NSError *error;
+    [[self context] save:&error];
+    return error;
+}
+
 -(NSArray*) fetch:(NSPredicate*)predicate{
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entityDesc =[NSEntityDescription entityForName:_entity inManagedObjectContext: [self context]];

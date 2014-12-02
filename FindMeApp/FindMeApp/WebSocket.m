@@ -50,13 +50,10 @@
         
         //Atualizar o usuario default com o connectionId atual
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-        if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]==0) {
-            //usuario default não cadastrado (a view de cadastro provavelmente está aberta nesse ponto)
-        }
-        else{
-            UserInfo *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
-            fetchResult.connectionId = recebida.connectionInfo.userInfo.connectionId;
-            NSLog(@"%@",[dao updateDefaultUser:fetchResult]);
+        if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
+            NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+            [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
+            NSLog(@"%@",[dao update:fetchResult]);
         }
     }
     if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
