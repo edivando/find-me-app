@@ -41,8 +41,8 @@
     
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
-    intervalo = 10.0/100;
-    // Atualiza os markers do mapa através de um timer.
+    intervalo = 10.0;
+    
     
 
 }
@@ -68,10 +68,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+// Atualiza os markers do mapa através de um timer.
 -(void)updateMarker{
+    NSLog(@"Testand Timer");
     UserInfoDAO *userDAO = [UserInfoDAO new];
     NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
-    
     for (UserInfo *user in usersInfo) {
         [user marker].map = _mapView;
     }
@@ -115,11 +117,11 @@
                                                                  zoom:13];
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
-    marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.icon = [UIImage imageNamed:@"flag_icon"];
-    marker.map = _mapView;
+//    GMSMarker *marker = [[GMSMarker alloc] init];
+//    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
+//    marker.appearAnimation = kGMSMarkerAnimationPop;
+//    marker.icon = [UIImage imageNamed:@"flag_icon"];
+//    marker.map = _mapView;
 //
 //    GMSMarker *marker2 = [[GMSMarker alloc] init];
 //    marker2.position = CLLocationCoordinate2DMake(41.880, -87.622);
