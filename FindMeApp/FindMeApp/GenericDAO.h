@@ -20,4 +20,6 @@
 
 -(NSArray*) fetch:(NSPredicate*)predicate;
 
+-(NSError*) updateDictionary:(NSDictionary*)dictionary;
+
 @end

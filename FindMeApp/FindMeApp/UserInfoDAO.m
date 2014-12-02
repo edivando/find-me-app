@@ -48,6 +48,17 @@
     return [dao update:managed];
 }
 
+-(NSError*)updateUserInfo:(UserInfo*)u{
+    return [dao updateDictionary:@{@"nome": u.user,
+                         @"telefone" : u.telefone,
+                         @"email" : u.email,
+                         @"connectionId" : u.connectionId,
+                         @"latitude" : @(u.latitude),
+                         @"longitude" : @(u.longitude),
+                         @"defaultuser" : @"NO"}
+            ];
+}
+
 
 -(void) clearAllExceptDefault{
     NSPredicate *pred = [[NSPredicate alloc] init];

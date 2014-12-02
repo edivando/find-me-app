@@ -33,6 +33,14 @@
     return error;
 }
 
+-(NSError*) updateDictionary:(NSDictionary*)dictionary{
+    NSError *error;
+    NSEntityDescription *description = [NSEntityDescription entityForName:_entity inManagedObjectContext:[self context]];
+    [description setValuesForKeysWithDictionary:dictionary];
+    [[self context] save:&error];
+    return error;
+}
+
 -(NSError*) update:(NSManagedObject*)managed{
     NSError *error;
     [[self context] save:&error];

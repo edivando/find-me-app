@@ -13,7 +13,9 @@
 @end
 
 @implementation ViewControllerContactsPicker{
+    UserInfoDAO *dao;
     UIAlertView *alert;
+    NSArray *contatos;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,6 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    dao = [[UserInfoDAO alloc] init];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     // Do any additional setup after loading the view.
 }
 
@@ -35,6 +41,32 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //edit table
+}
+
+//-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return [contatos count];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.lbTitle.text = [[contatos objectAtIndex:indexPath.row] valueForKey:@"nome"];
+    cell.lbTitle.text = [[contatos objectAtIndex:indexPath.row] valueForKey:@"telefone"];
+    return cell;
 }
 
 -(void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{

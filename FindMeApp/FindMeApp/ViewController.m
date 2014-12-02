@@ -358,4 +358,7 @@
 
 
 
+- (IBAction)addContato:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"SegueAddContato" sender:nil];
+}
 @end

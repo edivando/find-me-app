@@ -30,7 +30,7 @@
                 connectionId:(NSString*)connectionId;
 
 
-
+-(BOOL)isEqualUser:(UserInfo*)user;
 
 
 @end
