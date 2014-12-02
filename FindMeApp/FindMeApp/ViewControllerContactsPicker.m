@@ -60,6 +60,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
+    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -100,12 +101,15 @@
     }
     else {
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+        UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone idServer:0 connectionId:@""];
+        [dao save:newUser];
         
         //Instanciar objeto e salvar no banco
         
         //self.lbTel.text = phone;
         //self.lbNome.text = name;
     }
+    [self.tableView reloadData];
     CFRelease(phoneNumbers);
 }
 
@@ -120,12 +124,10 @@
 }
 */
 
-- (IBAction)showPicker:(UIButton *)sender {
+- (IBAction)addContato:(UIButton *)sender {
     ABPeoplePickerNavigationController *picker =
     [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-    WebSocket *teste = [WebSocketSingleton getConnection];
-    [teste sendMessage:@"bla"];
 }
 @end

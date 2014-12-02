@@ -18,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbTel;
 - (IBAction)showPicker:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)addContato:(UIButton *)sender;
 
 @end

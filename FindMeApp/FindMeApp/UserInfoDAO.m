@@ -61,7 +61,7 @@
 
 
 -(void) clearAllExceptDefault{
-    NSArray *nonDefault = [self convertToUsersInfo:[self fetchWithKey:@"defaultuser" andValue:@"NO"]];
+    NSArray *nonDefault = [self fetchWithKey:@"defaultuser" andValue:@"NO"];
     for (NSManagedObject *m in nonDefault) {
         [dao delete:m];
     }

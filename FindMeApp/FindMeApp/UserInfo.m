@@ -46,8 +46,12 @@
 }
 -(BOOL)isEqualUser:(UserInfo*)user{
     //provisorio
+    if([_telefone isEqual:@""] || [user.telefone isEqual:@""])
+        return NO;
     _telefone = [_telefone stringByReplacingOccurrencesOfString:@" " withString:@""];
     _telefone = [_telefone stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    _telefone = [_telefone stringByReplacingOccurrencesOfString:@"(" withString:@""];
+    _telefone = [_telefone stringByReplacingOccurrencesOfString:@")" withString:@""];
     _telefone = [_telefone substringWithRange:NSMakeRange(_telefone.length-8,_telefone.length)];
     
     user.telefone = [user.telefone stringByReplacingOccurrencesOfString:@" " withString:@""];
