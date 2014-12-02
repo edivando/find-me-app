@@ -12,7 +12,9 @@
 
 @end
 
-@implementation ViewControllerContactsPicker
+@implementation ViewControllerContactsPicker{
+    UIAlertView *alert;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,15 +56,24 @@
 
 - (void)displayPerson:(ABRecordRef)person{
     NSString* name = (__bridge_transfer NSString*)ABRecordCopyValue(person,kABPersonFirstNameProperty);
-    self.lbNome.text = name;
     NSString* phone = nil;
     ABMultiValueRef phoneNumbers = ABRecordCopyValue(person,kABPersonPhoneProperty);
-    if (ABMultiValueGetCount(phoneNumbers) > 0) {
-        phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-    } else {
-        phone = @"[None]";
+    if(name == nil){
+        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido" message:@"O contato escolhido não possui um nome" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
     }
-    self.lbTel.text = phone;
+    else if (ABMultiValueGetCount(phoneNumbers) == 0){
+        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido" message:@"O contato escolhido não possui um telefone" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+    else {
+        phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+        
+        //Instanciar objeto e salvar no banco
+        
+        //self.lbTel.text = phone;
+        //self.lbNome.text = name;
+    }
     CFRelease(phoneNumbers);
 }
 
@@ -82,5 +93,7 @@
     [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentViewController:picker animated:YES completion:nil];
+    WebSocket *teste = [WebSocketSingleton getConnection];
+    [teste sendMessage:@"bla"];
 }
 @end

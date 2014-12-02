@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import <AddressBookUI/AddressBookUI.h>
+#import "WebSocket.h"
+#import "WebSocketSingleton.h"
 
 @interface ViewControllerContactsPicker : ViewController <ABPeoplePickerNavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lbNome;
