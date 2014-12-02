@@ -14,8 +14,11 @@
 
 -(NSError*)save:(UserInfo*)user;
 
--(NSMutableArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor;
+-(NSArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor;
 
--(NSError*)updateDefaultUser:(UserInfo*)user;
+-(NSError*)update:(NSManagedObject*)managed;
 
+-(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds;
+
+-(UserInfo*)convertToUserInfo:(NSManagedObject*)m;
 @end

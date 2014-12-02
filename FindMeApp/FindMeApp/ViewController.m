@@ -53,7 +53,7 @@
         [self performSegueWithIdentifier:@"SegueViewRegistro" sender:nil];
     }
     else{
-        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[users objectAtIndex:0]];
+        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:[users objectAtIndex:0]]];
         [socket sendMessage:[message toJSONString]];
     }
 

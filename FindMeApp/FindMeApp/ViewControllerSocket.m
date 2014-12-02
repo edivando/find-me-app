@@ -92,14 +92,14 @@
 //    
 //    NSError *error;
 //    NSArray *objects = [context executeFetchRequest:request error:&error];
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    UserInfo *result = [[dao fetchWithKey:@"defaultuser" andValue: @"YES"] objectAtIndex:0];
-    if (result == nil) {
-        _telefone.text = @"No matches";
-    } else {
-        _telefone.text = result.connectionId;
-        _email.text = [matches valueForKey:@"email"];
-    }
+//    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+//    UserInfo *result = [[dao fetchWithKey:@"defaultuser" andValue: @"YES"] objectAtIndex:0];
+//    if (result == nil) {
+//        _telefone.text = @"No matches";
+//    } else {
+//        _telefone.text = result.connectionId;
+//        _email.text = [matches valueForKey:@"email"];
+//    }
     
 }
 @end

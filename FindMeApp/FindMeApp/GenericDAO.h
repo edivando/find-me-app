@@ -16,6 +16,8 @@
 
 -(NSError*) save:(NSDictionary*)dictionary;
 
+-(NSError*) update:(NSManagedObject*)managed;
+
 -(NSArray*) fetch:(NSPredicate*)predicate;
 
 @end
