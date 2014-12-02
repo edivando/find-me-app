@@ -22,7 +22,11 @@
     CLLocationManager *manager;
     CLGeocoder *geocoder;
     CLPlacemark *placemark;
+    
     WebSocket *socket;
+    
+    NSTimer *timer;
+    NSTimeInterval intervalo;
 
 }
 
@@ -37,10 +41,9 @@
     
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
+    intervalo = 10.0/100;
+    // Atualiza os markers do mapa através de um timer.
     
-    //Caso exista, carrega normalmente
-    
-    //[self CustomMaker];
 
 }
 
@@ -59,11 +62,20 @@
 
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)updateMarker{
+    UserInfoDAO *userDAO = [UserInfoDAO new];
+    NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
+    
+    for (UserInfo *user in usersInfo) {
+        [user marker].map = _mapView;
+    }
+
 }
 
 -(void) HelloMap{
@@ -98,17 +110,17 @@
 }
 
 -(void) CustomMaker{
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:41.887
-                                                            longitude:-87.622
-                                                                 zoom:18];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
+                                                            longitude:_longitude
+                                                                 zoom:13];
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     
-//    GMSMarker *marker = [[GMSMarker alloc] init];
-//    marker.position = CLLocationCoordinate2DMake(41.887, -87.622);
-//    marker.appearAnimation = kGMSMarkerAnimationPop;
-//    marker.icon = [UIImage imageNamed:@"flag_icon"];
-//    marker.map = mapView;
-//    
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.icon = [UIImage imageNamed:@"flag_icon"];
+    marker.map = _mapView;
+//
 //    GMSMarker *marker2 = [[GMSMarker alloc] init];
 //    marker2.position = CLLocationCoordinate2DMake(41.880, -87.622);
 //    marker2.appearAnimation = kGMSMarkerAnimationPop;
@@ -122,8 +134,16 @@
     
     //mapView.mapType = kGMSTypeSatellite;
 
-    
     self.view = _mapView;
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
+    
+    // Minha parte
+    //        for (UserInfo *user in recebida.connectionInfo.activeUsers) {
+    //
+    //             [user marker].map = _mapView;
+    //        }
+    
 
 }
 
@@ -319,7 +339,7 @@
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
-        [self StreetView];
+        [self CustomMaker];
         
         //NSLog(@"%f", currentLocation.coordinate.latitude);
         

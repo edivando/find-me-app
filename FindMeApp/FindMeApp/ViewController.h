@@ -13,6 +13,7 @@
 #import "UserInfoMessage.h"
 #import "WebSocket.h"
 #import "WebSocketSingleton.h"
+#import "UserInfo.h"
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate>
 

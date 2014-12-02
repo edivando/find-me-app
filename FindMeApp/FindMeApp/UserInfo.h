@@ -29,6 +29,7 @@
                           idServer:(NSInteger)idServer
                 connectionId:(NSString*)connectionId;
 
+-(GMSMarker*) marker;
 
 -(BOOL)isEqualUser:(UserInfo*)user;
 
