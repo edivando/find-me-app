@@ -32,11 +32,11 @@
     manager = [[CLLocationManager alloc] init];
     _UsuariosAtivos = [NSMutableArray new];
     
-    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"idServer:00 connectionId:@"seila"];
     
-    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:00 connectionId:@"seila"];
     
-    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"];
+    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:00 connectionId:@"seila"];
     
     [_UsuariosAtivos addObjectsFromArray:(@[user1,user2,user3])];
     
@@ -46,7 +46,9 @@
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     
-    //[self Indoor];
+    //Caso exista, carrega normalmente
+    
+    //[self CustomMaker];
     
     
 

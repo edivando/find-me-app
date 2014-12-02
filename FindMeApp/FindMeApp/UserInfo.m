@@ -35,6 +35,8 @@
         marker.title = _user;
         _marker = marker;
         
+        _idServer = idServer;
+        _connectionId = connectionId;
     }
     return self;
 }
