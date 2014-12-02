@@ -7,6 +7,7 @@
 //
 
 #import "WebSocket.h"
+#import "ViewController.h"
 
 @implementation WebSocket{
     SRWebSocket *webSocket;
@@ -43,7 +44,8 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSError* error;
-    
+    //ViewController* controllerMap;
+
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
         //Extraindo o connectionId da mensagem
         ConnectionInfoMessage *recebida = [[ConnectionInfoMessage alloc] initWithString:message error:&error];
@@ -55,6 +57,7 @@
             [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
             NSLog(@"%@",[dao update:fetchResult]);
         }
+        
     }
     if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
         NSLog(@"USER INFO: %@",message);
