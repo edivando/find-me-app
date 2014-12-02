@@ -32,6 +32,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Limpando todos os usuários, menos o default do bd
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    [dao clearAllExceptDefault];
+    
     socket = [WebSocketSingleton getConnection];
     manager = [[CLLocationManager alloc] init];
     _UsuariosAtivos = [NSMutableArray new];
@@ -380,4 +385,7 @@
 
 
 
+- (IBAction)addContato:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"SegueAddContato" sender:nil];
+}
 @end

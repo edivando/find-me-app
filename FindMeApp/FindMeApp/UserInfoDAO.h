@@ -18,7 +18,14 @@
 
 -(NSError*)update:(NSManagedObject*)managed;
 
+-(NSError*)updateUserInfo:(UserInfo*)u;
+
 -(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds;
 
 -(UserInfo*)convertToUserInfo:(NSManagedObject*)m;
+
+-(void) clearAllExceptDefault;
+
+-(void) deleteManaged:(NSManagedObject*)m;
+
 @end

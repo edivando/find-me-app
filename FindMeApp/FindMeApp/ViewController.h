@@ -22,6 +22,7 @@
 @property(nonatomic) float longitude;
 @property(nonatomic) NSMutableArray* UsuariosAtivos;
 @property(nonatomic) GMSMapView *mapView;
+- (IBAction)addContato:(UIButton *)sender;
 
 -(void) mandaLocalização;
 

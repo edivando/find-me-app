@@ -33,6 +33,14 @@
     return error;
 }
 
+-(NSError*) updateDictionary:(NSDictionary*)dictionary{
+    NSError *error;
+    NSEntityDescription *description = [NSEntityDescription entityForName:_entity inManagedObjectContext:[self context]];
+    [description setValuesForKeysWithDictionary:dictionary];
+    [[self context] save:&error];
+    return error;
+}
+
 -(NSError*) update:(NSManagedObject*)managed{
     NSError *error;
     [[self context] save:&error];
@@ -52,9 +60,9 @@
  
 }
 
--(void) delete:(NSDictionary*)dictionary{
-    NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
-    [managed setValuesForKeysWithDictionary:dictionary];
+-(void) delete:(NSManagedObject*)managed{
+    //NSManagedObject *managed = [NSEntityDescription insertNewObjectForEntityForName:_entity inManagedObjectContext:[self context]];
+    //[managed setValuesForKeysWithDictionary:dictionary];
     [[self context] deleteObject:managed];
     //**Talvez precise salvar o context depois, não sei
 }

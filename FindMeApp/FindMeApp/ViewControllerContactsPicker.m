@@ -13,7 +13,9 @@
 @end
 
 @implementation ViewControllerContactsPicker{
+    UserInfoDAO *dao;
     UIAlertView *alert;
+    NSMutableArray *contatos;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,13 +30,54 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    dao = [[UserInfoDAO alloc] init];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource: self];
+    //contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //edit table
+    [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
+    [self.tableView reloadData];
+}
+
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
+    return [contatos count];
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"Remover";
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (cell == nil) {
+        cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    cell.lbTitle.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"nome"];
+    cell.lbDetail.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"telefone"];
+    return cell;
 }
 
 -(void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
@@ -68,6 +111,8 @@
     }
     else {
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+        UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone idServer:0 connectionId:@""];
+        [dao save:newUser];
         
         //Instanciar objeto e salvar no banco
         
@@ -88,12 +133,10 @@
 }
 */
 
-- (IBAction)showPicker:(UIButton *)sender {
+- (IBAction)addContato:(UIButton *)sender {
     ABPeoplePickerNavigationController *picker =
     [[ABPeoplePickerNavigationController alloc] init];
     picker.peoplePickerDelegate = self;
     [self presentViewController:picker animated:YES completion:nil];
-    WebSocket *teste = [WebSocketSingleton getConnection];
-    [teste sendMessage:@"bla"];
 }
 @end
