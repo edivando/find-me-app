@@ -235,16 +235,19 @@
 
 -(void) mandaLocalização{
     UserInfoDAO *userInfoDAO = [[UserInfoDAO alloc]init];
+
     
-    UserInfo *user = [[userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+    NSManagedObject *user = [[userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
     
-    user.latitude = _latitude;
-    user.longitude = _longitude;
+    [user setValue:@(_latitude) forKey:@"latitude"];
+    [user setValue:@(_longitude) forKey:@"longitude"];
+
     
-    //[userInfoDAO updateDefaultUser:user];
+    [userInfoDAO update:user];
+    
+    UserInfoMessage *msg = [[UserInfoMessage alloc] initWithUser:[userInfoDAO convertToUserInfo:user]];
  
-    
-    [socket sendMessage:[user toJSONString]];
+    [socket sendMessage:[msg toJSONString]];
     
     
     //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
