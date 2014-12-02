@@ -42,14 +42,11 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    //NSError* error;
+    NSError* error;
     
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
         //Extraindo o connectionId da mensagem
-        NSString *prefix = @"{\"connectionInfo\":{\"userInfo\":{\"id\":0,\"connectionId\":\""; // string prefix,
-        NSRange needleRange = NSMakeRange(prefix.length, prefix.length-22);
-        NSString *connectionId = [message substringWithRange:needleRange];
-        NSLog(@"CONNECTION INFO: %@", connectionId);
+        ConnectionInfoMessage *recebida = [[ConnectionInfoMessage alloc] initWithString:message error:&error];
         
         //Atualizar o usuario default com o connectionId atual
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
@@ -58,7 +55,7 @@
         }
         else{
             UserInfo *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
-            fetchResult.connectionId = connectionId;
+            fetchResult.connectionId = recebida.connectionInfo.userInfo.connectionId;
             NSLog(@"%@",[dao updateDefaultUser:fetchResult]);
         }
     }
@@ -66,13 +63,9 @@
         NSLog(@"USER INFO: %@",message);
     }
     if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
+        //Se usuario desconectar, excluir usuario do banco
         NSLog(@"STATUS INFO: %@",message);
     }
-    //UserInfoMessage* recebida = [[UserInfoMessage alloc] initWithString:message error:&error];
-    
-    //NSLog(@"User recebido: %@", recebida.user);
-    //NSLog(@"Lat recebida: %f", recebida.latitude);
-    //NSLog(@"Long recebida: %f", recebida.longitude);
 }
 
 -(void) sendMessage:(NSString*)message{

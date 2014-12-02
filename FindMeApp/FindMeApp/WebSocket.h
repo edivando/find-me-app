@@ -11,6 +11,7 @@
 #import "UserInfo.h"
 #import "UserInfoMessage.h"
 #import "UserInfoDAO.h"
+#import "ConnectionInfoMessage.h"
 
 @interface WebSocket : NSObject <SRWebSocketDelegate>
 
