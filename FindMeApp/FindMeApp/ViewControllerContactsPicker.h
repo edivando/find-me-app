@@ -13,10 +13,9 @@
 #import "UserInfoDAO.h"
 #import "TableViewCell.h"
 
-@interface ViewControllerContactsPicker : ViewController <ABPeoplePickerNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface ViewControllerContactsPicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *lbNome;
 @property (weak, nonatomic) IBOutlet UILabel *lbTel;
-- (IBAction)showPicker:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)addContato:(UIButton *)sender;
 

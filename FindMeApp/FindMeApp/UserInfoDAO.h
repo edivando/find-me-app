@@ -26,4 +26,6 @@
 
 -(void) clearAllExceptDefault;
 
+-(void) deleteManaged:(NSManagedObject*)m;
+
 @end

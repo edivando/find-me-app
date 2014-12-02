@@ -15,7 +15,7 @@
 @implementation ViewControllerContactsPicker{
     UserInfoDAO *dao;
     UIAlertView *alert;
-    NSArray *contatos;
+    NSMutableArray *contatos;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,10 +31,14 @@
 {
     [super viewDidLoad];
     dao = [[UserInfoDAO alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource: self];
+    //contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,14 +49,21 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     //edit table
+    [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
+    [self.tableView reloadData];
 }
 
-//-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//}
+-(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     return [contatos count];
+}
+
+-(NSString*)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return @"Remover";
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -60,13 +71,12 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
-    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     if (cell == nil) {
         cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.lbTitle.text = [[contatos objectAtIndex:indexPath.row] valueForKey:@"nome"];
-    cell.lbTitle.text = [[contatos objectAtIndex:indexPath.row] valueForKey:@"telefone"];
+    cell.lbTitle.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"nome"];
+    cell.lbDetail.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"telefone"];
     return cell;
 }
 
@@ -109,7 +119,6 @@
         //self.lbTel.text = phone;
         //self.lbNome.text = name;
     }
-    [self.tableView reloadData];
     CFRelease(phoneNumbers);
 }
 

@@ -67,6 +67,10 @@
     }
 }
 
+-(void) deleteManaged:(NSManagedObject*)m{
+    [dao delete:m];
+}
+
 -(NSArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
     NSPredicate *pred = [[NSPredicate alloc] init];
     if ([chave isEqual:@"nome"])
