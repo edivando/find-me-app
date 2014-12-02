@@ -29,6 +29,8 @@
         _connectionId = connectionId;
 
         
+        _idServer = idServer;
+        _connectionId = connectionId;
     }
     return self;
 }
