@@ -20,6 +20,7 @@
 @property(nonatomic) float latitude;
 @property(nonatomic) float longitude;
 @property(nonatomic) NSMutableArray* UsuariosAtivos;
+@property(nonatomic) GMSMapView *mapView;
 
 -(void) mandaLocalização;
 
