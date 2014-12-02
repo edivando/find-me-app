@@ -57,7 +57,10 @@
             [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
             NSLog(@"%@",[dao update:fetchResult]);
         }
-        
+        //UserInfo *user = [[UserInfo alloc] init];
+        //user = [recebida.connectionInfo.activeUsers objectAtIndex:0];
+        //NSLog(@"%@", user.user);
+        //[dao save:[recebida.connectionInfo.activeUsers objectAtIndex:0]];
         
         //Teste
 //        for (int i = 0; i < recebida.connectionInfo.activeUsers.count; i++) {
@@ -66,18 +69,18 @@
         
         
         
-//        //Atualiza usuarios ativos
-//        for (UserInfo *userBD in [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]]) {
-//            for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
-//                if ([userAtivo isEqualUser:userBD]) {
-//                    userBD.latitude     = userAtivo.latitude;
-//                    userBD.longitude    = userAtivo.longitude;
-//                    userBD.connectionId = userAtivo.connectionId;
-//                    [dao updateUserInfo:userBD];
-//                }
-//            }
-//            
-//        }
+        //Atualiza usuarios ativos
+        for (UserInfo *userBD in [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]]) {
+            for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
+                if ([userAtivo isEqualUser:userBD]) {
+                    userBD.latitude     = userAtivo.latitude;
+                    userBD.longitude    = userAtivo.longitude;
+                    userBD.connectionId = userAtivo.connectionId;
+                    [dao updateUserInfo:userBD];
+                }
+            }
+            
+        }
         
     }
     if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {

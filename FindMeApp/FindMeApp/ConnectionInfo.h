@@ -13,7 +13,7 @@
 @interface ConnectionInfo : JSONModel
 
 @property (nonatomic) UserInfo *userInfo;
-@property (nonatomic) NSArray *activeUsers;
+@property (nonatomic) NSArray <UserInfo>* activeUsers;
 
 -(instancetype) initConnectionInfoWithUser:(UserInfo*)userInfo
                                activeUsers:(NSArray*)activeUsers;

@@ -10,6 +10,8 @@
 #import <JSONModel.h>
 #import "GoogleMaps/GoogleMaps.h"
 
+@protocol UserInfo
+@end
 
 @interface UserInfo : JSONModel
 
