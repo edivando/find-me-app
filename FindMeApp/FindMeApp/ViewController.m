@@ -32,11 +32,11 @@
     manager = [[CLLocationManager alloc] init];
     _UsuariosAtivos = [NSMutableArray new];
     
-    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091"idServer:00 connectionId:@"seila"];
+    UserInfo* user1 = [[UserInfo alloc] initWithUser:@"Diego" latitude:10.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
-    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:00 connectionId:@"seila"];
+    UserInfo* user2 = [[UserInfo alloc] initWithUser:@"Diego2" latitude:60.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
-    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:00 connectionId:@"seila"];
+    UserInfo* user3 = [[UserInfo alloc] initWithUser:@"Diego3" latitude:30.000 longitude:78.987 email:@"diegovidal08@gmail.com" telefone:@"85251091" idServer:0 connectionId:0];
     
     [_UsuariosAtivos addObjectsFromArray:(@[user1,user2,user3])];
     
@@ -244,62 +244,40 @@
 
 }
 
-#pragma mark - CLLocationManagerDelegate Methods
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
+-(void) mandaLocalização{
+    UserInfoDAO *userInfoDAO = [[UserInfoDAO alloc]init];
     
-    NSLog(@"Error: %@", error);
-    NSLog(@"Failed to get location! :(");
+    UserInfo *user = [[userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+    
+    user.latitude = _latitude;
+    user.longitude = _longitude;
+    
+    [userInfoDAO updateDefaultUser:user];
+ 
+    
+    [socket sendMessage:[user toJSONString]];
+    
+    
+    //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
+}
+
+-(void) markerTest{
+    
+    GMSMapView *mapView;
+    
+    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(51.5, -0.127);
+    GMSMarker *london = [GMSMarker markerWithPosition:position];
+    london.title = @"London";
+    london.snippet = @"Population: 8,174,100";
+    london.infoWindowAnchor = CGPointMake(0.5, 0.5);
+    london.icon = [UIImage imageNamed:@"house"];
+    london.map = mapView;
+    
+    self.view = mapView;
+    
     
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
-{
-    //NSLog(@"Distance Location: %f", [newLocation distanceFromLocation:oldLocation]);
-    CLLocation *currentLocation = newLocation;
-
-    if (currentLocation != nil) {
-        
-        _latitude = currentLocation.coordinate.latitude;
-        _longitude = currentLocation.coordinate.longitude;
-        
-        [self StreetView];
-        
-        //NSLog(@"%f", currentLocation.coordinate.latitude);
-        
-//        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
-//        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
-//        NSLog(@"Pega Latitude e Longitude");
-        
-        [self mandaLocalização];
-        
-        
-    }
-    
-//    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
-//        
-//        if (error == nil && [placemarks count] > 0) {
-//            
-//            placemark = [placemarks lastObject];
-//            
-//           NSLog(@"%@",[NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
-//                                 placemark.subThoroughfare, placemark.thoroughfare,
-//                                 placemark.postalCode, placemark.locality,
-//                                 placemark.administrativeArea,
-//                                 placemark.country]);
-//           NSLog(@"Pega Adress");
-//            
-//        } else {
-//            
-//            NSLog(@"%@", error.debugDescription);
-//            
-//        }
-//        
-//    } ];
-    
-    
-}
 
 #pragma mark - ButtonAction
 
@@ -330,33 +308,63 @@
     }
 }
 
--(void) mandaLocalização{
-//    UserInfo *position = [[UserInfo alloc]initWithUser:@"Yuri BlaBla" latitude:_latitude longitude:_longitude email:@"bla@bla.com" telefone:@"35699856"];
-//    
-//    NSLog(@"JSON STRING:\n%@",[position toJSONString]);
-//    
-//    [socket sendMessage:[position toJSONString]];
-//    
-//    
-    //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
+#pragma mark - CLLocationManagerDelegate Methods
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    
+    NSLog(@"Error: %@", error);
+    NSLog(@"Failed to get location! :(");
+    
 }
 
--(void) markerTest{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    //NSLog(@"Distance Location: %f", [newLocation distanceFromLocation:oldLocation]);
+    CLLocation *currentLocation = newLocation;
     
-    GMSMapView *mapView;
+    if (currentLocation != nil) {
+        
+        _latitude = currentLocation.coordinate.latitude;
+        _longitude = currentLocation.coordinate.longitude;
+        
+        [self StreetView];
+        
+        //NSLog(@"%f", currentLocation.coordinate.latitude);
+        
+        //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
+        //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
+        //        NSLog(@"Pega Latitude e Longitude");
+        
+        [self mandaLocalização];
+        
+        
+    }
     
-    CLLocationCoordinate2D position = CLLocationCoordinate2DMake(51.5, -0.127);
-    GMSMarker *london = [GMSMarker markerWithPosition:position];
-    london.title = @"London";
-    london.snippet = @"Population: 8,174,100";
-    london.infoWindowAnchor = CGPointMake(0.5, 0.5);
-    london.icon = [UIImage imageNamed:@"house"];
-    london.map = mapView;
+    //    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
+    //
+    //        if (error == nil && [placemarks count] > 0) {
+    //
+    //            placemark = [placemarks lastObject];
+    //
+    //           NSLog(@"%@",[NSString stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
+    //                                 placemark.subThoroughfare, placemark.thoroughfare,
+    //                                 placemark.postalCode, placemark.locality,
+    //                                 placemark.administrativeArea,
+    //                                 placemark.country]);
+    //           NSLog(@"Pega Adress");
+    //
+    //        } else {
+    //
+    //            NSLog(@"%@", error.debugDescription);
+    //            
+    //        }
+    //        
+    //    } ];
     
-    self.view = mapView;
-
-
+    
 }
+
 
 
 @end
