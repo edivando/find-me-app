@@ -87,7 +87,7 @@
     if ([[contato valueForKey:@"status"] isEqualToString:@"CONNECTED"]){
         cell.imgStatus.image = [UIImage imageNamed:@"online"];
     }
-    else if ([[contato valueForKey:@"status"] isEqualToString:@"DISCONNECTED"]){
+    else {
         cell.imgStatus.image = [UIImage imageNamed:@"offline"];
     }
     return cell;
