@@ -62,6 +62,7 @@
         for (NSManagedObject *userBD in [dao fetchWithKey:@"defaultuser" andValue:@"NO"]) {
             for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
                 if ([userAtivo isEqualUser:[dao convertToUserInfo:userBD]]) {
+                    [userBD setValue:@"CONNECTED" forKey:@"status"];
                     [userBD setValue:@(userAtivo.latitude) forKey:@"latitude"];
                     [userBD setValue:@(userAtivo.longitude) forKey:@"longitude"];
                     [userBD setValue:userAtivo.connectionId forKey:@"connectionId"];
@@ -80,8 +81,9 @@
         StatusInfoMessage *recebida = [[StatusInfoMessage alloc] initWithString:message error:&error];
         //recebida.statusInfo.userInfo
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-        NSManagedObject *result = [[dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId] objectAtIndex:0];
-        if (result != nil) {
+        NSArray *usuarios = [dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId];
+        if (usuarios.count > 0) {
+            NSManagedObject *result = [usuarios objectAtIndex:0];
             [result setValue:recebida.statusInfo.status forKey:@"status"];
             if ([recebida.statusInfo.status isEqualToString:@"EXITED"]) {
                 [dao deleteManaged:result];

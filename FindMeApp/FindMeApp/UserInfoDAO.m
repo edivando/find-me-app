@@ -81,6 +81,8 @@
         pred = [NSPredicate predicateWithFormat:@"(telefone = %@)",valor];
     else if ([chave isEqual:@"email"])
         pred = [NSPredicate predicateWithFormat:@"(email = %@)",valor];
+    else if ([chave isEqual:@"connectionId"])
+        pred = [NSPredicate predicateWithFormat:@"(connectionId = %@)",valor];
     return [dao fetch:pred];
 }
 
