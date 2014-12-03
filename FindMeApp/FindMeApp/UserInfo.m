@@ -12,7 +12,6 @@
 
 @implementation UserInfo
 
-//NSArray *const listaCores = @[@"fdsf"];
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude
@@ -42,7 +41,7 @@
 -(GMSMarker*) marker{
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(_latitude, _longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
-    marker.appearAnimation = kGMSMarkerAnimationPop;
+    //marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"flag_icon"];
     marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
     marker.title = _user;
@@ -66,5 +65,6 @@
     
     return [_telefone isEqual:user.telefone];
 }
+
 
 @end
