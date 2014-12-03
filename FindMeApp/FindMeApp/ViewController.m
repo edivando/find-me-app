@@ -46,9 +46,10 @@
     
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
-    intervalo = 10.0;
+    intervalo = 60.0;
     
-    
+    //Inicia o mapa
+    [self startMapView];
 
 }
 
@@ -76,13 +77,46 @@
 
 // Atualiza os markers do mapa através de um timer.
 -(void)updateMarker{
-    NSLog(@"Testand Timer");
+    NSLog(@"Testando Timer");
     UserInfoDAO *userDAO = [UserInfoDAO new];
     NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
     for (UserInfo *user in usersInfo) {
         [user marker].map = _mapView;
     }
 
+}
+
+-(void) CustomMaker{
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
+                                                            longitude:_longitude
+                                                                 zoom:13];
+    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
+    
+    // Definindo um Marker ao mapView
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
+    marker.appearAnimation = kGMSMarkerAnimationPop;
+    marker.icon = [UIImage imageNamed:@"flag_icon"];
+    marker.map = _mapView;
+    
+    // Adicionando um botão ao mapView
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(_mapView.bounds.size.width - 235, _mapView.bounds.size.height - 70, 150, 30);
+    button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
+    [button addTarget:self action:@selector(addContato:) forControlEvents:UIControlEventTouchUpInside];
+    button.tintColor = [UIColor blackColor];
+    button.layer.cornerRadius = 12;
+    button.backgroundColor = [UIColor colorWithHue:0.4 saturation:1.000 brightness:0.667 alpha:1.000];
+    [button setTitle:@"Adicionar Contato" forState:UIControlStateNormal];
+    [_mapView addSubview:button];
+    
+    //Adicionando o mapView para a nossa view atual
+    self.view = _mapView;
+    
+    //Chamando a função do timer
+    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
+    
+    
 }
 
 -(void) HelloMap{
@@ -114,44 +148,6 @@
     _mapView.mapType = kGMSTypeSatellite;
     self.view = _mapView;
     
-}
-
--(void) CustomMaker{
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
-                                                            longitude:_longitude
-                                                                 zoom:13];
-    _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    
-//    GMSMarker *marker = [[GMSMarker alloc] init];
-//    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
-//    marker.appearAnimation = kGMSMarkerAnimationPop;
-//    marker.icon = [UIImage imageNamed:@"flag_icon"];
-//    marker.map = _mapView;
-//
-//    GMSMarker *marker2 = [[GMSMarker alloc] init];
-//    marker2.position = CLLocationCoordinate2DMake(41.880, -87.622);
-//    marker2.appearAnimation = kGMSMarkerAnimationPop;
-//    //marker2.icon = [UIImage imageNamed:@"flag_icon"];
-//    marker2.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
-//    marker2.map = mapView;
-    
-//    for (UserInfo* user in _UsuariosAtivos) {
-//        user.marker.map = mapView;
-//    }
-    
-    //mapView.mapType = kGMSTypeSatellite;
-
-    self.view = _mapView;
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
-    
-    // Minha parte
-    //        for (UserInfo *user in recebida.connectionInfo.activeUsers) {
-    //
-    //             [user marker].map = _mapView;
-    //        }
-    
-
 }
 
 -(void) StreetView{
@@ -296,10 +292,7 @@
     
 }
 
-
-#pragma mark - ButtonAction
-
-- (IBAction)getLocation:(UIButton *)sender {
+- (void)startMapView{
     
     manager.delegate = self;
    // manager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -313,16 +306,16 @@
     //manager.headingFilter = 5;
     //[manager startUpdatingLocation];
     
-    
+    [_loadingGPS stopAnimating];
     
     manager.distanceFilter = 10.0;
     manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
 
-    
 
     // update location
     if ([CLLocationManager locationServicesEnabled]){
         [manager startUpdatingLocation];
+        
     }
 }
 
@@ -330,9 +323,14 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+
+//    NSLog(@"Error: %@", error);
+//    NSLog(@"Failed to get location! :(");
     
-    NSLog(@"Error: %@", error);
-    NSLog(@"Failed to get location! :(");
+    [_loadingGPS startAnimating];
+    UIAlertView *alerta;
+    alerta = [[UIAlertView alloc] initWithTitle:@"Por gentileza" message:@"Ative o seu GPS" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alerta show];
     
 }
 
@@ -347,13 +345,6 @@
         _longitude = currentLocation.coordinate.longitude;
         
         [self CustomMaker];
-        
-        //NSLog(@"%f", currentLocation.coordinate.latitude);
-        
-        //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude]);
-        //        NSLog(@"%@\n",[NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude]);
-        //        NSLog(@"Pega Latitude e Longitude");
-        
         [self mandaLocalização];
         
         
@@ -384,8 +375,9 @@
 }
 
 
-
 - (IBAction)addContato:(UIButton *)sender {
+      NSLog(@"Tap no botão 'Adicionar Contato'");
     [self performSegueWithIdentifier:@"SegueAddContato" sender:nil];
 }
+
 @end

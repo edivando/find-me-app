@@ -15,14 +15,13 @@
 #import "WebSocketSingleton.h"
 #import "UserInfo.h"
 
-@interface ViewController : UIViewController<CLLocationManagerDelegate>
+@interface ViewController : UIViewController<CLLocationManagerDelegate, UIAlertViewDelegate>
 
-- (IBAction)getLocation:(UIButton *)sender;
 @property(nonatomic) float latitude;
 @property(nonatomic) float longitude;
 @property(nonatomic) NSMutableArray* UsuariosAtivos;
 @property(nonatomic) GMSMapView *mapView;
-- (IBAction)addContato:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingGPS;
 
 -(void) mandaLocalização;
 
