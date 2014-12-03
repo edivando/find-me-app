@@ -8,7 +8,11 @@
 
 #import "UserInfo.h"
 
+
+
 @implementation UserInfo
+
+//NSArray *const listaCores = @[@"fdsf"];
 
 - (instancetype)initWithUser:(NSString*)user
                     latitude:(float)latitude

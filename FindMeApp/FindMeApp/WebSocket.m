@@ -55,7 +55,7 @@
         if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
             NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
             [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
-            NSLog(@"%@",[dao update:fetchResult]);
+            //NSLog(@"%@",[dao update:fetchResult]);
         }
         //UserInfo *user = [[UserInfo alloc] init];
         //user = [recebida.connectionInfo.activeUsers objectAtIndex:0];
@@ -63,9 +63,9 @@
         //[dao save:[recebida.connectionInfo.activeUsers objectAtIndex:0]];
         
         //Teste
-//        for (int i = 0; i < recebida.connectionInfo.activeUsers.count; i++) {
-//            [dao save:recebida.connectionInfo.activeUsers[i]];
-//        }
+        for (int i = 0; i < recebida.connectionInfo.activeUsers.count; i++) {
+            [dao save:recebida.connectionInfo.activeUsers[i]];
+        }
         
         
         
