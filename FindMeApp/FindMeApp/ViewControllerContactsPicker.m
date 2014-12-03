@@ -75,8 +75,21 @@
     if (cell == nil) {
         cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.lbTitle.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"nome"];
-    cell.lbDetail.text = [[contatos objectAtIndex:[indexPath row]] valueForKey:@"telefone"];
+    NSManagedObject *contato = [contatos objectAtIndex:[indexPath row]];
+    cell.lbTitle.text = [contato valueForKey:@"nome"];
+    cell.imgUserColor.backgroundColor = [UIColor redColor];
+    if ([[contato valueForKey:@"permission"] isEqualToString:@"YES"]) {
+        cell.imgPermission.image = [UIImage imageNamed:@"unlocked"];
+    }
+    else{
+        cell.imgPermission.image = [UIImage imageNamed:@"lock"];
+    }
+    if ([[contato valueForKey:@"status"] isEqualToString:@"CONNECTED"]){
+        cell.imgStatus.image = [UIImage imageNamed:@"online"];
+    }
+    else if ([[contato valueForKey:@"status"] isEqualToString:@"DISCONNECTED"]){
+        cell.imgStatus.image = [UIImage imageNamed:@"offline"];
+    }
     return cell;
 }
 

@@ -31,7 +31,8 @@
         _email = email;
         _idServer = idServer;
         _connectionId = connectionId;
-
+        _status = @"DISCONNECTED";
+        _permission = @"NO";
         
         _idServer = idServer;
         _connectionId = connectionId;

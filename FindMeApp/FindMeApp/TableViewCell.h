@@ -1,4 +1,3 @@
-//
 //  TableViewCell.h
 //  FindMeApp
 //
@@ -10,6 +9,9 @@
 
 @interface TableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
-@property (weak, nonatomic) IBOutlet UILabel *lbDetail;
+
+@property (weak, nonatomic) IBOutlet UIImageView *imgStatus;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPermission;
+@property (weak, nonatomic) IBOutlet UILabel *imgUserColor;
 
 @end

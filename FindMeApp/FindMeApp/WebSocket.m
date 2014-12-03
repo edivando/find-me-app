@@ -77,8 +77,19 @@
     }
     if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
         //Se usuario desconectar, excluir usuario do banco
-        NSLog(@"STATUS INFO: %@",message);
-        
+        StatusInfoMessage *recebida = [[StatusInfoMessage alloc] initWithString:message error:&error];
+        //recebida.statusInfo.userInfo
+        UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+        NSManagedObject *result = [[dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId] objectAtIndex:0];
+        if (result != nil) {
+            [result setValue:recebida.statusInfo.status forKey:@"status"];
+            if ([recebida.statusInfo.status isEqualToString:@"EXITED"]) {
+                [dao deleteManaged:result];
+            }
+            else{
+                [dao update:result];
+            }
+        }
     }
 }
 

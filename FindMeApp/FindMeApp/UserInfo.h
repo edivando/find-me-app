@@ -24,6 +24,9 @@ FOUNDATION_EXTERN NSArray *const listaCores;
 @property (nonatomic) NSString *telefone;
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
+@property (nonatomic) NSString *permission;
+@property (nonatomic) NSString *status;
+
 //@property (nonatomic) GMSMarker<> *marker;
 
 - (instancetype)initWithUser:(NSString*)user
