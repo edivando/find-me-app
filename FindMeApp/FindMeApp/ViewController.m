@@ -79,6 +79,12 @@
 -(void)updateMarker{
     NSLog(@"Testando Timer");
     UserInfoDAO *userDAO = [UserInfoDAO new];
+    
+//    NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
+    
+    // Limpa todos os markers
+    [_mapView clear];
+    
     NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
     for (UserInfo *user in usersInfo) {
         [user marker].map = _mapView;
