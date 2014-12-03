@@ -49,6 +49,9 @@
     
     //Inicia o mapa
     [self startMapView];
+    
+    //Chamando a função do timer
+    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
 
 }
 
@@ -76,35 +79,22 @@
 
 // Atualiza os markers do mapa através de um timer.
 -(void)updateMarker{
-    NSLog(@"Testando Timer");
-    UserInfoDAO *userDAO = [UserInfoDAO new];
+    
+    if(_mapView != nil){
+        NSLog(@"Testando Timer");
+        UserInfoDAO *userDAO = [UserInfoDAO new];
 
+        [_mapView clear];
     
-    //Teste Movimento
-//    UserInfoDAO *userInfoDAO = [[UserInfoDAO alloc]init];
-//    
-//    
-//    NSManagedObject *user = [[userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
-//    
-//    _latitude = _latitude + 0.000001;
-//    
-//    [user setValue:@(_latitude) forKey:@"latitude"];
-//    [user setValue:@(_longitude) forKey:@"longitude"];
-//    
-//    
-//    [userInfoDAO update:user];
+        NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
+        for (UserInfo *user in usersInfo) {
+            [user marker].map = _mapView;
+        }
     
-    // Limpa todos os markers
-    [_mapView clear];
-    
-    NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
-    for (UserInfo *user in usersInfo) {
-        [user marker].map = _mapView;
-    }
-    
-    NSMutableArray *usersInfoDefault = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"YES"]];
-    for (UserInfo *user in usersInfoDefault) {
-        [user marker].map = _mapView;
+        NSMutableArray *usersInfoDefault = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"YES"]];
+        for (UserInfo *user in usersInfoDefault) {
+            [user marker].map = _mapView;
+        }
     }
 
 }
@@ -129,8 +119,6 @@
     //Adicionando o mapView para a nossa view atual
     self.view = _mapView;
     
-    //Chamando a função do timer
-    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
     
     
 }
