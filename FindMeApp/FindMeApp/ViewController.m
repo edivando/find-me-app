@@ -39,14 +39,13 @@
     
     socket = [WebSocketSingleton getConnection];
     manager = [[CLLocationManager alloc] init];
-    _UsuariosAtivos = [NSMutableArray new];
     
     _latitude = 0.0;
     _longitude = 0.0;
     
     manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
-    intervalo = 60.0;
+    intervalo = 3.0;
     
     //Inicia o mapa
     [self startMapView];
@@ -79,14 +78,32 @@
 -(void)updateMarker{
     NSLog(@"Testando Timer");
     UserInfoDAO *userDAO = [UserInfoDAO new];
+
     
-//    NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
+    //Teste Movimento
+//    UserInfoDAO *userInfoDAO = [[UserInfoDAO alloc]init];
+//    
+//    
+//    NSManagedObject *user = [[userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+//    
+//    _latitude = _latitude + 0.000001;
+//    
+//    [user setValue:@(_latitude) forKey:@"latitude"];
+//    [user setValue:@(_longitude) forKey:@"longitude"];
+//    
+//    
+//    [userInfoDAO update:user];
     
     // Limpa todos os markers
     [_mapView clear];
     
     NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
     for (UserInfo *user in usersInfo) {
+        [user marker].map = _mapView;
+    }
+    
+    NSMutableArray *usersInfoDefault = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"YES"]];
+    for (UserInfo *user in usersInfoDefault) {
         [user marker].map = _mapView;
     }
 
@@ -97,13 +114,6 @@
                                                             longitude:_longitude
                                                                  zoom:13];
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
-    
-    // Definindo um Marker ao mapView
-    GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(_latitude, _longitude);
-    marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.icon = [UIImage imageNamed:@"flag_icon"];
-    marker.map = _mapView;
     
     // Adicionando um botão ao mapView
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];

@@ -88,7 +88,7 @@
 //    
 //    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(nome = %@)", _nome.text];
 //    [request setPredicate:pred];
-    NSManagedObject *matches = nil;
+
 //    
 //    NSError *error;
 //    NSArray *objects = [context executeFetchRequest:request error:&error];

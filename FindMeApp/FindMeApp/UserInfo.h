@@ -36,7 +36,6 @@ FOUNDATION_EXTERN NSArray *const listaCores;
                     telefone:(NSString*)telefone
                           idServer:(NSInteger)idServer
                 connectionId:(NSString*)connectionId;
-                    //  marker:(GMSMarker*)marker;
 
 -(GMSMarker*) marker;
 
