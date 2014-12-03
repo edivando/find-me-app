@@ -51,6 +51,8 @@
 		A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705B1A274C2F001B3D6B /* QuartzCore.framework */; };
 		A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */; };
 		DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */; };
+		DAA15DFD1A2FB42E00B0774B /* PermissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA15DFC1A2FB42E00B0774B /* PermissionInfo.m */; };
+		DAA15E001A2FB45000B0774B /* PermissionInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA15DFF1A2FB45000B0774B /* PermissionInfoMessage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +131,10 @@
 		C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DA83415E1A2A8958009DE6C6 /* ViewControllerRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerRegistration.h; sourceTree = "<group>"; };
 		DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerRegistration.m; sourceTree = "<group>"; };
+		DAA15DFB1A2FB42E00B0774B /* PermissionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionInfo.h; sourceTree = "<group>"; };
+		DAA15DFC1A2FB42E00B0774B /* PermissionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionInfo.m; sourceTree = "<group>"; };
+		DAA15DFE1A2FB45000B0774B /* PermissionInfoMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PermissionInfoMessage.h; sourceTree = "<group>"; };
+		DAA15DFF1A2FB45000B0774B /* PermissionInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PermissionInfoMessage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +193,8 @@
 				892483CA1A2C969B0087C4E9 /* StatusInfoMessage.m */,
 				892483CC1A2C96AA0087C4E9 /* ConnectionInfoMessage.h */,
 				892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */,
+				DAA15DFE1A2FB45000B0774B /* PermissionInfoMessage.h */,
+				DAA15DFF1A2FB45000B0774B /* PermissionInfoMessage.m */,
 			);
 			name = Mensagem;
 			sourceTree = "<group>";
@@ -200,6 +208,8 @@
 				892483C71A2C95590087C4E9 /* ConnectionInfo.m */,
 				89ACFE8D1A2766280000B7A7 /* UserInfo.h */,
 				89ACFE8E1A2766280000B7A7 /* UserInfo.m */,
+				DAA15DFB1A2FB42E00B0774B /* PermissionInfo.h */,
+				DAA15DFC1A2FB42E00B0774B /* PermissionInfo.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -481,8 +491,10 @@
 				89B2A0251A28914900861042 /* CoreDataModel.xcdatamodeld in Sources */,
 				892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */,
 				892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */,
+				DAA15DFD1A2FB42E00B0774B /* PermissionInfo.m in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
 				892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */,
+				DAA15E001A2FB45000B0774B /* PermissionInfoMessage.m in Sources */,
 				89ACFE8F1A2766280000B7A7 /* UserInfo.m in Sources */,
 				89B2A02C1A28A21400861042 /* WebSocket.m in Sources */,
 				892483C81A2C95590087C4E9 /* ConnectionInfo.m in Sources */,
