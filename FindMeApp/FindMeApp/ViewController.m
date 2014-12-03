@@ -89,6 +89,11 @@
     for (UserInfo *user in usersInfo) {
         [user marker].map = _mapView;
     }
+    
+    NSMutableArray *usersInfoDefault = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"YES"]];
+    for (UserInfo *user in usersInfoDefault) {
+        [user marker].map = _mapView;
+    }
 
 }
 
