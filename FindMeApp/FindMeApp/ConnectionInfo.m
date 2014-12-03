@@ -11,7 +11,7 @@
 @implementation ConnectionInfo
 
 -(instancetype) initConnectionInfoWithUser:(UserInfo*)userInfo
-                               activeUsers:(NSArray*)activeUsers{
+                               activeUsers:(NSArray <UserInfo>*)activeUsers{
     self = [super init];
     if (self) {
         _userInfo = userInfo;

@@ -58,7 +58,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
+    contatos = [[NSMutableArray alloc] initWithArray:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]];
     return [contatos count];
 }
 
