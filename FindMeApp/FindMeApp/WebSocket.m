@@ -55,28 +55,17 @@
         if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
             NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
             [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
-            //NSLog(@"%@",[dao update:fetchResult]);
+            [dao update:fetchResult];
         }
-        //UserInfo *user = [[UserInfo alloc] init];
-        //user = [recebida.connectionInfo.activeUsers objectAtIndex:0];
-        //NSLog(@"%@", user.user);
-        //[dao save:[recebida.connectionInfo.activeUsers objectAtIndex:0]];
-        
-        //Teste
-        for (int i = 0; i < recebida.connectionInfo.activeUsers.count; i++) {
-            [dao save:recebida.connectionInfo.activeUsers[i]];
-        }
-        
-        
         
         //Atualiza usuarios ativos
-        for (UserInfo *userBD in [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]]) {
+        for (NSManagedObject *userBD in [dao fetchWithKey:@"defaultuser" andValue:@"NO"]) {
             for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
-                if ([userAtivo isEqualUser:userBD]) {
-                    userBD.latitude     = userAtivo.latitude;
-                    userBD.longitude    = userAtivo.longitude;
-                    userBD.connectionId = userAtivo.connectionId;
-                    [dao updateUserInfo:userBD];
+                if ([userAtivo isEqualUser:[dao convertToUserInfo:userBD]]) {
+                    [userBD setValue:@(userAtivo.latitude) forKey:@"latitude"];
+                    [userBD setValue:@(userAtivo.longitude) forKey:@"longitude"];
+                    [userBD setValue:userAtivo.connectionId forKey:@"connectionId"];
+                    [dao update:userBD];
                 }
             }
             
@@ -89,6 +78,7 @@
     if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
         //Se usuario desconectar, excluir usuario do banco
         NSLog(@"STATUS INFO: %@",message);
+        
     }
 }
 
