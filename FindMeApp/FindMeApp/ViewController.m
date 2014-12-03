@@ -347,9 +347,9 @@
 //    NSLog(@"Failed to get location! :(");
     
     [_loadingGPS startAnimating];
-    UIAlertView *alerta;
-    alerta = [[UIAlertView alloc] initWithTitle:@"Por gentileza" message:@"Ative o seu GPS" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alerta show];
+//    UIAlertView *alerta;
+//    alerta = [[UIAlertView alloc] initWithTitle:@"Por gentileza" message:@"Ative o seu GPS" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//    [alerta show];
     
 }
 
