@@ -48,7 +48,7 @@
     intervalo = 3.0;
     
     //Inicia o mapa
-    [self startMapView];
+    //[self startMapView];
     
     //Chamando a função do timer
     timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
@@ -67,6 +67,8 @@
         UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:[users objectAtIndex:0]]];
         [socket sendMessage:[message toJSONString]];
     }
+    //Inicia o mapa
+    [self startMapView];
 
 }
 
@@ -81,7 +83,7 @@
 -(void)updateMarker{
     
     if(_mapView != nil){
-        NSLog(@"Testando Timer");
+        //NSLog(@"Testando Timer");
         UserInfoDAO *userDAO = [UserInfoDAO new];
 
         [_mapView clear];
@@ -278,9 +280,6 @@
         
         [socket sendMessage:[msg toJSONString]];
     }
-    
-    
-    //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
 }
 
 -(void) markerTest{
@@ -312,7 +311,7 @@
     //manager.distanceFilter = 50.0f;
     //manager.headingFilter = 5;
     //[manager startUpdatingLocation];
-    
+    NSLog(@" latitude pelo manager: %f",manager.location.coordinate.latitude);
     [_loadingGPS stopAnimating];
     
     manager.distanceFilter = 10.0;
@@ -344,8 +343,11 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     CLLocation *currentLocation = newLocation;
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    NSArray *users = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    
     NSLog(@"Entrou no Delegate");
-    if (currentLocation != nil) {
+    if (currentLocation != nil && users.count > 0) {
         
         NSLog(@"Entrou no Delegate - dentro do 'if'");
 
@@ -353,10 +355,13 @@
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
-        [self CustomMaker];
-        [self mandaLocalização];
+        NSLog(@"latitude: %f\n", _latitude);
+        NSLog(@"latitude: %f\n", _longitude);
         
+        [self mandaLocalização];
     }
+    [self CustomMaker];
+
     
     //    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
     //
