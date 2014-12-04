@@ -24,39 +24,39 @@
     CLPlacemark *placemark;
     
     WebSocket *socket;
+    UserInfoDAO *dao;
     
     NSTimer *timer;
     NSTimeInterval intervalo;
 
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //Limpando todos os usuários, menos o default do bd
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
+    dao = [[UserInfoDAO alloc] init];
     [dao clearAllExceptDefault];
     
     socket = [WebSocketSingleton getConnection];
     manager = [[CLLocationManager alloc] init];
     
-    _latitude = 0.0;
-    _longitude = 0.0;
-    
-    manager = [[CLLocationManager alloc] init];
+    //manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     intervalo = 3.0;
     
-    //Inicia o mapa
-    [self startMapView];
+    manager.delegate = self;
     
-    //Chamando a função do timer
-    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
+    //Inicia o mapa
+    //[self startMapView];
+    
+    _latitude = manager.location.coordinate.latitude;
+    _longitude = manager.location.coordinate.longitude;
 
 }
 
 -(void) viewDidAppear:(BOOL)animated{
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
     NSArray *users = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
     //Testa se existe usuário registrado no BD
     if ([users count] == 0) {
@@ -67,8 +67,12 @@
         UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:[users objectAtIndex:0]]];
         [socket sendMessage:[message toJSONString]];
     }
+    
+    //Inicia o mapa
+    [self CustomMaker];
 
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -79,19 +83,18 @@
 
 // Atualiza os markers do mapa através de um timer.
 -(void)updateMarker{
-    
+    NSLog(@"Testa Timer");
     if(_mapView != nil){
-        NSLog(@"Testando Timer");
-        UserInfoDAO *userDAO = [UserInfoDAO new];
+        //NSLog(@"Testando Timer");
 
         [_mapView clear];
     
-        NSMutableArray *usersInfo = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"NO"]];
+        NSMutableArray *usersInfo = [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]];
         for (UserInfo *user in usersInfo) {
             [user marker].map = _mapView;
         }
     
-        NSMutableArray *usersInfoDefault = [userDAO convertToUsersInfo:[userDAO fetchWithKey:@"defaultuser" andValue:@"YES"]];
+        NSMutableArray *usersInfoDefault = [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"YES"]];
         for (UserInfo *user in usersInfoDefault) {
             [user marker].map = _mapView;
         }
@@ -117,6 +120,10 @@
     
     //Adicionando o mapView para a nossa view atual
     self.view = _mapView;
+    [self startGPS];
+    
+    //Chamando a função do timer
+    timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
     
     
     
@@ -259,29 +266,6 @@
 
 }
 
--(void) mandaLocalização{
-    UserInfoDAO *userInfoDAO = [[UserInfoDAO alloc]init];
-    
-    NSArray *usuarios = [userInfoDAO fetchWithKey:@"defaultuser" andValue:@"YES"];
-    if(usuarios != nil && [usuarios count] > 0){
-        
-        NSManagedObject *user = [usuarios objectAtIndex:0];
-        
-        [user setValue:@(_latitude) forKey:@"latitude"];
-        [user setValue:@(_longitude) forKey:@"longitude"];
-        
-        
-        [userInfoDAO update:user];
-        
-        UserInfoMessage *msg = [[UserInfoMessage alloc] initWithUser:[userInfoDAO convertToUserInfo:user]];
-        
-        [socket sendMessage:[msg toJSONString]];
-    }
-    
-    
-    //{userInfo"{"email":"bla@bla.com","telefone":"35699856","latitude":37.33241,"longitude":-122.0305,"user":"Yuri BlaBla"}}
-}
-
 -(void) markerTest{
     
     
@@ -298,30 +282,38 @@
     
 }
 
-- (void)startMapView{
+-(void) mandaLocalização{
     
-    manager.delegate = self;
-   // manager.desiredAccuracy = kCLLocationAccuracyBest;
-    //manager.distanceFilter = 10.0;
-    //manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    if(usuarios != nil && [usuarios count] > 0){
+        
+        NSManagedObject *user = [usuarios objectAtIndex:0];
+        
+        [user setValue:@(_latitude) forKey:@"latitude"];
+        [user setValue:@(_longitude) forKey:@"longitude"];
+        
+        
+        [dao update:user];
+        
+        UserInfoMessage *msg = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:user]];
+        
+        [socket sendMessage:[msg toJSONString]];
+    }
+}
+
+
+- (void)startGPS{
     
-    //[manager setDesiredAccuracy:kCLLocationAccuracyBest];
-    
-    //[manager setDistanceFilter:kCLDistanceFilterNone];
-    //manager.distanceFilter = 50.0f;
-    //manager.headingFilter = 5;
-    //[manager startUpdatingLocation];
-    
+    NSLog(@"Entrou no startGPS");
     [_loadingGPS stopAnimating];
     
     manager.distanceFilter = 10.0;
-    manager.desiredAccuracy = kCLLocationAccuracyHundredMeters; // 100 m
+    manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters; // 10 m
 
 
     // update location
     if ([CLLocationManager locationServicesEnabled]){
         [manager startUpdatingLocation];
-        
     }
 }
 
@@ -334,17 +326,16 @@
     NSLog(@"Failed to get location! :(");
     
     [_loadingGPS startAnimating];
-//    UIAlertView *alerta;
-//    alerta = [[UIAlertView alloc] initWithTitle:@"Por gentileza" message:@"Ative o seu GPS" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alerta show];
     
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     CLLocation *currentLocation = newLocation;
+    NSArray *users = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    
     NSLog(@"Entrou no Delegate");
-    if (currentLocation != nil) {
+    if (currentLocation != nil && users.count > 0) {
         
         NSLog(@"Entrou no Delegate - dentro do 'if'");
 
@@ -352,10 +343,12 @@
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
-        [self CustomMaker];
-        [self mandaLocalização];
+        NSLog(@"latitude: %f\n", _latitude);
+        NSLog(@"latitude: %f\n", _longitude);
         
+        [self mandaLocalização];
     }
+
     
     //    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error) {
     //

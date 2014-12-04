@@ -16,7 +16,7 @@
 #import "UserInfo.h"
 #import "ViewControllerContactsPicker.h"
 
-@interface ViewController : UIViewController<CLLocationManagerDelegate, UIAlertViewDelegate>
+@interface ViewController : UIViewController<CLLocationManagerDelegate>
 
 @property(nonatomic) float latitude;
 @property(nonatomic) float longitude;
