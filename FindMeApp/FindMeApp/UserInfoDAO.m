@@ -100,7 +100,7 @@
                                           longitude:[[m valueForKey:@"longitude"] floatValue]
                                               email:[m valueForKey:@"email"]
                                            telefone:[m valueForKey:@"telefone"]
-                                           idServer:[[m valueForKey:@"idServer"] integerValue]
+                                           deviceId:[m valueForKey:@"deviceId"]
                                        connectionId:[m valueForKey:@"connectionId"]];
     return user;
 }

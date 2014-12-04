@@ -116,7 +116,7 @@
         [alert show];
     }
     else{
-        UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text idServer:0 connectionId:@"0"];
+        UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text deviceId:[[[UIDevice currentDevice] identifierForVendor] UUIDString] connectionId:@"0"];
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         [dao save:newUser];
         UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:newUser];
