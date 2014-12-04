@@ -10,4 +10,17 @@
 
 @implementation PermissionInfo
 
+-(instancetype) initPermissionWithUserFrom:(UserInfo*)from
+                                    userTo:(UserInfo*)to
+                                    status:(NSString*)status{
+    self = [super init];
+    if (self) {
+        _from = from;
+        _to = to;
+        _status = status;
+    }
+    return self;
+}
+
+
 @end

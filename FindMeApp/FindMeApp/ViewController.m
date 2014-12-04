@@ -96,7 +96,6 @@
             [user marker].map = _mapView;
         }
     }
-
 }
 
 -(void) CustomMaker{
@@ -379,9 +378,7 @@
     //        
     //    } ];
     
-    
 }
-
 
 - (IBAction)addContato:(UIButton *)sender {
       NSLog(@"Tap no botão 'Adicionar Contato'");

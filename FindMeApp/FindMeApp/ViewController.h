@@ -14,6 +14,7 @@
 #import "WebSocket.h"
 #import "WebSocketSingleton.h"
 #import "UserInfo.h"
+#import "ViewControllerContactsPicker.h"
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate, UIAlertViewDelegate>
 

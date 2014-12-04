@@ -10,4 +10,12 @@
 
 @implementation PermissionInfoMessage
 
+-(instancetype) initWithPermission:(PermissionInfo*) permissionInfo{
+    self = [super init];
+    if (self) {
+        _permissionInfo = permissionInfo;
+    }
+    return self;
+}
+
 @end

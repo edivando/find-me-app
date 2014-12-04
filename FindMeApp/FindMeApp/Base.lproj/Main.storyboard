@@ -56,12 +56,12 @@
         <!--View Controller Contacts Picker - Adicionar contatos-->
         <scene sceneID="7WS-IS-csY">
             <objects>
-                <viewController id="I2h-WF-EvN" customClass="ViewControllerContactsPicker" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddContatos" id="I2h-WF-EvN" customClass="ViewControllerContactsPicker" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ksS-45-eE9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7fZ-AQ-Z3O">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="7fZ-AQ-Z3O">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

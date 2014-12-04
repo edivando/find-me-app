@@ -16,6 +16,7 @@
     UserInfoDAO *dao;
     UIAlertView *alert;
     NSMutableArray *contatos;
+    NSTimer *timerToUpdateTable;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -33,7 +34,7 @@
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource: self];
-    //contatos = [dao fetchWithKey:@"defaultuser" andValue:@"NO"];
+    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -50,6 +51,10 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     //edit table
     [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
+    [self.tableView reloadData];
+}
+
+-(void) updateTable{
     [self.tableView reloadData];
 }
 
@@ -126,7 +131,10 @@
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
         [dao save:newUser];
-        
+        PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:[dao convertToUserInfo:[[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0]] userTo:newUser status:@"CONNECT"];
+        PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
+        WebSocket *socket = [WebSocketSingleton getConnection];
+        [socket sendMessage:[permissionMessage toJSONString]];
         //Instanciar objeto e salvar no banco
         
         //self.lbTel.text = phone;

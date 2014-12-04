@@ -16,4 +16,8 @@
 @property (nonatomic) UserInfo *to;
 @property (nonatomic) NSString *status;
 
+-(instancetype) initPermissionWithUserFrom:(UserInfo*)from
+                                    userTo:(UserInfo*)to
+                                    status:(NSString*)status;
+
 @end

@@ -43,15 +43,15 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSError* error;
-
+    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
     //ViewController* controllerMap;
 
+    //Bloco para controle de mensagens de conexao
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
         //Extraindo o connectionId da mensagem
         ConnectionInfoMessage *recebida = [[ConnectionInfoMessage alloc] initWithString:message error:&error];
         
         //Atualizar o usuario default com o connectionId atual
-        UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
             NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
             [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
@@ -73,14 +73,15 @@
         }
         
     }
-    if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
+    else if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
         NSLog(@"USER INFO: %@",message);
     }
-    if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
+    
+    //Bloco para controle de mensagens de status
+    else if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
         //Se usuario desconectar, excluir usuario do banco
         StatusInfoMessage *recebida = [[StatusInfoMessage alloc] initWithString:message error:&error];
         //recebida.statusInfo.userInfo
-        UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         NSArray *usuarios = [dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId];
         if (usuarios.count > 0) {
             NSManagedObject *result = [usuarios objectAtIndex:0];
@@ -92,6 +93,39 @@
                 [dao update:result];
             }
         }
+    }
+    
+    //Bloco para controlar mensagens de requisicao
+    else if ([message rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"permissionInfo\"" ].location <20) {
+        PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:message error:&error];
+        if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
+            NSLog(@"Usuario nao existe");
+        }
+        else if ([recebida.permissionInfo.status isEqualToString:@"YES"]) {
+            NSLog(@"Permissao concedida");
+            NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
+            if(usuarios.count>0){
+                NSManagedObject *result = [usuarios objectAtIndex:0];
+                [result setValue:@"permission" forKey:@"YES"];
+                [dao update:result];
+            }
+            //Atualizar usuario "to"no banco
+        }
+        else if ([recebida.permissionInfo.status isEqualToString:@"NO"]){
+            NSLog(@"Permissao negada");
+            NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
+            if(usuarios.count>0){
+                NSManagedObject *result = [usuarios objectAtIndex:0];
+                [result setValue:@"permission" forKey:@"NO"];
+                [dao update:result];
+            }
+            //Atualizar usuario "to" no banco
+        }
+        else {
+            NSLog(@"Requisicao de permissao");
+            //alert
+        }
+        
     }
 }
 

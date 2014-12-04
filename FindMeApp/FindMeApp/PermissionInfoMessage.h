@@ -14,4 +14,6 @@
 
 @property (nonatomic) PermissionInfo *permissionInfo;
 
+-(instancetype) initWithPermission:(PermissionInfo*) permissionInfo;
+
 @end

@@ -12,6 +12,8 @@
 #import "WebSocketSingleton.h"
 #import "UserInfoDAO.h"
 #import "TableViewCell.h"
+#import "PermissionInfoMessage.h"
+
 
 @interface ViewControllerContactsPicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
