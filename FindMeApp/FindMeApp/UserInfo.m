@@ -18,7 +18,7 @@
                    longitude:(float)longitude
                        email:(NSString*)email
                     telefone:(NSString*)telefone
-                    idServer:(NSInteger)idServer
+                    deviceId:(NSString*)deviceId
                 connectionId:(NSString*)connectionId
 {
     self = [super init];
@@ -28,12 +28,12 @@
         _longitude = longitude;
         _telefone = telefone;
         _email = email;
-        _idServer = idServer;
+        _deviceId = deviceId;
         _connectionId = connectionId;
         _status = @"DISCONNECTED";
         _permission = @"NO";
         
-        _idServer = idServer;
+        _deviceId = deviceId;
         _connectionId = connectionId;
     }
     return self;

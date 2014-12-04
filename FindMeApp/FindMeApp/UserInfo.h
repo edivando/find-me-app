@@ -17,7 +17,7 @@
 
 FOUNDATION_EXTERN NSArray *const listaCores;
 
-@property (nonatomic) NSInteger idServer;
+@property (nonatomic) NSString *deviceId;
 @property (nonatomic) NSString *connectionId;
 @property (nonatomic) NSString *user;
 @property (nonatomic) NSString <Optional> *email;
@@ -34,7 +34,7 @@ FOUNDATION_EXTERN NSArray *const listaCores;
                    longitude:(float)longitude
                        email:(NSString*)email
                     telefone:(NSString*)telefone
-                          idServer:(NSInteger)idServer
+                          deviceId:(NSString*)deviceId
                 connectionId:(NSString*)connectionId;
 
 -(GMSMarker*) marker;

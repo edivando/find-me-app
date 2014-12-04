@@ -124,7 +124,7 @@
     }
     else {
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-        UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone idServer:0 connectionId:@""];
+        UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:0 connectionId:@""];
         [dao save:newUser];
         
         //Instanciar objeto e salvar no banco
