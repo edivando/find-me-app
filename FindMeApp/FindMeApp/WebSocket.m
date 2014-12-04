@@ -16,7 +16,6 @@
 - (void)connect {
     webSocket.delegate = nil;
     webSocket = nil;
-    
     NSString *urlString = @"wss://findme-edivando.rhcloud.com:8443/server";
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
@@ -44,6 +43,7 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     NSError* error;
+
     //ViewController* controllerMap;
 
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
@@ -98,5 +98,6 @@
 -(void) sendMessage:(NSString*)message{
     [webSocket send:message];
 }
+
 
 @end
