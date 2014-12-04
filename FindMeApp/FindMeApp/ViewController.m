@@ -332,7 +332,7 @@
 {
 
 //    NSLog(@"Error: %@", error);
-//    NSLog(@"Failed to get location! :(");
+    NSLog(@"Failed to get location! :(");
     
     [_loadingGPS startAnimating];
 //    UIAlertView *alerta;
@@ -345,7 +345,7 @@
 {
     //NSLog(@"Distance Location: %f", [newLocation distanceFromLocation:oldLocation]);
     CLLocation *currentLocation = newLocation;
-    
+    NSLog(@"Entrou no Delegate");
     if (currentLocation != nil) {
         
         _latitude = currentLocation.coordinate.latitude;
