@@ -343,17 +343,18 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
-    //NSLog(@"Distance Location: %f", [newLocation distanceFromLocation:oldLocation]);
     CLLocation *currentLocation = newLocation;
     NSLog(@"Entrou no Delegate");
     if (currentLocation != nil) {
+        
+        NSLog(@"Entrou no Delegate - dentro do 'if'");
+
         
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
         [self CustomMaker];
         [self mandaLocalização];
-        
         
     }
     

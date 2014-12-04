@@ -399,7 +399,7 @@
 						DevelopmentTeam = S9Q88BN22A;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
