@@ -52,7 +52,9 @@
     //provisorio
     if([_telefone isEqual:@""] || [user.telefone isEqual:@""])
         return NO;
-    
+    if (_telefone.length <8 || user.telefone.length<8) {
+        return  NO;
+    }
     _telefone = [[_telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
 //    _telefone = [_telefone stringByReplacingOccurrencesOfString:@"-" withString:@""];
 //    _telefone = [_telefone stringByReplacingOccurrencesOfString:@"(" withString:@""];
