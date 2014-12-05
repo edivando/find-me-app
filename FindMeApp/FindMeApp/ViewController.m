@@ -28,6 +28,8 @@
     
     NSTimer *timer;
     NSTimeInterval intervalo;
+    
+    int count;
 
 }
 
@@ -45,6 +47,8 @@
     //manager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
     intervalo = 3.0;
+    
+    count = 0;
     
     manager.delegate = self;
     
@@ -66,10 +70,11 @@
     else{
         UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:[users objectAtIndex:0]]];
         [socket sendMessage:[message toJSONString]];
+        //Inicia o GPS
+        [self startGPS];
     }
     
-    //Inicia o mapa
-    [self CustomMaker];
+    
 
 }
 
@@ -102,6 +107,7 @@
 }
 
 -(void) CustomMaker{
+    NSLog(@"Entrou no CustomMaker");
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
                                                             longitude:_longitude
                                                                  zoom:13];
@@ -119,8 +125,9 @@
     [_mapView addSubview:button];
     
     //Adicionando o mapView para a nossa view atual
+    //[self startGPS];
     self.view = _mapView;
-    [self startGPS];
+    
     
     //Chamando a função do timer
     timer = [NSTimer scheduledTimerWithTimeInterval:intervalo target:self selector:@selector(updateMarker) userInfo:nil repeats:YES];
@@ -337,16 +344,17 @@
     NSLog(@"Entrou no Delegate");
     if (currentLocation != nil && users.count > 0) {
         
-        NSLog(@"Entrou no Delegate - dentro do 'if'");
 
         
         _latitude = currentLocation.coordinate.latitude;
         _longitude = currentLocation.coordinate.longitude;
         
-        NSLog(@"latitude: %f\n", _latitude);
-        NSLog(@"latitude: %f\n", _longitude);
         
         [self mandaLocalização];
+    }
+    if(count == 0){
+        [self CustomMaker];
+        count++;
     }
 
     
