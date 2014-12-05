@@ -36,6 +36,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
+    img.frame = CGRectMake(0, 0, 100, 50);
+    self.navigationItem.titleView = img;
+    
+    
     
     //Limpando todos os usuários, menos o default do bd
     dao = [[UserInfoDAO alloc] init];
@@ -51,6 +57,7 @@
     count = 0;
     
     manager.delegate = self;
+    _mapView.delegate = self;
     
     //Inicia o mapa
     //[self startMapView];
@@ -88,7 +95,7 @@
 
 // Atualiza os markers do mapa através de um timer.
 -(void)updateMarker{
-    NSLog(@"Testa Timer");
+    //NSLog(@"Testa Timer");
     if(_mapView != nil){
         //NSLog(@"Testando Timer");
 
@@ -96,7 +103,9 @@
     
         NSMutableArray *usersInfo = [dao convertToUsersInfo:[dao fetchWithPredicate:[NSPredicate predicateWithFormat:@"(defaultuser == %@) AND (permission == %@)",@"NO", @"YES"]]];
         for (UserInfo *user in usersInfo) {
-            [user marker].map = _mapView;
+            if([user.permission isEqualToString:@"YES"]){
+                [user marker].map = _mapView;
+            }
         }
     
         NSMutableArray *usersInfoDefault = [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"YES"]];
@@ -120,7 +129,7 @@
     [button addTarget:self action:@selector(addContato:) forControlEvents:UIControlEventTouchUpInside];
     button.tintColor = [UIColor blackColor];
     button.layer.cornerRadius = 12;
-    button.backgroundColor = [UIColor colorWithHue:0.4 saturation:1.000 brightness:0.667 alpha:1.000];
+    button.backgroundColor = [UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0];
     [button setTitle:@"Adicionar Contato" forState:UIControlStateNormal];
     [_mapView addSubview:button];
     
@@ -384,6 +393,8 @@
 - (IBAction)addContato:(UIButton *)sender {
       NSLog(@"Tap no botão 'Adicionar Contato'");
     [self performSegueWithIdentifier:@"SegueAddContato" sender:nil];
+    
+    
 }
 
 @end
