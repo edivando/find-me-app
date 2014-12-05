@@ -96,6 +96,7 @@
     
         NSMutableArray *usersInfo = [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]];
         for (UserInfo *user in usersInfo) {
+            
             [user marker].map = _mapView;
         }
     
