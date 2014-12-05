@@ -131,7 +131,8 @@
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
         [dao save:newUser];
-        PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:[dao convertToUserInfo:[[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0]] userTo:newUser status:@"CONNECT"];
+        NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+        PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] userTo:newUser status:@"CONNECT"];
         PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
         WebSocket *socket = [WebSocketSingleton getConnection];
         [socket sendMessage:[permissionMessage toJSONString]];

@@ -106,7 +106,7 @@
             NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
             if(usuarios.count>0){
                 NSManagedObject *result = [usuarios objectAtIndex:0];
-                [result setValue:@"permission" forKey:@"YES"];
+                [result setValue:@"YES" forKey:@"permission"];
                 [dao update:result];
             }
             //Atualizar usuario "to"no banco
@@ -116,7 +116,7 @@
             NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
             if(usuarios.count>0){
                 NSManagedObject *result = [usuarios objectAtIndex:0];
-                [result setValue:@"permission" forKey:@"NO"];
+                [result setValue:@"NO" forKey:@"permission"];
                 [dao update:result];
             }
             //Atualizar usuario "to" no banco
