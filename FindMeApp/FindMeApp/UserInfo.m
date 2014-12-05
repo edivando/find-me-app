@@ -43,10 +43,11 @@
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(_latitude, _longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     //marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.icon = [UIImage imageNamed:@"flag_icon"];
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor blackColor]];
+    marker.icon = [UIImage imageNamed:@"dsada"];
+    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0]];
     marker.title = _user;
     return marker;
+    
 }
 -(BOOL)isEqualUser:(UserInfo*)user{
     //provisorio
