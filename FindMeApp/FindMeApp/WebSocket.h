@@ -15,7 +15,7 @@
 #import "StatusInfoMessage.h"
 #import "PermissionInfoMessage.h"
 
-@interface WebSocket : NSObject <SRWebSocketDelegate>
+@interface WebSocket : NSObject <SRWebSocketDelegate,UIAlertViewDelegate>
 
 - (void)connect;
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket;

@@ -13,6 +13,7 @@
 #import "UserInfoMessage.h"
 #import "WebSocket.h"
 #import "WebSocketSingleton.h"
+#import <NSStringMask.h>
 
 @interface ViewControllerRegistration : UITableViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textNome;

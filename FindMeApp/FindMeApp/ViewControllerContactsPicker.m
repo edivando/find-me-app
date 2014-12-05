@@ -49,7 +49,6 @@
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    //edit table
     [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
     [self.tableView reloadData];
 }
@@ -129,6 +128,7 @@
     }
     else {
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
+        phone = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
         [dao save:newUser];
         NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
@@ -136,24 +136,9 @@
         PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
         WebSocket *socket = [WebSocketSingleton getConnection];
         [socket sendMessage:[permissionMessage toJSONString]];
-        //Instanciar objeto e salvar no banco
-        
-        //self.lbTel.text = phone;
-        //self.lbNome.text = name;
     }
     CFRelease(phoneNumbers);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)addContato:(UIButton *)sender {
     ABPeoplePickerNavigationController *picker =

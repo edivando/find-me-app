@@ -11,6 +11,8 @@
 
 @implementation WebSocket{
     SRWebSocket *webSocket;
+    UIAlertView *alert;
+    NSString *jsonMessage;
 }
 
 - (void)connect {
@@ -45,7 +47,8 @@
     NSError* error;
     UserInfoDAO *dao = [[UserInfoDAO alloc] init];
     //ViewController* controllerMap;
-
+    jsonMessage = message;
+    
     //Bloco para controle de mensagens de conexao
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
         //Extraindo o connectionId da mensagem
@@ -101,33 +104,31 @@
         if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
             NSLog(@"Usuario nao existe");
         }
-        else if ([recebida.permissionInfo.status isEqualToString:@"YES"]) {
-            NSLog(@"Permissao concedida");
+        else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
+            NSLog(@"Permissao %@",recebida.permissionInfo.status);
             NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
             if(usuarios.count>0){
                 NSManagedObject *result = [usuarios objectAtIndex:0];
-                [result setValue:@"YES" forKey:@"permission"];
+                [result setValue:recebida.permissionInfo.status forKey:@"permission"];
                 [dao update:result];
             }
-            //Atualizar usuario "to"no banco
         }
-        else if ([recebida.permissionInfo.status isEqualToString:@"NO"]){
-            NSLog(@"Permissao negada");
-            NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
-            if(usuarios.count>0){
-                NSManagedObject *result = [usuarios objectAtIndex:0];
-                [result setValue:@"NO" forKey:@"permission"];
-                [dao update:result];
-            }
-            //Atualizar usuario "to" no banco
-        }
-        else {
+        else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
+            alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
+            [alert show];
             NSLog(@"Requisicao de permissao");
             //alert
         }
-        
     }
 }
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSError* error;
+    PermissionInfoMessage *pi = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
+    pi.permissionInfo.status = buttonIndex == 0 ? @"NO" : @"YES";
+    [self sendMessage:[pi toJSONString]];
+}
+
 
 -(void) sendMessage:(NSString*)message{
     [webSocket send:message];

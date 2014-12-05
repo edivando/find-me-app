@@ -1,13 +1,16 @@
 PODS:
   - JSONModel (1.0.1)
+  - NSStringMask (1.2)
   - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
   - JSONModel
+  - NSStringMask (~> 1.2)
   - SocketRocket (= 0.3.1-beta2)
 
 SPEC CHECKSUMS:
   JSONModel: 634100aaacbd89811bc8a03da209356e5989c569
+  NSStringMask: 5a2bd1214cae7396aaa14487ea972a8966d49d18
   SocketRocket: 79a68ae186063c65e1fe6f638b1ae2927aa5f304
 
 COCOAPODS: 0.35.0
