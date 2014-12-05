@@ -94,7 +94,7 @@
 
         [_mapView clear];
     
-        NSMutableArray *usersInfo = [dao convertToUsersInfo:[dao fetchWithKey:@"defaultuser" andValue:@"NO"]];
+        NSMutableArray *usersInfo = [dao convertToUsersInfo:[dao fetchWithPredicate:[NSPredicate predicateWithFormat:@"(defaultuser=NO) AND (permission==YES)"]]];
         for (UserInfo *user in usersInfo) {
             
             [user marker].map = _mapView;

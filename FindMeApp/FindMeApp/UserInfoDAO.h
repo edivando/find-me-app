@@ -28,4 +28,5 @@
 
 -(void) deleteManaged:(NSManagedObject*)m;
 
+-(NSArray*) fetchWithPredicate:(NSPredicate*) predicate;
 @end

@@ -88,6 +88,10 @@
     return [dao fetch:pred];
 }
 
+-(NSArray*) fetchWithPredicate:(NSPredicate*) predicate{
+    return [dao fetch:predicate];
+}
+
 -(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds{
     NSMutableArray *users = [NSMutableArray new];
     for (NSManagedObject *m in manageds) {
