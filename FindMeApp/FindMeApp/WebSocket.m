@@ -102,7 +102,10 @@
     else if ([message rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"permissionInfo\"" ].location <20) {
         PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:message error:&error];
         if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
-            NSLog(@"Usuario nao existe");
+            NSArray *contatos = [dao fetchWithKey:@"nome" andValue:recebida.permissionInfo.to.user];
+            [dao deleteManaged:[contatos objectAtIndex:0]];
+            alert = [[UIAlertView alloc] initWithTitle:@"Esse usuário não está cadastrado" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
         }
         else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
             NSLog(@"Permissao %@",recebida.permissionInfo.status);
