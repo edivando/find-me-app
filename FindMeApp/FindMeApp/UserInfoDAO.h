@@ -18,7 +18,7 @@
 
 -(NSError*)update:(NSManagedObject*)managed;
 
--(NSError*)updateUserInfo:(UserInfo*)u;
+//-(NSError*)updateUserInfo:(UserInfo*)u;
 
 -(NSMutableArray*) convertToUsersInfo:(NSArray*) manageds;
 

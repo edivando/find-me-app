@@ -26,6 +26,7 @@ FOUNDATION_EXTERN NSArray *const listaCores;
 @property (nonatomic) float longitude;
 @property (nonatomic) NSString <Optional> *permission;
 @property (nonatomic) NSString <Optional> *status;
+@property (nonatomic) NSString <Optional> *cor;
 
 //@property (nonatomic) GMSMarker<> *marker;
 

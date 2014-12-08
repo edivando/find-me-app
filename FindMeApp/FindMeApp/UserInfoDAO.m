@@ -23,43 +23,25 @@
 }
 
 -(NSError*)save:(UserInfo*)user{
-    NSDictionary *dict;
-    if ([[self fetchWithKey:@"defaultuser" andValue:@"YES"] count] == 0) {
-        dict = @{@"nome": user.user,
-                 @"telefone" : user.telefone,
-                 @"email" : user.email,
-                 @"deviceId" : user.deviceId,
-                 @"connectionId" : user.connectionId,
-                 @"latitude" : @(user.latitude),
-                 @"longitude" : @(user.longitude),
-                 @"defaultuser" : @"YES"};
-    } else {
-        dict = @{@"nome": user.user,
-                 @"telefone" : user.telefone,
-                 @"email" : user.email,
-                 @"deviceId" : user.deviceId,
-                 @"connectionId" : user.connectionId,
-                 @"latitude" : @(user.latitude),
-                 @"longitude" : @(user.longitude),
-                 @"defaultuser" : @"NO"};
-    }
-    return [dao save:dict];
+    NSString *s = ([self fetchWithKey:@"defaultuser" andValue:@"YES"].count == 0) ? @"YES" : @"NO";
+    return [dao save:[self convertToDictionary:user defaultUser:s]];
 }
 
 -(NSError*)update:(NSManagedObject*)managed{
     return [dao update:managed];
 }
 
--(NSError*)updateUserInfo:(UserInfo*)u{
-    return [dao updateDictionary:@{@"nome": u.user,
-                         @"telefone" : u.telefone,
-                         @"email" : u.email,
-                         @"connectionId" : u.connectionId,
-                         @"latitude" : @(u.latitude),
-                         @"longitude" : @(u.longitude),
-                         @"defaultuser" : @"NO"}
-            ];
-}
+//-(NSError*)updateUserInfo:(UserInfo*)u{
+//    return [dao updateDictionary:@{@"nome": u.user,
+//                                   @"telefone" : u.telefone,
+//                                   @"email" : u.email,
+//                                   @"connectionId" : u.connectionId,
+//                                   @"latitude" : @(u.latitude),
+//                                   @"longitude" : @(u.longitude),
+//                                   @"cor" : u.cor,
+//                                   @"defaultuser" : @"NO"}
+//            ];
+//}
 
 
 -(void) clearAllExceptDefault{
@@ -98,6 +80,18 @@
         [users addObject:[self convertToUserInfo:m]];
     }
     return users;
+}
+
+-(NSDictionary*) convertToDictionary:(UserInfo*)user defaultUser:(NSString*)d{
+    return @{@"nome": user.user,
+             @"telefone" : user.telefone,
+             @"email" : user.email,
+             @"deviceId" : user.deviceId,
+             @"connectionId" : user.connectionId,
+             @"latitude" : @(user.latitude),
+             @"longitude" : @(user.longitude),
+             @"cor" : user.cor,
+             @"defaultuser" : d};
 }
 
 -(UserInfo*)convertToUserInfo:(NSManagedObject*)m{
