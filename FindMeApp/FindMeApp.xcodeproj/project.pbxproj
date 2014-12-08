@@ -49,7 +49,6 @@
 		A073705A1A274C21001B3D6B /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370591A274C21001B3D6B /* OpenGLES.framework */; };
 		A073705C1A274C2F001B3D6B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705B1A274C2F001B3D6B /* QuartzCore.framework */; };
 		A073705E1A274C3C001B3D6B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */; };
-		A0ED98D51A308FBF00B28AB9 /* GPS.m in Sources */ = {isa = PBXBuildFile; fileRef = A0ED98D41A308FBF00B28AB9 /* GPS.m */; };
 		DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = DA83415F1A2A8958009DE6C6 /* ViewControllerRegistration.m */; };
 		DAA15DFD1A2FB42E00B0774B /* PermissionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA15DFC1A2FB42E00B0774B /* PermissionInfo.m */; };
 		DAA15E001A2FB45000B0774B /* PermissionInfoMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA15DFF1A2FB45000B0774B /* PermissionInfoMessage.m */; };
@@ -125,8 +124,6 @@
 		A07370591A274C21001B3D6B /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A073705B1A274C2F001B3D6B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A073705D1A274C3C001B3D6B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		A0ED98D31A308FBF00B28AB9 /* GPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPS.h; sourceTree = "<group>"; };
-		A0ED98D41A308FBF00B28AB9 /* GPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPS.m; sourceTree = "<group>"; };
 		AB7AB2C179E346E382D3E093 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C31642967B924B74C2066B8A /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C3630B19F2B2A4AA76FD8FC8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -355,13 +352,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A0ED98D21A308FA900B28AB9 /* GPS */ = {
+		A058D6FE1A35DE1600715ED4 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				A0ED98D31A308FBF00B28AB9 /* GPS.h */,
-				A0ED98D41A308FBF00B28AB9 /* GPS.m */,
+				A058D6FF1A35DE4D00715ED4 /* Common.h */,
+				A058D7001A35DE4D00715ED4 /* Common.m */,
+				A058D7021A35DE6300715ED4 /* StyleButton.h */,
+				A058D7031A35DE6300715ED4 /* StyleButton.m */,
 			);
-			name = GPS;
+			name = Button;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,7 +509,7 @@
 				892483D11A2C9A120087C4E9 /* ViewControllerContactsPicker.m in Sources */,
 				892483CE1A2C96AA0087C4E9 /* ConnectionInfoMessage.m in Sources */,
 				DAA15DFD1A2FB42E00B0774B /* PermissionInfo.m in Sources */,
-				A0ED98D51A308FBF00B28AB9 /* GPS.m in Sources */,
+				A058D7011A35DE4D00715ED4 /* Common.m in Sources */,
 				89EFA21A1A261434008AAF2C /* AppDelegate.m in Sources */,
 				892483C11A2C91710087C4E9 /* UserInfoMessage.m in Sources */,
 				DAA15E001A2FB45000B0774B /* PermissionInfoMessage.m in Sources */,
@@ -521,6 +520,7 @@
 				DA8341601A2A8958009DE6C6 /* ViewControllerRegistration.m in Sources */,
 				89B2A0291A28A1F100861042 /* WebSocketSingleton.m in Sources */,
 				89A4964E1A2DFD5100EBC05A /* TableViewCell.m in Sources */,
+				A058D7041A35DE6300715ED4 /* StyleButton.m in Sources */,
 				892483C51A2C949F0087C4E9 /* StatusInfo.m in Sources */,
 				89EFA2161A261434008AAF2C /* main.m in Sources */,
 				89B2A0311A28AA9200861042 /* UserInfoDAO.m in Sources */,

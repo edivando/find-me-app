@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     srandom(time(nil));
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
