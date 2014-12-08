@@ -42,5 +42,6 @@ FOUNDATION_EXTERN NSArray *const listaCores;
 
 -(BOOL)isEqualUser:(UserInfo*)user;
 
+-(UIColor*) color;
 
 @end

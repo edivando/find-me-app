@@ -86,16 +86,17 @@
     if (cell == nil) {
         cell = [[TableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    NSManagedObject *contato = [contatos objectAtIndex:[indexPath row]];
-    cell.lbTitle.text = [contato valueForKey:@"nome"];
-    cell.imgUserColor.backgroundColor = [UIColor redColor];
-    if ([[contato valueForKey:@"permission"] isEqualToString:@"YES"]) {
+    UserInfo *user = [dao convertToUserInfo:[contatos objectAtIndex:[indexPath row]]];
+
+    cell.lbTitle.text = user.user;
+    cell.imgUserColor.backgroundColor = [user color];
+    if ([user.permission isEqualToString:@"YES"]) {
         cell.imgPermission.image = [UIImage imageNamed:@"unlocked"];
     }
     else{
         cell.imgPermission.image = [UIImage imageNamed:@"lock"];
     }
-    if ([[contato valueForKey:@"status"] isEqualToString:@"CONNECTED"]){
+    if ([user.status isEqualToString:@"CONNECTED"]){
         cell.imgStatus.image = [UIImage imageNamed:@"online"];
     }
     else {

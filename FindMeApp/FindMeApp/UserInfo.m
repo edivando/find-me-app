@@ -45,8 +45,7 @@
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     //marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"map-marker"];
-    NSArray *aux = [_cor componentsSeparatedByString:@"|"];
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:[aux[0] floatValue] green:[aux[1] floatValue] blue:[aux[2] floatValue] alpha:1.0]];
+    marker.icon = [GMSMarker markerImageWithColor:[self color]];
     marker.title = _user;
     return marker;
     
@@ -67,5 +66,9 @@
     return [_telefone isEqual:user.telefone];
 }
 
+-(UIColor*) color{
+    NSArray *aux = [_cor componentsSeparatedByString:@"|"];
+    return [UIColor colorWithRed:[aux[0] floatValue]/255.0 green:[aux[1] floatValue]/255.0 blue:[aux[2] floatValue]/255.0 alpha:1.0];
+}
 
 @end
