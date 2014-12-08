@@ -44,6 +44,7 @@
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     //marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"dsada"];
+    NSArray *aux = [@"abcd,efgh" componentsSeparatedByString:@","];
     marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0]];
     marker.title = _user;
     return marker;

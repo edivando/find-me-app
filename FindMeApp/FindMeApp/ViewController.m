@@ -36,11 +36,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    img.frame = CGRectMake(0, 0, 100, 50);
-    self.navigationItem.titleView = img;
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                  forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.view.backgroundColor = [UIColor clearColor];
     
     
     //Limpando todos os usuários, menos o default do bd

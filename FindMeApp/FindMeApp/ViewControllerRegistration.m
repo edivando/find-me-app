@@ -29,10 +29,6 @@
 {
     [super viewDidLoad];
     
-    UIImageView *img = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo.png"]];
-    img.frame = CGRectMake(0, 0, 100, 50);
-    self.navigationItem.titleView = img;
-    
     [self setTitle:@"FindMe"];
     self.textTelefone.delegate = self;
     self.textTelefone.placeholder = @"(__) ____-____";
