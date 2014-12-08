@@ -15,6 +15,7 @@
 #import "WebSocketSingleton.h"
 #import "UserInfo.h"
 #import "ViewControllerContactsPicker.h"
+#import "StyleButton.h"
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate, GMSMapViewDelegate>
 
