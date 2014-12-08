@@ -188,7 +188,7 @@
 }
 
 -(NSString*) randCor{
-    return [NSString stringWithFormat:@"%ld|%ld|%ld", random()%255,random()%255,random()%255];
+    return [NSString stringWithFormat:@"%ld|%ld|%ld", random()%255,random()%50,random()%255];
 }
 
 - (IBAction)addContato:(UIButton *)sender {
