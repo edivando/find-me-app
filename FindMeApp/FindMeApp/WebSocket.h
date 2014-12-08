@@ -14,14 +14,21 @@
 #import "ConnectionInfoMessage.h"
 #import "StatusInfoMessage.h"
 #import "PermissionInfoMessage.h"
+#import "ContactPickerDelegate.h"
 
 @interface WebSocket : NSObject <SRWebSocketDelegate,UIAlertViewDelegate>
 
+@property (nonatomic, weak) id <ContactPickerDelegate> delegate;
+
 - (void)connect;
-- (void)webSocketDidOpen:(SRWebSocket *)newWebSocket;
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
+//- (void)webSocketDidOpen:(SRWebSocket *)newWebSocket;
+//- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
+//- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+//- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
+
 - (void)sendMessage:(NSString*)message;
 
+
+-(void) sendUserInfoMessage:(UserInfo*)user;
+-(void) sendPermissionMessageFrom:(UserInfo*)userFrom To:(UserInfo*)userTo status:(NSString*)status;
 @end

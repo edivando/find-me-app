@@ -13,7 +13,10 @@
     SRWebSocket *webSocket;
     UIAlertView *alert;
     NSString *jsonMessage;
+    UserInfoDAO *dao;
 }
+
+@synthesize delegate;
 
 - (void)connect {
     webSocket.delegate = nil;
@@ -21,6 +24,7 @@
     NSString *urlString = @"wss://findme-edivando.rhcloud.com:8443/server";
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
+    dao = [[UserInfoDAO alloc] init];
     
     [newWebSocket open];
 }
@@ -30,7 +34,6 @@
 
 - (void)webSocketDidOpen:(SRWebSocket *)newWebSocket {
     webSocket = newWebSocket;
-    //[webSocket send:[NSString stringWithFormat:@"Hello from %@", [UIDevice currentDevice].name]];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error {
@@ -44,86 +47,29 @@
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
-    NSError* error;
-    UserInfoDAO *dao = [[UserInfoDAO alloc] init];
-    //ViewController* controllerMap;
     jsonMessage = message;
-    
+
     //Bloco para controle de mensagens de conexao
     if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
-        //Extraindo o connectionId da mensagem
-        ConnectionInfoMessage *recebida = [[ConnectionInfoMessage alloc] initWithString:message error:&error];
-        
-        //Atualizar o usuario default com o connectionId atual
-        if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
-            NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
-            [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
-            [dao update:fetchResult];
-        }
-        
-        //Atualiza usuarios ativos
-        for (NSManagedObject *userBD in [dao fetchWithKey:@"defaultuser" andValue:@"NO"]) {
-            for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
-                if ([userAtivo isEqualUser:[dao convertToUserInfo:userBD]]) {
-                    [userBD setValue:@"CONNECTED" forKey:@"status"];
-                    [userBD setValue:@(userAtivo.latitude) forKey:@"latitude"];
-                    [userBD setValue:@(userAtivo.longitude) forKey:@"longitude"];
-                    [userBD setValue:userAtivo.connectionId forKey:@"connectionId"];
-                    [dao update:userBD];
-                }
-            }
-            
-        }
-        
+        [self receiveConnectionInfo];
     }
+    
     else if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
         NSLog(@"USER INFO: %@",message);
     }
     
     //Bloco para controle de mensagens de status
     else if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
-        //Se usuario desconectar, excluir usuario do banco
-        StatusInfoMessage *recebida = [[StatusInfoMessage alloc] initWithString:message error:&error];
-        //recebida.statusInfo.userInfo
-        NSArray *usuarios = [dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId];
-        if (usuarios.count > 0) {
-            NSManagedObject *result = [usuarios objectAtIndex:0];
-            [result setValue:recebida.statusInfo.status forKey:@"status"];
-            if ([recebida.statusInfo.status isEqualToString:@"EXITED"]) {
-                [dao deleteManaged:result];
-            }
-            else{
-                [dao update:result];
-            }
-        }
+        [self receiveStatusInfo];
     }
     
     //Bloco para controlar mensagens de requisicao
     else if ([message rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"permissionInfo\"" ].location <20) {
-        PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:message error:&error];
-        if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
-            NSArray *contatos = [dao fetchWithKey:@"nome" andValue:recebida.permissionInfo.to.user];
-            [dao deleteManaged:[contatos objectAtIndex:0]];
-            alert = [[UIAlertView alloc] initWithTitle:@"Esse usuário não está cadastrado" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-        }
-        else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
-            NSLog(@"Permissao %@",recebida.permissionInfo.status);
-            NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
-            if(usuarios.count>0){
-                NSManagedObject *result = [usuarios objectAtIndex:0];
-                [result setValue:recebida.permissionInfo.status forKey:@"permission"];
-                [dao update:result];
-            }
-        }
-        else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
-            alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
-            [alert show];
-            NSLog(@"Requisicao de permissao");
-            //alert
-        }
+        [self receivePermissionInfo];
     }
 }
+
+
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSError* error;
@@ -133,8 +79,90 @@
 }
 
 
+#pragma mark receiveMessages
+-(void) receiveConnectionInfo{
+    NSError* error;
+    //Extraindo o connectionId da mensagem
+    ConnectionInfoMessage *recebida = [[ConnectionInfoMessage alloc] initWithString:jsonMessage error:&error];
+    
+    //Atualizar o usuario default com o connectionId atual
+    if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
+        NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
+        [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
+        [dao update:fetchResult];
+    }
+    
+    //Atualiza usuarios ativos
+    for (NSManagedObject *userBD in [dao fetchWithKey:@"defaultuser" andValue:@"NO"]) {
+        for (UserInfo *userAtivo in recebida.connectionInfo.activeUsers) {
+            if ([userAtivo isEqualUser:[dao convertToUserInfo:userBD]]) {
+                [userBD setValue:@"CONNECTED" forKey:@"status"];
+                [userBD setValue:@(userAtivo.latitude) forKey:@"latitude"];
+                [userBD setValue:@(userAtivo.longitude) forKey:@"longitude"];
+                [userBD setValue:userAtivo.connectionId forKey:@"connectionId"];
+                [dao update:userBD];
+            }
+        }
+    }
+    [self.delegate updateTable];
+}
+
+-(void) receiveStatusInfo{
+    NSError* error;
+    //Se usuario desconectar, excluir usuario do banco
+    StatusInfoMessage *recebida = [[StatusInfoMessage alloc] initWithString:jsonMessage error:&error];
+    //recebida.statusInfo.userInfo
+    NSArray *usuarios = [dao fetchWithKey:@"connectionId" andValue:recebida.statusInfo.userInfo.connectionId];
+    if (usuarios.count > 0) {
+        NSManagedObject *result = [usuarios objectAtIndex:0];
+        [result setValue:recebida.statusInfo.status forKey:@"status"];
+        if ([recebida.statusInfo.status isEqualToString:@"EXITED"]) {
+            [dao deleteManaged:result];
+        }
+        else{
+            [dao update:result];
+        }
+    }
+}
+
+-(void) receivePermissionInfo{
+    NSError* error;
+    PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
+    if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
+        NSArray *contatos = [dao fetchWithKey:@"nome" andValue:recebida.permissionInfo.to.user];
+        [dao deleteManaged:[contatos objectAtIndex:0]];
+        alert = [[UIAlertView alloc] initWithTitle:@"Esse usuário não está cadastrado" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
+        NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
+        if(usuarios.count>0){
+            NSManagedObject *result = [usuarios objectAtIndex:0];
+            [result setValue:recebida.permissionInfo.status forKey:@"permission"];
+            [dao update:result];
+        }
+    }
+    else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
+        alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
+        [alert show];
+    }
+
+}
+
+#pragma mark sendMessages
 -(void) sendMessage:(NSString*)message{
     [webSocket send:message];
+}
+
+-(void) sendUserInfoMessage:(UserInfo*)user{
+    UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:user];
+    [self sendMessage:[message toJSONString]];
+}
+
+-(void) sendPermissionMessageFrom:(UserInfo*)userFrom To:(UserInfo*)userTo status:(NSString*)status{
+    PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:userFrom userTo:userTo status:status];
+    PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
+    [self sendMessage:[permissionMessage toJSONString]];
 }
 
 

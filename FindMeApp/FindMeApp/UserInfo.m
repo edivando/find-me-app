@@ -33,8 +33,6 @@
         _status = @"DISCONNECTED";
         _permission = @"NO";
         _cor = @"";
-        
-        
         _deviceId = deviceId;
         _connectionId = connectionId;
     }
@@ -51,6 +49,12 @@
     return marker;
     
 }
+
+-(NSString*) telefoneFormat{
+    _telefone = [[_telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+    return [_telefone substringFromIndex: [_telefone length] - 8];
+}
+
 -(BOOL)isEqualUser:(UserInfo*)user{
     //provisorio
     if([_telefone isEqual:@""] || [user.telefone isEqual:@""])
@@ -58,19 +62,16 @@
     if (_telefone.length <8 || user.telefone.length<8) {
         return  NO;
     }
-    _telefone = [[_telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
-    _telefone = [_telefone substringFromIndex: [_telefone length] - 8];
-    
-    user.telefone = [[user.telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
-    user.telefone = [user.telefone substringFromIndex: [user.telefone length] - 8];
-    
-    return [_telefone isEqual:user.telefone];
+    return [[self telefoneFormat] isEqual:[user telefoneFormat]];
 }
 
 -(UIColor*) color{
-    
     NSArray *aux = [_cor componentsSeparatedByString:@"|"];
-    return [UIColor colorWithRed:[aux[0] floatValue]/255.0 green:[aux[1] floatValue]/255.0 blue:[aux[2] floatValue]/255.0 alpha:1.0];
+    if(aux.count == 3){
+        return [UIColor colorWithRed:[aux[0] floatValue]/255.0 green:[aux[1] floatValue]/255.0 blue:[aux[2] floatValue]/255.0 alpha:1.0];
+    }else{
+        return [UIColor blackColor];
+    }
 }
 
 @end

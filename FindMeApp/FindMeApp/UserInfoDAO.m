@@ -31,19 +31,6 @@
     return [dao update:managed];
 }
 
-//-(NSError*)updateUserInfo:(UserInfo*)u{
-//    return [dao updateDictionary:@{@"nome": u.user,
-//                                   @"telefone" : u.telefone,
-//                                   @"email" : u.email,
-//                                   @"connectionId" : u.connectionId,
-//                                   @"latitude" : @(u.latitude),
-//                                   @"longitude" : @(u.longitude),
-//                                   @"cor" : u.cor,
-//                                   @"defaultuser" : @"NO"}
-//            ];
-//}
-
-
 -(void) clearAllExceptDefault{
     NSArray *nonDefault = [self fetchWithKey:@"defaultuser" andValue:@"NO"];
     for (NSManagedObject *m in nonDefault) {

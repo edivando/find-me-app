@@ -102,16 +102,13 @@
 
 - (IBAction)btDone:(UIButton *)sender {
     if ([self.textNome.text isEqual: @""]) {
-        alert = [[UIAlertView alloc] initWithTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Nome" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Nome"];
     }
     else if ([self.textTelefone.text isEqual: @""]){
-        alert = [[UIAlertView alloc] initWithTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Telefone" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Telefone"];
     }
     else if (self.textTelefone.text.length <8){
-        alert = [[UIAlertView alloc] initWithTitle:@"Telefone invalido" message:@"Favor preencher o campo Telefone com pleo menos 8 digitos" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
+        [self alertTitle:@"Telefone invalido" message:@"Favor preencher o campo Telefone com pelo menos 8 digitos"];
     }
     else{
         UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text deviceId:[[[UIDevice currentDevice] identifierForVendor] UUIDString] connectionId:@"0"];
@@ -119,11 +116,21 @@
         newUser.telefone = [[newUser.telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         [dao save:newUser];
-        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:newUser];
-        WebSocket *socket = [WebSocketSingleton getConnection];
-        [socket sendMessage:[message toJSONString]];
+        [self sendUserInfoMessage:newUser];
         [self dismissViewControllerAnimated:YES completion:nil];
-
     }
 }
+
+-(void) sendUserInfoMessage:(UserInfo*)user{
+    UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:user];
+    WebSocket *socket = [WebSocketSingleton getConnection];
+    [socket sendMessage:[message toJSONString]];
+}
+
+
+-(void) alertTitle:(NSString*)title message:(NSString*)message{
+    alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+}
+
 @end

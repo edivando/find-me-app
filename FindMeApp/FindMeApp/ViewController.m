@@ -46,7 +46,7 @@
     
     //Limpando todos os usuários, menos o default do bd
     dao = [[UserInfoDAO alloc] init];
-    [dao clearAllExceptDefault];
+    //[dao clearAllExceptDefault];
     
     socket = [WebSocketSingleton getConnection];
     manager = [[CLLocationManager alloc] init];
@@ -76,8 +76,7 @@
         [self performSegueWithIdentifier:@"SegueViewRegistro" sender:nil];
     }
     else{
-        UserInfoMessage *message = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:[users objectAtIndex:0]]];
-        [socket sendMessage:[message toJSONString]];
+        [socket sendUserInfoMessage:[dao convertToUserInfo:[users objectAtIndex:0]]];
         //Inicia o GPS
         [self startGPS];
     }
@@ -311,10 +310,7 @@
         
         
         [dao update:user];
-        
-        UserInfoMessage *msg = [[UserInfoMessage alloc] initWithUser:[dao convertToUserInfo:user]];
-        
-        [socket sendMessage:[msg toJSONString]];
+        [socket sendUserInfoMessage:[dao convertToUserInfo:user]];
     }
 }
 

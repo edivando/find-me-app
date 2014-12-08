@@ -35,7 +35,7 @@
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource: self];
-    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
+//    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view.
 }
 
@@ -139,12 +139,13 @@
         phone = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
         newUser.cor = [self randCor];
-        [dao save:newUser];
-        NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
-        PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] userTo:newUser status:@"CONNECT"];
-        PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
-        WebSocket *socket = [WebSocketSingleton getConnection];
-        [socket sendMessage:[permissionMessage toJSONString]];
+        NSArray *users = [dao fetchWithKey:@"telefone" andValue:phone];
+        if (users.count == 0) {
+            [dao save:newUser];
+            WebSocket *socket = [WebSocketSingleton getConnection];
+            NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+            [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:newUser status:@"CONNECT"];
+        }
     }
     CFRelease(phoneNumbers);
 }
@@ -186,6 +187,8 @@
     [subView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:subView];
 }
+
+
 
 -(NSString*) randCor{
     return [NSString stringWithFormat:@"%ld|%ld|%ld", random()%255,random()%50,random()%255];
