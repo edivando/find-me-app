@@ -102,6 +102,9 @@
                                            telefone:[m valueForKey:@"telefone"]
                                            deviceId:[m valueForKey:@"deviceId"]
                                        connectionId:[m valueForKey:@"connectionId"]];
+    user.cor = [m valueForKey:@"cor"];
+    user.status = [m valueForKey:@"status"];
+    user.permission = [m valueForKey:@"permission"];
     return user;
 }
 

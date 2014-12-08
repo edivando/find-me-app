@@ -34,6 +34,7 @@
         _permission = @"NO";
         _cor = @"";
         
+        
         _deviceId = deviceId;
         _connectionId = connectionId;
     }
@@ -67,6 +68,7 @@
 }
 
 -(UIColor*) color{
+    
     NSArray *aux = [_cor componentsSeparatedByString:@"|"];
     return [UIColor colorWithRed:[aux[0] floatValue]/255.0 green:[aux[1] floatValue]/255.0 blue:[aux[2] floatValue]/255.0 alpha:1.0];
 }
