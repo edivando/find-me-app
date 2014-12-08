@@ -34,12 +34,12 @@
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource: self];
-    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
+    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self.tableView reloadData];
+    [self updateTable];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,11 +50,17 @@
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
-    [self.tableView reloadData];
+    [self updateTable];
 }
 
 -(void) updateTable{
     [self.tableView reloadData];
+    if (contatos.count == 0) {
+        [self contactsSubview];
+    }
+    else{
+        [self.view addSubview:self.tableView];
+    }
 }
 
 -(UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -138,6 +144,44 @@
         [socket sendMessage:[permissionMessage toJSONString]];
     }
     CFRelease(phoneNumbers);
+}
+
+-(void)contactsSubview{
+    CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+    UIView *subView = [[UIView alloc] initWithFrame:applicationFrame];
+    
+    //Imagem
+    UIImage *imagem = [UIImage imageNamed:@"contactsEmpty"];
+    CGRect imgFrame = CGRectMake(0,0, 120, 120);
+    UIImageView *imagemView = [[UIImageView alloc] initWithFrame:imgFrame];
+    [imagemView setImage:imagem];
+    [imagemView setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/3)];
+    
+    //Label 1
+    UILabel *labelSubContact = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+    [labelSubContact setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2)];
+    labelSubContact.text = @"Você não tem contatos.";
+    labelSubContact.numberOfLines = 1;
+    labelSubContact.font = [UIFont boldSystemFontOfSize:15];
+    labelSubContact.adjustsFontSizeToFitWidth = YES;
+    labelSubContact.textColor = [UIColor grayColor];
+    labelSubContact.textAlignment = NSTextAlignmentCenter;
+    
+    //Label 2
+    UILabel *labelSubContact2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 200)];
+    [labelSubContact2 setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/1.7)];
+    labelSubContact2.text = @"Adicione novos contatos para vê-los no mapa.";
+    labelSubContact2.numberOfLines = 1;
+    labelSubContact2.font = [UIFont systemFontOfSize:12];
+    labelSubContact2.adjustsFontSizeToFitWidth = YES;
+    labelSubContact2.textColor = [UIColor grayColor];
+    labelSubContact2.textAlignment = NSTextAlignmentCenter;
+
+    [subView addSubview:imagemView];
+    [subView addSubview:labelSubContact];
+    [subView addSubview:labelSubContact2];
+    [subView setBackgroundColor:[UIColor whiteColor]];
+    [self.view addSubview:subView];
 }
 
 - (IBAction)addContato:(UIButton *)sender {
