@@ -46,7 +46,9 @@
     //marker.appearAnimation = kGMSMarkerAnimationPop;
     marker.icon = [UIImage imageNamed:@"map-marker"];
     NSArray *aux = [_cor componentsSeparatedByString:@"|"];
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:[aux[0] floatValue] green:[aux[1] floatValue] blue:[aux[2] floatValue] alpha:1.0]];
+    if(![_cor isEqualToString:@""]){
+        marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:[aux[0] floatValue] green:[aux[1] floatValue] blue:[aux[2] floatValue] alpha:1.0]];
+    }
     marker.title = _user;
     return marker;
     
