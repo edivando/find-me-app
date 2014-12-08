@@ -44,7 +44,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="x5H-MN-rc2"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="loadingGPS" destination="3A1-fy-xMc" id="ySI-5i-FsZ"/>
                         <segue destination="VFj-ph-qnf" kind="modal" identifier="SegueViewRegistro" id="j6l-LA-80y"/>
