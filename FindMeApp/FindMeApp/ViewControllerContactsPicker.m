@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    srandom(time(nil));
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource: self];
@@ -136,6 +137,7 @@
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
         phone = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
+        newUser.cor = [self randCor];
         [dao save:newUser];
         NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
         PermissionInfo *permission = [[PermissionInfo alloc] initPermissionWithUserFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] userTo:newUser status:@"CONNECT"];
@@ -182,6 +184,10 @@
     [subView addSubview:labelSubContact2];
     [subView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:subView];
+}
+
+-(NSString*) randCor{
+    return [NSString stringWithFormat:@"%ld|%ld|%ld", random()%255,random()%255,random()%255];
 }
 
 - (IBAction)addContato:(UIButton *)sender {
