@@ -44,9 +44,9 @@
     CLLocationCoordinate2D position = CLLocationCoordinate2DMake(_latitude, _longitude);
     GMSMarker *marker = [GMSMarker markerWithPosition:position];
     //marker.appearAnimation = kGMSMarkerAnimationPop;
-    marker.icon = [UIImage imageNamed:@"dsada"];
-    NSArray *aux = [@"abcd,efgh" componentsSeparatedByString:@","];
-    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0]];
+    marker.icon = [UIImage imageNamed:@"map-marker"];
+    NSArray *aux = [_cor componentsSeparatedByString:@"|"];
+    marker.icon = [GMSMarker markerImageWithColor:[UIColor colorWithRed:[aux[0] floatValue] green:[aux[1] floatValue] blue:[aux[2] floatValue] alpha:1.0]];
     marker.title = _user;
     return marker;
     
