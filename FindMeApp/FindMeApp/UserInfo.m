@@ -32,6 +32,7 @@
         _connectionId = connectionId;
         _status = @"DISCONNECTED";
         _permission = @"NO";
+        _cor = @"";
         
         _deviceId = deviceId;
         _connectionId = connectionId;
@@ -57,17 +58,9 @@
         return  NO;
     }
     _telefone = [[_telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
-//    _telefone = [_telefone stringByReplacingOccurrencesOfString:@"-" withString:@""];
-//    _telefone = [_telefone stringByReplacingOccurrencesOfString:@"(" withString:@""];
-//    _telefone = [_telefone stringByReplacingOccurrencesOfString:@")" withString:@""];
-//    _telefone = [_telefone stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     _telefone = [_telefone substringFromIndex: [_telefone length] - 8];
     
     user.telefone = [[user.telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
-//    user.telefone = [user.telefone stringByReplacingOccurrencesOfString:@"-" withString:@""];
-//    user.telefone = [user.telefone stringByReplacingOccurrencesOfString:@"(" withString:@""];
-//    user.telefone = [user.telefone stringByReplacingOccurrencesOfString:@")" withString:@""];
-//    user.telefone = [user.telefone stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     user.telefone = [user.telefone substringFromIndex: [user.telefone length] - 8];
     
     return [_telefone isEqual:user.telefone];

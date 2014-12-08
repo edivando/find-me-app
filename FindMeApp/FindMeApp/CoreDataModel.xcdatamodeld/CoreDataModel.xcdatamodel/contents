@@ -2,6 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Usuario" syncable="YES">
         <attribute name="connectionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="defaultuser" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +14,6 @@
         <attribute name="telefone" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Usuario" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="Usuario" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>
