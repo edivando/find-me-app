@@ -46,6 +46,10 @@
     marker.icon = [UIImage imageNamed:@"map-marker"];
     marker.icon = [GMSMarker markerImageWithColor:[self color]];
     marker.title = _user;
+    if ([_status isEqual:@"DISCONNECTED"]) {
+        marker.opacity = 0.4;
+        marker.snippet = @"Desconectado";
+    }
     return marker;
     
 }
