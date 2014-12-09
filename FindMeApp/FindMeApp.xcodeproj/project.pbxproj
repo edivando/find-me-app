@@ -37,6 +37,9 @@
 		89EFA2351A261434008AAF2C /* FindMeAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EFA2341A261434008AAF2C /* FindMeAppTests.m */; };
 		A03081BE1A275FAD00CC30AE /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */; };
 		A03081C01A275FBB00CC30AE /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */; };
+		A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A03081C21A27604700CC30AE /* ViewControllerSocket.m */; };
+		A058D7011A35DE4D00715ED4 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A058D7001A35DE4D00715ED4 /* Common.m */; };
+		A058D7041A35DE6300715ED4 /* StyleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A058D7031A35DE6300715ED4 /* StyleButton.m */; };
 		A07370481A274B7F001B3D6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370471A274B7F001B3D6B /* AVFoundation.framework */; };
 		A073704A1A274BA1001B3D6B /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370491A274BA1001B3D6B /* CoreData.framework */; };
 		A073704C1A274BAE001B3D6B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A073704B1A274BAE001B3D6B /* CoreLocation.framework */; };
@@ -112,6 +115,12 @@
 		89EFA2341A261434008AAF2C /* FindMeAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindMeAppTests.m; sourceTree = "<group>"; };
 		A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		A03081C11A27604700CC30AE /* ViewControllerSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerSocket.h; sourceTree = "<group>"; };
+		A03081C21A27604700CC30AE /* ViewControllerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSocket.m; sourceTree = "<group>"; };
+		A058D6FF1A35DE4D00715ED4 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		A058D7001A35DE4D00715ED4 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
+		A058D7021A35DE6300715ED4 /* StyleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleButton.h; sourceTree = "<group>"; };
+		A058D7031A35DE6300715ED4 /* StyleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleButton.m; sourceTree = "<group>"; };
 		A07370471A274B7F001B3D6B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		A07370491A274BA1001B3D6B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A073704B1A274BAE001B3D6B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -307,8 +316,7 @@
 		89EFA20F1A261434008AAF2C /* FindMeApp */ = {
 			isa = PBXGroup;
 			children = (
-				892A53FD1A35EB4A00476A64 /* protocol */,
-				A0ED98D21A308FA900B28AB9 /* GPS */,
+				A058D6FE1A35DE1600715ED4 /* Button */,
 				89B2A02E1A28A84E00861042 /* DAO */,
 				89B2A02D1A28A44000861042 /* controller */,
 				89B2A0261A28A1B100861042 /* websocket */,
