@@ -137,8 +137,8 @@
     }
     else {
         phone = (__bridge_transfer NSString*)ABMultiValueCopyValueAtIndex(phoneNumbers, 0);
-        phone = [[phone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
+        newUser.telefone = [newUser telefoneFormat];
         newUser.cor = [self randCor];
         NSArray *users = [dao fetchWithKey:@"telefone" andValue:phone];
         if (users.count == 0) {

@@ -78,6 +78,8 @@
              @"latitude" : @(user.latitude),
              @"longitude" : @(user.longitude),
              @"cor" : user.cor,
+             @"permission" : user.permission,
+             @"status" : user.status,
              @"defaultuser" : d};
 }
 

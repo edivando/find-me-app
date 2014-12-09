@@ -44,4 +44,5 @@ FOUNDATION_EXTERN NSArray *const listaCores;
 
 -(UIColor*) color;
 
+-(NSString*) telefoneFormat;
 @end
