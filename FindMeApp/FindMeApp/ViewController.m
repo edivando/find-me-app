@@ -68,6 +68,11 @@
 
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    NSLog(@"Will.....................");
+}
+
+
 -(void) viewDidAppear:(BOOL)animated{
     NSArray *users = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
     //Testa se existe usuário registrado no BD
