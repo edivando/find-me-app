@@ -123,15 +123,16 @@
     _mapView = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     
     // Adicionando um botão ao mapView
-    StyleButton *button = [[StyleButton alloc] initWithHue:0.29 andSaturation:2.0 andBrightness:0.8];
+    UIButton *button = [UIButton new];
+    //StyleButton *button = [[StyleButton alloc] initWithHue:0.29 andSaturation:2.0 andBrightness:0.8];
     button.frame = CGRectMake(_mapView.bounds.size.width - 310, _mapView.bounds.size.height - 70, 300, 40);
     //button.frame = CGRectMake(200, 0, 300, 40);
     button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
     [button addTarget:self action:@selector(addContato:) forControlEvents:UIControlEventTouchUpInside];
     button.tintColor = [UIColor blackColor];
-    //button.layer.cornerRadius = 12;
-    //button.backgroundColor = [UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0];
-    [button setTitle:@"Adicionar Contato" forState:UIControlStateNormal];
+    button.layer.cornerRadius = 12;
+    button.backgroundColor = [UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0];
+    [button setTitle:@"Me Encontre" forState:UIControlStateNormal];
     [_mapView addSubview:button];
     
     //Adicionando o mapView para a nossa view atual
