@@ -113,7 +113,7 @@
     else{
         UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text deviceId:[[[UIDevice currentDevice] identifierForVendor] UUIDString] connectionId:@"0"];
         newUser.cor = @"108|165|58";
-        newUser.telefone = [[newUser.telefone componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]]componentsJoinedByString:@""];
+        newUser.telefone = [newUser telefoneFormat];
         UserInfoDAO *dao = [[UserInfoDAO alloc] init];
         [dao save:newUser];
         [self sendUserInfoMessage:newUser];
