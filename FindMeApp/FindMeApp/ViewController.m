@@ -125,6 +125,7 @@
     // Adicionando um botão ao mapView
     StyleButton *button = [[StyleButton alloc] initWithHue:0.29 andSaturation:2.0 andBrightness:0.8];
     button.frame = CGRectMake(_mapView.bounds.size.width - 310, _mapView.bounds.size.height - 70, 300, 40);
+    //button.frame = CGRectMake(200, 0, 300, 40);
     button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin;
     [button addTarget:self action:@selector(addContato:) forControlEvents:UIControlEventTouchUpInside];
     button.tintColor = [UIColor blackColor];
