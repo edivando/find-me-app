@@ -75,6 +75,7 @@
     PermissionInfoMessage *pi = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
     pi.permissionInfo.status = buttonIndex == 0 ? @"NO" : @"YES";
     [self sendMessage:[pi toJSONString]];
+    [self updateUserInfo:pi.permissionInfo.from.telefone status:pi.permissionInfo.status];
 }
 
 #pragma mark receiveMessages
@@ -132,19 +133,23 @@
         [alert show];
     }
     else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
-        NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:recebida.permissionInfo.to.telefone];
-        if(usuarios.count>0){
-            NSManagedObject *result = [usuarios objectAtIndex:0];
-            [result setValue:recebida.permissionInfo.status forKey:@"permission"];
-            [result setValue:@"CONNECTED" forKey:@"status"];
-            [dao update:result];
-        }
+        [self updateUserInfo:recebida.permissionInfo.to.telefone status:recebida.permissionInfo.status];
     }
     else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
         alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
         [alert show];
     }
 
+}
+
+-(void) updateUserInfo:(NSString*)telefone status:(NSString*)status {
+    NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:telefone];
+    if(usuarios.count>0){
+        NSManagedObject *result = [usuarios objectAtIndex:0];
+        [result setValue:status forKey:@"permission"];
+        [result setValue:@"CONNECTED" forKey:@"status"];
+        [dao update:result];
+    }
 }
 
 #pragma mark sendMessages
