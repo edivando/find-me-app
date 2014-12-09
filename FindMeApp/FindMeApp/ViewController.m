@@ -131,7 +131,7 @@
     button.tintColor = [UIColor blackColor];
     //button.layer.cornerRadius = 12;
     //button.backgroundColor = [UIColor colorWithRed:108/255.0 green:165/255.0 blue:58/255.0 alpha:1.0];
-    [button setTitle:@"Adicionar Contato" forState:UIControlStateNormal];
+    [button setTitle:@"Me Encontre" forState:UIControlStateNormal];
     [_mapView addSubview:button];
     
     //Adicionando o mapView para a nossa view atual
