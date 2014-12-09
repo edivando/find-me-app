@@ -17,6 +17,7 @@
     UIAlertView *alert;
     NSMutableArray *contatos;
     NSTimer *timerToUpdateTable;
+    WebSocket *socket;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -31,11 +32,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     srandom(time(nil));
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
     [self.tableView setDataSource: self];
+    socket = [WebSocketSingleton getConnection];
+    socket.pickerContacts = self;
 //    timerToUpdateTable = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateTable) userInfo:nil repeats:YES];
     // Do any additional setup after loading the view.
 }
@@ -143,7 +145,6 @@
         NSArray *users = [dao fetchWithKey:@"telefone" andValue:phone];
         if (users.count == 0) {
             [dao save:newUser];
-            WebSocket *socket = [WebSocketSingleton getConnection];
             NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
             [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:newUser status:@"CONNECT"];
         }

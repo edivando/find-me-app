@@ -16,8 +16,6 @@
     UserInfoDAO *dao;
 }
 
-@synthesize delegate;
-
 - (void)connect {
     webSocket.delegate = nil;
     webSocket = nil;
@@ -67,6 +65,7 @@
     else if ([message rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"permissionInfo\"" ].location <20) {
         [self receivePermissionInfo];
     }
+    [self.pickerContacts updateTable];
 }
 
 
@@ -77,14 +76,6 @@
     pi.permissionInfo.status = buttonIndex == 0 ? @"NO" : @"YES";
     [self sendMessage:[pi toJSONString]];
 }
-
--(void)reloadData{
-    if ([self.delegate respondsToSelector:@selector(updateTable)])
-    {
-        [self.delegate updateTable];
-    }
-}
-
 
 #pragma mark receiveMessages
 -(void) receiveConnectionInfo{
@@ -111,7 +102,6 @@
             }
         }
     }
-    [self.delegate updateTable];
 }
 
 -(void) receiveStatusInfo{
@@ -146,6 +136,7 @@
         if(usuarios.count>0){
             NSManagedObject *result = [usuarios objectAtIndex:0];
             [result setValue:recebida.permissionInfo.status forKey:@"permission"];
+            [result setValue:@"CONNECTED" forKey:@"status"];
             [dao update:result];
         }
     }

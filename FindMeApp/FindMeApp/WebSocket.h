@@ -15,13 +15,11 @@
 #import "StatusInfoMessage.h"
 #import "PermissionInfoMessage.h"
 
-@protocol WebSocketTableDelegate <NSObject>
--(void)updateTable;
-@end
+@class ViewControllerContactsPicker;
 
 @interface WebSocket : NSObject <SRWebSocketDelegate,UIAlertViewDelegate>
 
-@property (nonatomic, weak) id <WebSocketTableDelegate> delegate;
+@property (nonatomic) ViewControllerContactsPicker *pickerContacts;
 
 - (void)connect;
 //- (void)webSocketDidOpen:(SRWebSocket *)newWebSocket;
