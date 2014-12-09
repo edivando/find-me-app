@@ -115,6 +115,7 @@
     }
 }
 
+
 -(void) CustomMaker{
     NSLog(@"Entrou no CustomMaker");
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:_latitude
