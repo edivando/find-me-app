@@ -23,7 +23,7 @@
     SRWebSocket *newWebSocket = [[SRWebSocket alloc] initWithURL:[NSURL URLWithString:urlString]];
     newWebSocket.delegate = self;
     dao = [[UserInfoDAO alloc] init];
-    
+    srandom(time(nil));
     [newWebSocket open];
 }
 
@@ -75,7 +75,19 @@
     PermissionInfoMessage *pi = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
     pi.permissionInfo.status = buttonIndex == 0 ? @"NO" : @"YES";
     [self sendMessage:[pi toJSONString]];
-    [self updateUserInfo:pi.permissionInfo.from.telefone status:pi.permissionInfo.status];
+
+    NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:pi.permissionInfo.from.telefone];
+    if(usuarios.count>0){
+        NSManagedObject *result = [usuarios objectAtIndex:0];
+        [result setValue:pi.permissionInfo.status forKey:@"permission"];
+        [result setValue:@"CONNECTED" forKey:@"status"];
+        [dao update:result];
+    }else{
+        pi.permissionInfo.from.status = @"CONNECTED";
+        pi.permissionInfo.from.permission = pi.permissionInfo.status;
+        pi.permissionInfo.from.cor = [self randCor];
+        [dao save:pi.permissionInfo.from];
+    }
 }
 
 #pragma mark receiveMessages
@@ -169,4 +181,7 @@
 }
 
 
+-(NSString*) randCor{
+    return [NSString stringWithFormat:@"%ld|%ld|%ld", random()%255,random()%50,random()%255];
+}
 @end
