@@ -13,9 +13,8 @@
 #import "UserInfoDAO.h"
 #import "TableViewCell.h"
 #import "PermissionInfoMessage.h"
-#import "ContactPickerDelegate.h"
 
-@interface ViewControllerContactsPicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,ContactPickerDelegate>
+@interface ViewControllerContactsPicker : UIViewController <ABPeoplePickerNavigationControllerDelegate,UITableViewDataSource,UITableViewDelegate,WebSocketTableDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 - (IBAction)addContato:(UIButton *)sender;
 

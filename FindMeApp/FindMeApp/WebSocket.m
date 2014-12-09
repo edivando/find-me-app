@@ -78,6 +78,13 @@
     [self sendMessage:[pi toJSONString]];
 }
 
+-(void)reloadData{
+    if ([self.delegate respondsToSelector:@selector(updateTable)])
+    {
+        [self.delegate updateTable];
+    }
+}
+
 
 #pragma mark receiveMessages
 -(void) receiveConnectionInfo{
