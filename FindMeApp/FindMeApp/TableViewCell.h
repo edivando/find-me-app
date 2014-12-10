@@ -10,10 +10,14 @@
 #import "PermissionInfoMessage.h"
 #import "UserInfoDAO.h"
 #import "WebSocketSingleton.h"
+#import "ViewControllerContactsPicker.h"
 
 @interface TableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
+
 @property (nonatomic) UserInfo *userCell;
+@property (nonatomic) ViewControllerContactsPicker *pickerDelegate;
+
+@property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *imgStatus;
 @property (weak, nonatomic) IBOutlet UILabel *imgUserColor;
 - (IBAction)btPermission:(UIButton *)sender;
