@@ -115,6 +115,7 @@
     else {
         cell.imgStatus.image = [UIImage imageNamed:@"offline"];
     }
+    cell.pickerDelegate = self;
     return cell;
 }
 

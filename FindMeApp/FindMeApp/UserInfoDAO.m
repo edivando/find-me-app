@@ -43,6 +43,7 @@
 }
 
 -(NSArray*) fetchWithKey:(NSString*)chave andValue:(NSString*)valor{
+    
     NSPredicate *pred = [[NSPredicate alloc] init];
     if ([chave isEqual:@"nome"])
         pred = [NSPredicate predicateWithFormat:@"(nome = %@)",valor];
@@ -54,6 +55,8 @@
         pred = [NSPredicate predicateWithFormat:@"(email = %@)",valor];
     else if ([chave isEqual:@"connectionId"])
         pred = [NSPredicate predicateWithFormat:@"(connectionId = %@)",valor];
+    else if ([chave isEqual:@"deviceId"])
+        pred = [NSPredicate predicateWithFormat:@"(deviceId = %@)",valor];
     return [dao fetch:pred];
 }
 

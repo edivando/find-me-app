@@ -37,13 +37,16 @@
 - (IBAction)btPermission:(UIButton *)sender {
     dao = [[UserInfoDAO alloc] init];
     socket = [WebSocketSingleton getConnection];
+    NSString *permission = [self.userCell.permission isEqualToString:@"YES"]? @"NO": @"CONNECT";
     NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
-    [socket sendPermissionMessageFrom:self.userCell To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:[self.userCell.permission isEqualToString:@"YES" ]? @"NO": @"YES"];
-    NSManagedObject *result = [[dao fetchWithKey:@"telefone" andValue:[self.userCell telefoneFormat]] objectAtIndex:0];
-    [result setValue:[self.userCell.permission isEqualToString:@"YES" ]? @"NO": @"YES" forKey:@"status"];
+    [socket sendPermissionMessageFrom:self.userCell To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:permission];
+    NSManagedObject *result = [[dao fetchWithKey:@"deviceId" andValue:self.userCell.deviceId] objectAtIndex:0];
+    [result setValue:permission forKey:@"permission"];
     [dao update:result];
+    [[self pickerDelegate] updateTable];
 }
 
+    
 
 
 //{"permissionInfo":{
