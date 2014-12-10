@@ -88,6 +88,7 @@
         pi.permissionInfo.from.cor = [self randCor];
         [dao save:pi.permissionInfo.from];
     }
+    [self.pickerContacts updateTable];
 }
 
 #pragma mark receiveMessages

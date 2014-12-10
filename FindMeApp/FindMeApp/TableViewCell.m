@@ -39,7 +39,12 @@
     socket = [WebSocketSingleton getConnection];
     NSString *permission = [self.userCell.permission isEqualToString:@"YES"]? @"NO": @"CONNECT";
     NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
-    [socket sendPermissionMessageFrom:self.userCell To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:permission];
+    if ([permission isEqualToString:@"CONNECT"]) {
+        [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:self.userCell status:permission];
+    }
+    else{
+        [socket sendPermissionMessageFrom:self.userCell To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:permission];
+    }
     NSManagedObject *result = [[dao fetchWithKey:@"deviceId" andValue:self.userCell.deviceId] objectAtIndex:0];
     [result setValue:permission forKey:@"permission"];
     [dao update:result];
