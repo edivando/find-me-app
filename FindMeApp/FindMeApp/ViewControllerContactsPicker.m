@@ -94,6 +94,7 @@
     cell.lbTitle.text = user.user;
     cell.userCell = user;
     cell.imgUserColor.backgroundColor = [user color];
+    
     if ([user.permission isEqualToString:@"YES"]) {
         [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateNormal];
         [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateHighlighted];

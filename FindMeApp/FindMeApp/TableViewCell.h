@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbTitle;
 @property (nonatomic) UserInfo *userCell;
 @property (weak, nonatomic) IBOutlet UIImageView *imgStatus;
-@property (weak, nonatomic) IBOutlet UIImageView *imgPermission;
 @property (weak, nonatomic) IBOutlet UILabel *imgUserColor;
 - (IBAction)btPermission:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *permission;
