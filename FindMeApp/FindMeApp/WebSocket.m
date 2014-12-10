@@ -111,6 +111,8 @@
                 [userBD setValue:@(userAtivo.latitude) forKey:@"latitude"];
                 [userBD setValue:@(userAtivo.longitude) forKey:@"longitude"];
                 [userBD setValue:userAtivo.connectionId forKey:@"connectionId"];
+                [userBD setValue:userAtivo.deviceId forKey:@"deviceId"];
+
                 [dao update:userBD];
             }
         }
@@ -145,7 +147,7 @@
         [alert show];
     }
     else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
-        [self updateUserInfo:recebida.permissionInfo.to.telefone status:recebida.permissionInfo.status];
+        [self updateUserInfo:recebida.permissionInfo.to status:recebida.permissionInfo.status];
     }
     else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
         alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
@@ -154,10 +156,12 @@
 
 }
 
--(void) updateUserInfo:(NSString*)telefone status:(NSString*)status {
-    NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:telefone];
+-(void) updateUserInfo:(UserInfo*)userInfo status:(NSString*)status {
+    NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:[userInfo telefoneFormat]];
     if(usuarios.count>0){
         NSManagedObject *result = [usuarios objectAtIndex:0];
+        [result setValue:userInfo.connectionId forKey:@"connectionId"];
+        [result setValue:userInfo.deviceId forKey:@"deviceId"];
         [result setValue:status forKey:@"permission"];
         [result setValue:@"CONNECTED" forKey:@"status"];
         [dao update:result];
