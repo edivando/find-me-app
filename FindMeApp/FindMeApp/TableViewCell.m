@@ -40,7 +40,8 @@
     NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
     [socket sendPermissionMessageFrom:self.userCell To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:[self.userCell.permission isEqualToString:@"YES" ]? @"NO": @"YES"];
     NSManagedObject *result = [[dao fetchWithKey:@"telefone" andValue:[self.userCell telefoneFormat]] objectAtIndex:0];
-    //result setValue: forKey:<#(NSString *)#>
+    [result setValue:[self.userCell.permission isEqualToString:@"YES" ]? @"NO": @"YES" forKey:@"status"];
+    [dao update:result];
 }
 
 
