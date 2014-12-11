@@ -59,6 +59,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
+    [socket sendPermissionMessageFrom:[dao convertToUserInfo:[contatos objectAtIndex:[indexPath row]]] To:[dao convertToUserInfo:[usuarios objectAtIndex:0]] status:@"NO"];
     [dao deleteManaged:[contatos objectAtIndex:indexPath.row]];
     [self updateTable];
 }
@@ -146,11 +148,11 @@
     NSString* phone = nil;
     ABMultiValueRef phoneNumbers = ABRecordCopyValue(person,kABPersonPhoneProperty);
     if(name == nil){
-        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido" message:@"O contato escolhido não possui um nome" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido!" message:@"O contato escolhido não possui um nome." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
     else if (ABMultiValueGetCount(phoneNumbers) == 0){
-        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido" message:@"O contato escolhido não possui um telefone" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"Contato inválido!" message:@"O contato escolhido não possui um telefone." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
     }
     else {
@@ -158,11 +160,15 @@
         UserInfo *newUser = [[UserInfo alloc] initWithUser:name latitude:0.0 longitude:0.0 email:@"" telefone:phone deviceId:@"" connectionId:@""];
         newUser.telefone = [newUser telefoneFormat];
         newUser.cor = [self randCor];
-        NSArray *users = [dao fetchWithKey:@"telefone" andValue:phone];
+        NSArray *users = [dao fetchWithKey:@"telefone" andValue:newUser.telefone];
         if (users.count == 0) {
             [dao save:newUser];
             NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
             [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:newUser status:@"CONNECT"];
+        }
+        else{
+            alert = [[UIAlertView alloc] initWithTitle:@"Usuário já existente!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
         }
     }
     CFRelease(phoneNumbers);
