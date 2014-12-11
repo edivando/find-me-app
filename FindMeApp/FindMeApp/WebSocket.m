@@ -141,14 +141,14 @@
     if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
         NSArray *contatos = [dao fetchWithKey:@"nome" andValue:recebida.permissionInfo.to.user];
         [dao deleteManaged:[contatos objectAtIndex:0]];
-        alert = [[UIAlertView alloc] initWithTitle:@"Esse usuário não está cadastrado" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        alert = [[UIAlertView alloc] initWithTitle:@"Esse usuário não foi encontrado" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
     else if ([recebida.permissionInfo.status isEqualToString:@"YES"] || [recebida.permissionInfo.status isEqualToString:@"NO"]) {
         [self updateUserInfo:recebida.permissionInfo.to status:recebida.permissionInfo.status];
     }
     else if([recebida.permissionInfo.status isEqualToString:@"CONNECT"]){
-        alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuario %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
+        alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"O usuário %@ esta querendo te encontrar",recebida.permissionInfo.from.user] message:@"Deseja permitir que ele te localize?" delegate:self cancelButtonTitle:@"Nao" otherButtonTitles:@"Sim",nil];
         [alert show];
     }
 

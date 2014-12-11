@@ -102,13 +102,13 @@
 
 - (IBAction)btDone:(UIButton *)sender {
     if ([self.textNome.text isEqual: @""]) {
-        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Nome"];
+        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo: nome."];
     }
     else if ([self.textTelefone.text isEqual: @""]){
-        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo Telefone"];
+        [self alertTitle:@"Campo obrigatório não preenchido!" message:@"Favor preencher o campo: telefone."];
     }
     else if (self.textTelefone.text.length <8){
-        [self alertTitle:@"Telefone invalido" message:@"Favor preencher o campo Telefone com pelo menos 8 digitos"];
+        [self alertTitle:@"Telefone invalido!" message:@"Favor preencher o campo telefone com pelo menos 8 digitos."];
     }
     else{
         UserInfo *newUser = [[UserInfo alloc]initWithUser:self.textNome.text latitude:0.0 longitude:0.0 email:self.textEmail.text telefone:self.textTelefone.text deviceId:[[[UIDevice currentDevice] identifierForVendor] UUIDString] connectionId:@"0"];
