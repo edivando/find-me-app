@@ -23,5 +23,6 @@
 - (IBAction)btPermission:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *permission;
 @property (weak, nonatomic) IBOutlet UILabel *lbTelefone;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadPermission;
 
 @end

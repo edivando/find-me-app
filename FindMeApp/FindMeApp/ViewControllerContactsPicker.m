@@ -106,6 +106,8 @@
     if ([user.permission isEqualToString:@"YES"]) {
         [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateNormal];
         [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateHighlighted];
+        cell.permission.hidden = NO;
+        cell.loadPermission.hidden = YES;
     }
     else{
         [cell.permission setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
