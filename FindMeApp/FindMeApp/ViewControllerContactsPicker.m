@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.contentInset = UIEdgeInsetsZero;
     srandom(time(nil));
     dao = [[UserInfoDAO alloc] init];
     [self.tableView setDelegate:self];
@@ -88,6 +89,7 @@
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
+
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath{
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
