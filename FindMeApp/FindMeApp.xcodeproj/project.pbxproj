@@ -409,7 +409,7 @@
 				ORGANIZATIONNAME = BEPiD;
 				TargetAttributes = {
 					89EFA2051A261434008AAF2C = {
-						DevelopmentTeam = S9Q88BN22A;
+						DevelopmentTeam = X4AF5EGUS8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
