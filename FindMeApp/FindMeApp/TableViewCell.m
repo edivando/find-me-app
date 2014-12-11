@@ -17,7 +17,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }
@@ -40,6 +40,12 @@
     NSString *permission = [self.userCell.permission isEqualToString:@"YES"]? @"NO": @"CONNECT";
     NSArray *usuarios = [dao fetchWithKey:@"defaultuser" andValue:@"YES"];
     if ([permission isEqualToString:@"CONNECT"]) {
+        _permission.hidden = YES;
+        _loadPermission.hidden = NO;
+//        dispatch_async(dispatch_get_main_queue(), ˆ{
+//            [_loadPermission startAnimating];
+//            });
+        
         [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:self.userCell status:permission];
     }
     else{
