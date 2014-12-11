@@ -98,7 +98,6 @@
 
     cell.lbTitle.text = user.user;
     cell.userCell = user;
-    cell.lbTelefone.text = [NSString stringWithFormat:@"%@",user.telefone];
     cell.imgUserColor.backgroundColor = [user color];
     
     if ([user.permission isEqualToString:@"YES"]) {

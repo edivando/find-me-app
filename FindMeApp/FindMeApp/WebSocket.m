@@ -13,6 +13,8 @@
     SRWebSocket *webSocket;
     UIAlertView *alert;
     NSString *jsonMessage;
+    NSString *jsonPermissionInfo;
+    
     UserInfoDAO *dao;
 }
 
@@ -46,23 +48,18 @@
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message {
     jsonMessage = message;
-
-    //Bloco para controle de mensagens de conexao
-    if ([message rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"connectionInfo\"" ].location <20) {
+    
+    if ([self isConnectionInfo]) {
         [self receiveConnectionInfo];
     }
-    
-    else if ([message rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"userInfo\""].location < 10) {
+    else if ([self isUserInfo]) {
         NSLog(@"USER INFO: %@",message);
     }
-    
-    //Bloco para controle de mensagens de status
-    else if ([message rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [message rangeOfString:@"{\"statusInfo\""].location < 12) {
+    else if ([self isStatusInfo]) {
         [self receiveStatusInfo];
     }
-    
-    //Bloco para controlar mensagens de requisicao
-    else if ([message rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [message rangeOfString: @"{\"permissionInfo\"" ].location <20) {
+    else if ([self isPermissionInfo]) {
+        jsonPermissionInfo = jsonMessage;
         [self receivePermissionInfo];
     }
     [self.pickerContacts updateTable];
@@ -72,10 +69,10 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSError* error;
-    PermissionInfoMessage *pi = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
+    PermissionInfoMessage *pi = [[PermissionInfoMessage alloc] initWithString:jsonPermissionInfo error:&error];
     pi.permissionInfo.status = buttonIndex == 0 ? @"NO" : @"YES";
     [self sendMessage:[pi toJSONString]];
-
+    
     NSArray *usuarios = [dao fetchWithKey:@"telefone" andValue:pi.permissionInfo.from.telefone];
     if(usuarios.count>0){
         NSManagedObject *result = [usuarios objectAtIndex:0];
@@ -101,7 +98,6 @@
     if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
         NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
         [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
-        [fetchResult setValue:@"CONNECTED" forKey:@"status"]; //teste
         [dao update:fetchResult];
     }
     
@@ -141,7 +137,7 @@
 
 -(void) receivePermissionInfo{
     NSError* error;
-    PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:jsonMessage error:&error];
+    PermissionInfoMessage *recebida = [[PermissionInfoMessage alloc] initWithString:jsonPermissionInfo error:&error];
     if ([recebida.permissionInfo.status isEqualToString:@"NOT_CONNECT"]) {
         NSArray *contatos = [dao fetchWithKey:@"nome" andValue:recebida.permissionInfo.to.user];
         [dao deleteManaged:[contatos objectAtIndex:0]];
@@ -185,6 +181,26 @@
     PermissionInfoMessage *permissionMessage = [[PermissionInfoMessage alloc] initWithPermission:permission];
     [self sendMessage:[permissionMessage toJSONString]];
 }
+
+
+#pragma mark - verify message
+
+-(BOOL) isConnectionInfo{
+    return ([jsonMessage rangeOfString: @"{\"connectionInfo\"" ].location != NSNotFound && [jsonMessage rangeOfString: @"{\"connectionInfo\"" ].location <20);
+}
+
+-(BOOL) isStatusInfo{
+    return ([jsonMessage rangeOfString: @"{\"statusInfo\"" ].location != NSNotFound && [jsonMessage rangeOfString:@"{\"statusInfo\""].location < 12);
+}
+
+-(BOOL) isUserInfo{
+    return ([jsonMessage rangeOfString: @"{\"userInfo\"" ].location != NSNotFound && [jsonMessage rangeOfString:@"{\"userInfo\""].location < 10);
+}
+
+-(BOOL) isPermissionInfo{
+    return ([jsonMessage rangeOfString: @"{\"permissionInfo\"" ].location != NSNotFound && [jsonMessage rangeOfString: @"{\"permissionInfo\"" ].location <20);
+}
+
 
 
 -(NSString*) randCor{
