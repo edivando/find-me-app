@@ -101,6 +101,7 @@
     if ([[dao fetchWithKey:@"defaultuser" andValue:@"YES"] count]!=0) {
         NSManagedObject *fetchResult = [[dao fetchWithKey:@"defaultuser" andValue:@"YES"] objectAtIndex:0];
         [fetchResult setValue:recebida.connectionInfo.userInfo.connectionId forKey:@"connectionId"];
+        [fetchResult setValue:@"CONNECTED" forKey:@"status"]; //teste
         [dao update:fetchResult];
     }
     

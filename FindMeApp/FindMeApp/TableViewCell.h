@@ -22,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *imgUserColor;
 - (IBAction)btPermission:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *permission;
+@property (weak, nonatomic) IBOutlet UILabel *lbTelefone;
 
 @end

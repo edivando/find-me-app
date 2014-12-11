@@ -37,7 +37,6 @@
 		89EFA2351A261434008AAF2C /* FindMeAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 89EFA2341A261434008AAF2C /* FindMeAppTests.m */; };
 		A03081BE1A275FAD00CC30AE /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */; };
 		A03081C01A275FBB00CC30AE /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */; };
-		A03081C31A27604700CC30AE /* ViewControllerSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A03081C21A27604700CC30AE /* ViewControllerSocket.m */; };
 		A058D7011A35DE4D00715ED4 /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = A058D7001A35DE4D00715ED4 /* Common.m */; };
 		A058D7041A35DE6300715ED4 /* StyleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A058D7031A35DE6300715ED4 /* StyleButton.m */; };
 		A07370481A274B7F001B3D6B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A07370471A274B7F001B3D6B /* AVFoundation.framework */; };
@@ -80,7 +79,6 @@
 		892483CD1A2C96AA0087C4E9 /* ConnectionInfoMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionInfoMessage.m; sourceTree = "<group>"; };
 		892483CF1A2C9A120087C4E9 /* ViewControllerContactsPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerContactsPicker.h; sourceTree = "<group>"; };
 		892483D01A2C9A120087C4E9 /* ViewControllerContactsPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ViewControllerContactsPicker.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		892A53FF1A35F23700476A64 /* ContactPickerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactPickerDelegate.h; sourceTree = "<group>"; };
 		89A4964C1A2DFD5100EBC05A /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		89A4964D1A2DFD5100EBC05A /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		89ACFE8D1A2766280000B7A7 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UserInfo.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -115,8 +113,6 @@
 		89EFA2341A261434008AAF2C /* FindMeAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FindMeAppTests.m; sourceTree = "<group>"; };
 		A03081BD1A275FAD00CC30AE /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		A03081BF1A275FBB00CC30AE /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
-		A03081C11A27604700CC30AE /* ViewControllerSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerSocket.h; sourceTree = "<group>"; };
-		A03081C21A27604700CC30AE /* ViewControllerSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerSocket.m; sourceTree = "<group>"; };
 		A058D6FF1A35DE4D00715ED4 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		A058D7001A35DE4D00715ED4 /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		A058D7021A35DE6300715ED4 /* StyleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleButton.h; sourceTree = "<group>"; };
@@ -204,14 +200,6 @@
 				DAA15DFF1A2FB45000B0774B /* PermissionInfoMessage.m */,
 			);
 			name = Mensagem;
-			sourceTree = "<group>";
-		};
-		892A53FD1A35EB4A00476A64 /* protocol */ = {
-			isa = PBXGroup;
-			children = (
-				892A53FF1A35F23700476A64 /* ContactPickerDelegate.h */,
-			);
-			name = protocol;
 			sourceTree = "<group>";
 		};
 		89ACFE901A27662C0000B7A7 /* model */ = {
@@ -421,7 +409,7 @@
 				ORGANIZATIONNAME = BEPiD;
 				TargetAttributes = {
 					89EFA2051A261434008AAF2C = {
-						DevelopmentTeam = S9Q88BN22A;
+						DevelopmentTeam = X4AF5EGUS8;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;

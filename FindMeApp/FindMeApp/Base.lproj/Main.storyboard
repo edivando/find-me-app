@@ -75,7 +75,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dss-zl-YPR">
-                                                    <rect key="frame" x="68" y="11" width="184" height="21"/>
+                                                    <rect key="frame" x="68" y="3" width="184" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -102,11 +102,19 @@
                                                         <action selector="btPermission:" destination="W5m-iS-aqI" eventType="touchUpInside" id="t4Z-ls-MhF"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Map-gR-upj">
+                                                    <rect key="frame" x="68" y="26" width="184" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" red="0.47501273777173914" green="0.47501273777173914" blue="0.47501273777173914" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgStatus" destination="lJx-JM-eLe" id="ZcD-Uu-gss"/>
                                             <outlet property="imgUserColor" destination="Ss6-xS-KPC" id="cpE-aw-bzD"/>
+                                            <outlet property="lbTelefone" destination="Map-gR-upj" id="Rlb-b9-ShK"/>
                                             <outlet property="lbTitle" destination="Dss-zl-YPR" id="qa3-za-A81"/>
                                             <outlet property="permission" destination="60M-hV-SPY" id="zkz-bU-bdM"/>
                                         </connections>
