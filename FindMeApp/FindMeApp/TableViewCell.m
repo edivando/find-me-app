@@ -42,10 +42,8 @@
     if ([permission isEqualToString:@"CONNECT"]) {
         _permission.hidden = YES;
         _loadPermission.hidden = NO;
-//        dispatch_async(dispatch_get_main_queue(), ˆ{
-//            [_loadPermission startAnimating];
-//            });
-        
+        [_loadPermission startAnimating];
+        [self performSelector:@selector(stopIndicator) withObject:self afterDelay:1];
         [socket sendPermissionMessageFrom:[dao convertToUserInfo:[usuarios objectAtIndex:0]] To:self.userCell status:permission];
     }
     else{
@@ -55,6 +53,11 @@
     [result setValue:permission forKey:@"permission"];
     [dao update:result];
     [[self pickerDelegate] updateTable];
+}
+
+-(void)stopIndicator
+{
+    [_loadPermission stopAnimating];
 }
 
     
