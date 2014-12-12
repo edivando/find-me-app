@@ -106,16 +106,16 @@
     cell.imgUserColor.backgroundColor = [user color];
     
     if ([user.permission isEqualToString:@"YES"]) {
-        [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateNormal];
-        [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateHighlighted];
-        cell.permission.hidden = NO;
-        cell.loadPermission.hidden = YES;
+        [self updatePermissionImageYes:cell];
+    }else if([user.connectionId isEqualToString:@""]){
+        [self updatePermissionImageConnect:cell];
+    }else if([user.permission isEqualToString:@"NO"]){
+        [self updatePermissionImageNo:cell];
+    }else{
+        [self updatePermissionImageConnect:cell];
     }
-    else{
-        [cell.permission setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
-        [cell.permission setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateHighlighted];
-
-    }
+    
+    
     if ([user.status isEqualToString:@"CONNECTED"]){
         cell.imgStatus.image = [UIImage imageNamed:@"online"];
     }
@@ -124,6 +124,27 @@
     }
     cell.pickerDelegate = self;
     return cell;
+}
+
+-(void) updatePermissionImageYes:(TableViewCell*)cell{
+    [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateNormal];
+    [cell.permission setBackgroundImage:[UIImage imageNamed:@"unlocked"] forState:UIControlStateHighlighted];
+    cell.permission.hidden = NO;
+    cell.loadPermission.hidden = YES;
+    [cell.loadPermission stopAnimating];
+}
+
+-(void) updatePermissionImageNo:(TableViewCell*)cell{
+    [cell.permission setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateNormal];
+    [cell.permission setBackgroundImage:[UIImage imageNamed:@"lock"] forState:UIControlStateHighlighted];
+    cell.permission.hidden = NO;
+    cell.loadPermission.hidden = YES;
+}
+
+-(void) updatePermissionImageConnect:(TableViewCell*)cell{
+    cell.permission.hidden = YES;
+    cell.loadPermission.hidden = NO;
+    [cell.loadPermission startAnimating];
 }
 
 -(void) peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
